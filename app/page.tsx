@@ -71,12 +71,6 @@ export default function HomePage() {
               onOpenAuth={handleOpenAuth}
             />
 
-            {/* 🔐 COFRE DIÁRIO FÍSICO 3D/2.5D NO LOBBY */}
-            <LobbyVaultObject
-              onOpenAuth={handleOpenAuth}
-              isAuthenticated={Boolean(user)}
-            />
-
             {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🏆 RANKINGS */}
             <ThreeChallengePaths onStartGame={handleStartGame} />
           </div>
@@ -85,6 +79,12 @@ export default function HomePage() {
         {/* 4. RODAPÉ DE NAVEGAÇÃO COMPLETO DA PÁGINA INICIAL */}
         <SiteFooter />
       </div>
+
+      {/* 🔐 COFRE DIÁRIO SECRETO PREMIUM (APENAS O COFRE, NO CANTO DA HOME) */}
+      <LobbyVaultObject
+        onOpenAuth={handleOpenAuth}
+        isAuthenticated={Boolean(user)}
+      />
 
       {/* 🔒 Modal de Bloqueio de Convidado / Login Obrigatório */}
       <AuthWallModal

@@ -1362,7 +1362,36 @@ iframe[title*="chat"],
   animation: reward-ascend 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-lock-shockwave {
-  animation: lock-shockwave 0.6s ease-out forwards;
+@keyframes coin-float-burst {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 0px), var(--ty, -140px)) scale(1.15) rotate(var(--rot, 360deg));
+    opacity: 0;
+  }
 }
+
+@keyframes jackpot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px rgba(234, 179, 8, 0.6));
+  }
+  50% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 55px rgba(234, 179, 8, 1)) drop-shadow(0 0 75px rgba(16, 185, 129, 0.8));
+  }
+}
+
+.animate-jackpot-pulse {
+  animation: jackpot-pulse 2.2s ease-in-out infinite;
+}
+
 

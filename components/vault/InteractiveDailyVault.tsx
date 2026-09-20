@@ -4,21 +4,13 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import {
-  Sparkles,
-  Key,
-  Clock,
   Flame,
-  CheckCircle2,
-  AlertCircle,
   ArrowRight,
-  Shield,
-  Coins,
-  Lock,
+  Sparkles,
 } from 'lucide-react'
 import {
   claimDailyVault,
   fetchVaultStatus,
-  formatCooldownTime,
   type VaultStatusResponse,
   type VaultRewardInfo,
 } from '@/lib/vault-service'
@@ -35,13 +27,11 @@ import { cn } from '@/lib/utils'
 
 export type VaultAnimStage =
   | 'IDLE'
-  | 'FOCUS_IN'
+  | 'CINEMA_FOCUS'
   | 'RUMBLE'
-  | 'LOCK_1'
-  | 'LOCK_2'
-  | 'LOCK_3'
+  | 'LOCK_SEQUENCE'
   | 'DOOR_OPENING'
-  | 'REWARD_REVEALED'
+  | 'JACKPOT_REVEAL'
   | 'DISSOLVE_EXIT'
 
 interface InteractiveDailyVaultProps {
@@ -60,18 +50,14 @@ export function InteractiveDailyVault({
   const router = useRouter()
   const [status, setStatus] = useState<VaultStatusResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [cooldownMs, setCooldownMs] = useState(0)
   const [animStage, setAnimStage] = useState<VaultAnimStage>('IDLE')
   const [claimedReward, setClaimedReward] = useState<VaultRewardInfo | null>(null)
   const [currentStreak, setCurrentStreak] = useState(0)
-  const [bestStreak, setBestStreak] = useState(0)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [microTwitch, setMicroTwitch] = useState(false)
-  const [shockwaveIndex, setShockwaveIndex] = useState<number | null>(null)
-
-  const vaultContainerRef = useRef<HTMLDivElement>(null)
+  const [activeLock, setActiveLock] = useState<number>(0)
+  const [hasClaimedNow, setHasClaimedNow] = useState(false)
 
   // 1. Deteção de Reduced Motion
   useEffect(() => {
@@ -82,7 +68,7 @@ export function InteractiveDailyVault({
     }
   }, [])
 
-  // 2. Carregar Status do Servidor
+  // 2. Carregar Status Autoritativo do Servidor / Firebase
   const loadStatus = useCallback(async () => {
     setIsLoading(true)
     const data = await fetchVaultStatus()
@@ -91,8 +77,26 @@ export function InteractiveDailyVault({
     if (data && data.success) {
       setStatus(data)
       setCurrentStreak(data.currentStreak || 0)
-      setBestStreak(data.bestStreak || 0)
-      setCooldownMs(data.cooldownRemainingMs || 0)
+    } else {
+      // Se utilizador não estiver autenticado ainda, permitir ver o cofre no modo visitante
+      setStatus({
+        ok: true,
+        success: true,
+        vaultEnabled: true,
+        canClaim: true,
+        cooldownRemainingMs: 0,
+        nextAvailableAt: 0,
+        currentStreak: 0,
+        displayedStreak: 0,
+        bestStreak: 0,
+        totalOpened: 0,
+        totalAcordasWon: 0,
+        totalAidsWon: 0,
+        lastReward: null,
+        lastOpenedAt: null,
+        isDay7Special: false,
+        serverTime: Date.now(),
+      })
     }
   }, [])
 
@@ -109,45 +113,27 @@ export function InteractiveDailyVault({
     }
   }, [loadStatus])
 
-  // 3. Temporizador regressivo em Cooldown
-  useEffect(() => {
-    if (!status || status.canClaim || cooldownMs <= 0) return
-
-    const interval = setInterval(() => {
-      setCooldownMs((prev) => {
-        if (prev <= 1000) {
-          clearInterval(interval)
-          loadStatus()
-          return 0
-        }
-        return prev - 1000
-      })
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [status, cooldownMs, loadStatus])
-
-  // 4. Micro-animação mecânica ocasional da fechadura em IDLE (~8s)
+  // 3. Micro-animação mecânica subtil a cada 8s em IDLE
   useEffect(() => {
     if (animStage !== 'IDLE' || reducedMotion) return
 
-    const twitchInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setMicroTwitch(true)
-      setTimeout(() => setMicroTwitch(false), 450)
-    }, 7500)
+      setTimeout(() => setMicroTwitch(false), 380)
+    }, 8000)
 
-    return () => clearInterval(twitchInterval)
+    return () => clearInterval(interval)
   }, [animStage, reducedMotion])
 
-  // 5. Inclinação 3D interativa no rato / toque (Hover / Touch Tilt)
+  // 4. Parallax 3D / Tilt ao passar o rato ou arrastar
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (animStage !== 'IDLE' || reducedMotion) return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
     setTilt({
-      x: Math.max(-8, Math.min(8, -(y / (rect.height / 2)) * 8)),
-      y: Math.max(-8, Math.min(8, (x / (rect.width / 2)) * 8)),
+      x: Math.max(-10, Math.min(10, -(y / (rect.height / 2)) * 10)),
+      y: Math.max(-10, Math.min(10, (x / (rect.width / 2)) * 10)),
     })
   }
 
@@ -155,18 +141,12 @@ export function InteractiveDailyVault({
     setTilt({ x: 0, y: 0 })
   }
 
-  // 6. SEQUÊNCIA CINEMATOGRÁFICA DE ABERTURA (9 FASES DE VIDEOJOGO)
-  const handleTriggerOpen = async () => {
+  // 5. SEQUÊNCIA CINEMATOGRÁFICA DE ABERTURA — NÍVEL PROFISSIONAL DE VIDEOJOGO
+  const handleTriggerOpen = async (e: React.MouseEvent) => {
+    e.stopPropagation()
     if (animStage !== 'IDLE' || isLoading) return
 
-    const canClaim = status?.canClaim ?? false
-    if (!canClaim) {
-      if (variant === 'home') {
-        router.push('/cofre')
-      }
-      return
-    }
-
+    // Se o jogador não estiver autenticado, abrir fluxo de login
     if (!isAuthenticated) {
       if (onOpenAuth) {
         onOpenAuth()
@@ -176,17 +156,15 @@ export function InteractiveDailyVault({
       return
     }
 
-    setErrorMessage(null)
-
-    // FASE 1: Aproximação e Foco da Câmara
-    setAnimStage('FOCUS_IN')
+    // FASE 1: Reação imediata ao toque & Foco Cinematográfico Central
+    setAnimStage('CINEMA_FOCUS')
     playVaultButtonClick()
     triggerVaultHaptic('click')
 
-    // Disparar claim atómico seguro para o backend imediatamente
+    // Disparar requisição de claim autoritativo ao backend imediatamente
     const claimPromise = claimDailyVault()
 
-    // FASE 2: Vibração mecânica & rumble de energia (350ms)
+    // FASE 2: Aceleração, Vibração Mecânica e Rumble Magnético (após 350ms)
     setTimeout(async () => {
       setAnimStage('RUMBLE')
       playVaultMechanismHum()
@@ -197,425 +175,386 @@ export function InteractiveDailyVault({
         claimResult = await claimPromise
       } catch (err: any) {
         setAnimStage('IDLE')
-        setErrorMessage(err?.message || 'Falha de conexão com o servidor.')
         return
       }
 
       if (!claimResult || !claimResult.success || !claimResult.reward) {
         setAnimStage('IDLE')
-        setErrorMessage(claimResult?.error || 'Não foi possível validar a abertura.')
-        if (claimResult?.cooldownRemainingMs) {
-          setCooldownMs(claimResult.cooldownRemainingMs)
+        if (claimResult?.cooldownRemainingMs && claimResult.cooldownRemainingMs > 0) {
+          setHasClaimedNow(true)
         }
         return
       }
 
-      // Recompensa confirmada pelo servidor
       const reward = claimResult.reward
       setClaimedReward(reward)
       setCurrentStreak(claimResult.streak)
-      setBestStreak(claimResult.bestStreak)
 
-      // FASE 3, 4, 5: Desbloqueio sequencial das 3 trancas mecânicas (CLIC 1, 2, 3)
-      setAnimStage('LOCK_1')
-      setShockwaveIndex(1)
+      // FASE 3: Desbloqueio Mecânico em Sequência (Trancas 1, 2, 3)
+      setAnimStage('LOCK_SEQUENCE')
+      setActiveLock(1)
       playVaultLockClick(1)
       triggerVaultHaptic('lock')
 
       setTimeout(() => {
-        setAnimStage('LOCK_2')
-        setShockwaveIndex(2)
+        setActiveLock(2)
         playVaultLockClick(2)
         triggerVaultHaptic('lock')
       }, reducedMotion ? 200 : 380)
 
       setTimeout(() => {
-        setAnimStage('LOCK_3')
-        setShockwaveIndex(3)
+        setActiveLock(3)
         playVaultLockClick(3)
         triggerVaultHaptic('lock')
       }, reducedMotion ? 400 : 760)
 
-      // FASE 6 & 7: Abertura da Porta 3D & Explosão de Luz Volumétrica (God Rays)
+      // FASE 4 & 5: Abertura 3D da Porta Blindada & Feixes Volumétricos de Luz (God Rays)
       setTimeout(() => {
         setAnimStage('DOOR_OPENING')
         playVaultLightBurst()
         triggerVaultHaptic('burst')
 
-        // FASE 8 & 9: Partículas & Revelação Heroica da Recompensa
+        // FASE 6 & 7: Explosão de Partículas, Fanfarra & Revelação JACKPOT
         setTimeout(() => {
-          setAnimStage('REWARD_REVEALED')
+          setAnimStage('JACKPOT_REVEAL')
           playVaultRewardFanfare()
           triggerVaultHaptic('success')
           if (onRewardClaimed) {
             onRewardClaimed(reward, claimResult.streak)
           }
-        }, reducedMotion ? 300 : 550)
+        }, reducedMotion ? 300 : 600)
       }, reducedMotion ? 600 : 1100)
-    }, reducedMotion ? 300 : 500)
+    }, reducedMotion ? 250 : 450)
   }
 
-  // 7. Recolha da Recompensa & Saída Limpa
+  // 6. Terminar e Recolher: O cofre dissolve-se e desaparece para sempre da Home
   const handleCollectReward = () => {
     playVaultExitHum()
     triggerVaultHaptic('click')
     setAnimStage('DISSOLVE_EXIT')
 
     setTimeout(() => {
+      setHasClaimedNow(true)
       setAnimStage('IDLE')
-      setCooldownMs(24 * 60 * 60 * 1000)
       loadStatus()
     }, 700)
   }
 
-  const canClaim = status?.canClaim ?? false
-  const isInCinematic = animStage !== 'IDLE' && animStage !== 'DISSOLVE_EXIT'
-  const isDoorOpen = animStage === 'DOOR_OPENING' || animStage === 'REWARD_REVEALED'
+  // REGRA FUNDAMENTAL:
+  // Na HOME: Se já abriu nas últimas 24h, o cofre DESAPARECE COMPLETAMENTE DA HOME.
+  const canClaim = (status?.canClaim ?? true) && !hasClaimedNow
 
-  // SE EM COOLDOWN NA HOME: Exibição compacta e limpa de alta fidelidade
-  if (!canClaim && cooldownMs > 0 && animStage === 'IDLE' && variant === 'home') {
+  if (!canClaim && animStage === 'IDLE') {
+    if (variant === 'home') {
+      return null
+    }
+
     return (
-      <section
-        aria-label="Cofre Diário em Cooldown"
-        className="w-full max-w-md mx-auto my-3 px-4 select-none flex flex-col items-center justify-center animate-in fade-in duration-500"
-      >
-        <div
-          onClick={() => router.push('/cofre')}
-          className="group relative cursor-pointer flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-950/70 border border-slate-800/90 hover:border-emerald-500/40 shadow-xl backdrop-blur-md transition-all hover:scale-[1.02]"
-        >
-          <div className="flex items-center gap-3">
-            {/* Miniatura do Cofre Oficial em Cooldown */}
-            <div className="relative w-12 h-10 rounded-lg overflow-hidden border border-slate-700/60 shrink-0 bg-slate-900">
-              <Image
-                src="/images/vault/daily-vault-chassis.png"
-                alt="Cofre Diário"
-                fill
-                className="object-cover opacity-75 grayscale-[30%] group-hover:grayscale-0 transition-all"
-                sizes="48px"
-              />
-              <div className="absolute inset-0 bg-black/30" />
-            </div>
-
-            <div className="flex flex-col text-left">
-              <span className="text-[11px] font-black uppercase tracking-wider text-slate-300 group-hover:text-emerald-300 transition-colors flex items-center gap-1.5">
-                <span>COFRE DIÁRIO</span>
-                {currentStreak > 0 && (
-                  <span className="inline-flex items-center gap-0.5 text-orange-400 font-mono text-[10px]">
-                    <Flame className="w-3 h-3 fill-orange-400" />
-                    {currentStreak}d
-                  </span>
-                )}
-              </span>
-
-              <div className="flex items-center gap-1.5 text-amber-400 font-mono text-xs font-bold mt-0.5">
-                <Clock className="w-3 h-3 text-amber-400 shrink-0" />
-                <span>Próximo em:</span>
-                <span className="text-amber-300 font-black">{formatCooldownTime(cooldownMs, false)}</span>
-              </div>
-            </div>
-
-            <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all ml-2" />
-          </div>
+      <div className="w-full max-w-md mx-auto my-6 p-6 rounded-3xl bg-slate-950/80 border border-slate-800 text-center shadow-xl backdrop-blur-md">
+        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+          <Sparkles className="w-6 h-6" />
         </div>
-      </section>
+        <h3 className="text-base font-black text-white uppercase tracking-wider">
+          Cofre Diário Recolhido
+        </h3>
+        <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+          Já resgataste o teu cofre diário. Passadas 24 horas da tua última abertura, o cofre voltará a aparecer automaticamente.
+        </p>
+      </div>
     )
   }
 
+  const isInCinematic = animStage !== 'IDLE' && animStage !== 'DISSOLVE_EXIT'
+  const isDoorOpen = animStage === 'DOOR_OPENING' || animStage === 'JACKPOT_REVEAL'
+
+  // Partículas simuladas de moedas para explosão de jackpot
+  const coins = Array.from({ length: 12 }, (_, i) => {
+    const angle = (i / 12) * Math.PI * 2
+    const dist = 120 + (i % 3) * 40
+    const tx = Math.cos(angle) * dist
+    const ty = Math.sin(angle) * dist - 50
+    const rot = (i % 2 === 0 ? 1 : -1) * (180 + i * 30)
+    return { id: i, tx, ty, rot, delay: (i % 4) * 0.08 }
+  })
+
   return (
     <>
-      {/* 1. OVERLAY DE FOCO CINEMATOGRÁFICO (VINHETA ESCURA DE JOGO) */}
+      {/* 1. AMBIENTE CINEMATOGRÁFICO DE ABERTURA (QUANDO EM FOCO) */}
       {isInCinematic && (
         <div
-          className="fixed inset-0 z-40 bg-slate-950/90 backdrop-blur-md transition-opacity duration-700 animate-in fade-in"
+          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-xl transition-opacity duration-700 animate-in fade-in flex items-center justify-center overflow-hidden"
           onClick={(e) => e.stopPropagation()}
-        />
-      )}
-
-      {/* 2. CENA PRINCIPAL DO OBJETO FÍSICO DO COFRE (100% VISUAL OFICIAL) */}
-      <section
-        aria-label="Cofre Diário Oficial"
-        className={cn(
-          'relative w-full flex flex-col items-center justify-center select-none my-4 sm:my-6 transition-all duration-700',
-          isInCinematic ? 'z-50' : 'z-20',
-          animStage === 'DISSOLVE_EXIT' && 'opacity-0 scale-90 translate-y-8 blur-sm pointer-events-none'
-        )}
-      >
-        {/* Holographic Prompt Flutuante Superior (Apenas em Idle) */}
-        <div
-          className={cn(
-            'flex flex-col items-center text-center transition-all duration-500 mb-2',
-            isInCinematic ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100'
-          )}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/40 text-emerald-300 text-[11px] font-black tracking-wider uppercase shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" style={{ animationDuration: '4s' }} />
-            <span>COFRE DIÁRIO DISPONÍVEL</span>
-          </div>
-          <span className="text-[11px] text-slate-400 font-medium tracking-wide mt-1">
-            Toca no cofre para resgatar a recompensa
-          </span>
-        </div>
+          {/* Luz Ambiente e Feixes de Foco */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.15)_0%,_rgba(0,0,0,0.95)_70%)] pointer-events-none" />
 
-        {/* CONTAINER DO COFRE 3D + SOMBRA + LUZES */}
-        <div
-          ref={vaultContainerRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleTriggerOpen}
-          className={cn(
-            'relative cursor-pointer transition-all duration-500 flex flex-col items-center justify-center group',
-            animStage === 'FOCUS_IN' && 'scale-115 sm:scale-125 duration-700',
-            animStage === 'RUMBLE' && !reducedMotion && 'scale-115 sm:scale-125 animate-vault-rumble',
-            isDoorOpen && 'scale-115 sm:scale-125',
-            animStage === 'IDLE' && !reducedMotion && 'animate-vault-breathing'
+          {/* CHUVA / EXPLOSÃO DE MOEDAS E PARTÍCULAS EM JACKPOT */}
+          {animStage === 'JACKPOT_REVEAL' && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-40 overflow-hidden">
+              {coins.map((c) => (
+                <span
+                  key={c.id}
+                  className="absolute text-2xl sm:text-3xl select-none"
+                  style={
+                    {
+                      '--tx': `${c.tx}px`,
+                      '--ty': `${c.ty}px`,
+                      '--rot': `${c.rot}deg`,
+                      animation: `coin-float-burst 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                      animationDelay: `${c.delay}s`,
+                    } as React.CSSProperties
+                  }
+                >
+                  🪙
+                </span>
+              ))}
+            </div>
           )}
-          style={{
-            perspective: 1200,
-            transformStyle: 'preserve-3d',
-            transform:
-              animStage === 'IDLE' && !reducedMotion
-                ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
-                : undefined,
-          }}
-        >
-          {/* Luz de Fundo e Halo Esmeralda / Dourado */}
-          <div
-            className={cn(
-              'pointer-events-none absolute -top-8 h-64 w-64 sm:h-80 sm:w-80 rounded-full blur-3xl transition-all duration-700',
-              isDoorOpen
-                ? 'bg-amber-400/45 scale-150'
-                : isInCinematic
-                  ? 'bg-emerald-400/50 scale-130'
-                  : 'bg-emerald-500/25 group-hover:bg-emerald-400/40'
-            )}
-          />
 
-          {/* O COFRE FÍSICO — RECTÂNGULO DE VISUALIZAÇÃO COM PROPORÇÕES REAIS (830x420) */}
-          <div className="relative w-[310px] h-[162px] sm:w-[460px] sm:h-[240px] md:w-[540px] md:h-[282px] transition-transform duration-500">
-            {/* 1. CHASSIS PRINCIPAL (Aço escovado, chanfros, brasão Porto, dobradiças) */}
-            <div className="absolute inset-0 z-10 pointer-events-none">
-              <Image
-                src="/images/vault/daily-vault-chassis.png"
-                alt="Cofre Diário Oficial"
-                fill
-                priority
-                className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)]"
-                sizes="(max-width: 640px) 310px, (max-width: 768px) 460px, 540px"
+          {/* PALCO CENTRAL DO COFRE EM CINEMA */}
+          <div className="relative flex flex-col items-center justify-center z-50">
+            {/* CONTAINER 3D DO COFRE EM TAMANHO HERO */}
+            <div
+              className={cn(
+                'relative flex items-center justify-center transition-all duration-700',
+                animStage === 'CINEMA_FOCUS' && 'scale-105 duration-500',
+                animStage === 'RUMBLE' && !reducedMotion && 'scale-110 animate-vault-rumble',
+                isDoorOpen && 'scale-110'
+              )}
+            >
+              {/* Luz volumétrica de fundo do cofre */}
+              <div
+                className={cn(
+                  'pointer-events-none absolute h-72 w-72 sm:h-96 sm:w-96 rounded-full blur-3xl transition-all duration-700',
+                  isDoorOpen
+                    ? 'bg-amber-400/40 scale-150'
+                    : 'bg-emerald-400/35 scale-120'
+                )}
               />
 
-              {/* Reflexo Metálico Dinâmico a percorrer o metal (Sheen) */}
-              {animStage === 'IDLE' && !reducedMotion && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none mix-blend-color-dodge opacity-60">
-                  <div className="w-[140%] h-[200%] -top-[50%] -left-[20%] bg-gradient-to-r from-transparent via-white/50 to-transparent animate-vault-sheen" />
+              {/* COFRE EM TAMANHO HERO (Proporções 538x407) */}
+              <div className="relative w-[300px] h-[227px] sm:w-[420px] sm:h-[318px] md:w-[480px] md:h-[363px]">
+                {/* 1. CHASSIS DO COFRE ISOLADO (100% TRANSPARENTE, SEM FUNDO NEM TEXTOS) */}
+                <div className="absolute inset-0 z-10 pointer-events-none">
+                  <Image
+                    src="/images/vault/daily-vault-isolated.png"
+                    alt="Cofre Diário Secreto"
+                    fill
+                    priority
+                    className="object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.95)]"
+                    sizes="(max-width: 640px) 300px, (max-width: 768px) 420px, 480px"
+                  />
+
+                  {/* Conduítes Neon a energizar no Rumble */}
+                  {(animStage === 'RUMBLE' || animStage === 'LOCK_SEQUENCE') && (
+                    <div className="absolute inset-0 pointer-events-none filter drop-shadow-[0_0_20px_#10b981] brightness-150 animate-pulse">
+                      <Image
+                        src="/images/vault/daily-vault-isolated.png"
+                        alt="Cofre Neon"
+                        fill
+                        className="object-contain opacity-35 mix-blend-screen"
+                        sizes="480px"
+                      />
+                    </div>
+                  )}
                 </div>
-              )}
 
-              {/* Conduítes Neon Verde Pulsantes nos LED Slots do Topo e Base */}
-              <div
-                className={cn(
-                  'absolute inset-0 pointer-events-none transition-opacity duration-500',
-                  animStage === 'IDLE' && !reducedMotion && 'animate-vault-conduit',
-                  (animStage === 'RUMBLE' || animStage === 'FOCUS_IN') && 'opacity-100 brightness-150'
-                )}
-              >
-                {/* LED Superior do Chassis */}
-                <div className="absolute top-[8.5%] left-[52.5%] w-[12%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_12px_#10b981] opacity-75" />
-                {/* LED Inferior do Chassis */}
-                <div className="absolute bottom-[8%] left-[53.5%] w-[12%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_12px_#10b981] opacity-75" />
-                {/* LED Lateral Esquerda Superior */}
-                <div className="absolute top-[18%] left-[21.5%] w-[6%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981] opacity-65" />
-                {/* LED Lateral Esquerda Inferior */}
-                <div className="absolute bottom-[16%] left-[21.5%] w-[6%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981] opacity-65" />
-              </div>
-            </div>
-
-            {/* 2. CÂMARA INTERIOR ILUMINADA (Fica visível quando a porta abre) */}
-            <div
-              className={cn(
-                'absolute z-15 left-[34.94%] top-[13.09%] w-[45.78%] h-[82.14%] rounded-xl overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-black transition-opacity duration-500 flex items-center justify-center',
-                isDoorOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              )}
-            >
-              {/* Feixes Volumétricos de Luz (God Rays) a rodar a partir do centro */}
-              <div
-                className={cn(
-                  'absolute -inset-24 opacity-85 pointer-events-none',
-                  !reducedMotion && 'animate-god-rays'
-                )}
-                style={{
-                  background:
-                    'conic-gradient(from 0deg at 50% 50%, rgba(234,179,8,0) 0deg, rgba(234,179,8,0.7) 20deg, rgba(234,179,8,0) 40deg, rgba(16,185,129,0.8) 70deg, rgba(16,185,129,0) 100deg, rgba(234,179,8,0.7) 140deg, rgba(234,179,8,0) 180deg, rgba(16,185,129,0.8) 220deg, rgba(16,185,129,0) 260deg, rgba(234,179,8,0.8) 310deg, rgba(234,179,8,0) 360deg)',
-                }}
-              />
-
-              {/* Núcleo Central de Luz Branca/Dourada Brilhante */}
-              <div className="absolute w-24 h-24 rounded-full bg-yellow-100 blur-xl opacity-90 animate-pulse" />
-              <div className="absolute w-16 h-16 rounded-full bg-amber-400 blur-md opacity-95" />
-
-              {/* Parede Interior Blindada */}
-              <div className="absolute inset-1 rounded-lg border border-amber-400/40 shadow-inner" />
-            </div>
-
-            {/* 3. CAMADA DA PORTA BLINDADA 3D COM DOBRADIÇAS NA DIREITA */}
-            <div
-              className={cn(
-                'absolute z-20 left-[34.94%] top-[13.09%] w-[45.78%] h-[82.14%] transition-transform duration-700 pointer-events-none',
-                isDoorOpen && 'duration-1000'
-              )}
-              style={{
-                transformOrigin: '92% 50%',
-                transformStyle: 'preserve-3d',
-                transform: isDoorOpen
-                  ? 'perspective(1200px) rotateY(-82deg) translateZ(12px)'
-                  : microTwitch && !reducedMotion
-                    ? 'perspective(1200px) rotateY(-1.8deg)'
-                    : 'perspective(1200px) rotateY(0deg)',
-              }}
-            >
-              <Image
-                src="/images/vault/daily-vault-door.png"
-                alt="Porta do Cofre"
-                fill
-                priority
-                className="object-contain"
-                sizes="(max-width: 640px) 150px, (max-width: 768px) 215px, 250px"
-              />
-
-              {/* Brilho da Fechadura Central na Ativação */}
-              {(animStage === 'FOCUS_IN' || animStage === 'RUMBLE' || animStage === 'LOCK_1' || animStage === 'LOCK_2' || animStage === 'LOCK_3') && (
-                <div className="absolute top-[41%] left-[47%] w-[28%] h-[32%] rounded-full bg-emerald-400/40 blur-md animate-ping pointer-events-none" />
-              )}
-
-              {/* Ondas de Choque Visuais das Trancas (CLIC 1, 2, 3) */}
-              {shockwaveIndex && (
+                {/* 2. CÂMARA INTERIOR ILUMINADA COM GOD RAYS QUANDO A PORTA ABRE */}
                 <div
-                  key={shockwaveIndex}
-                  className="absolute top-[38%] left-[44%] w-[34%] h-[38%] rounded-full border-2 border-emerald-300 shadow-[0_0_20px_#10b981] animate-lock-shockwave pointer-events-none"
-                />
-              )}
+                  className={cn(
+                    'absolute z-15 left-[31.6%] top-[9.3%] w-[66.9%] h-[84.7%] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-black transition-opacity duration-500 flex items-center justify-center',
+                    isDoorOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  )}
+                >
+                  {/* Feixes Volumétricos de Luz (God Rays) a rodar */}
+                  <div
+                    className={cn(
+                      'absolute -inset-32 opacity-90 pointer-events-none',
+                      !reducedMotion && 'animate-god-rays'
+                    )}
+                    style={{
+                      background:
+                        'conic-gradient(from 0deg at 50% 50%, rgba(234,179,8,0) 0deg, rgba(234,179,8,0.75) 20deg, rgba(234,179,8,0) 40deg, rgba(16,185,129,0.85) 75deg, rgba(16,185,129,0) 105deg, rgba(234,179,8,0.75) 140deg, rgba(234,179,8,0) 180deg, rgba(16,185,129,0.85) 225deg, rgba(16,185,129,0) 265deg, rgba(234,179,8,0.75) 310deg, rgba(234,179,8,0) 360deg)',
+                    }}
+                  />
+
+                  {/* Núcleo Central de Luz Brilhante */}
+                  <div className="absolute w-28 h-28 rounded-full bg-yellow-100 blur-xl opacity-95 animate-pulse" />
+                  <div className="absolute w-20 h-20 rounded-full bg-amber-400 blur-md opacity-100" />
+                  <div className="absolute inset-2 rounded-xl border border-amber-400/50 shadow-inner" />
+                </div>
+
+                {/* 3. PORTA BLINDADA 3D QUE RODA SOBRE AS DOBRADIÇAS DA DIREITA */}
+                <div
+                  className={cn(
+                    'absolute z-20 left-[31.6%] top-[9.3%] w-[66.9%] h-[84.7%] transition-transform duration-700 pointer-events-none',
+                    isDoorOpen && 'duration-1000'
+                  )}
+                  style={{
+                    transformOrigin: '98% 50%',
+                    transformStyle: 'preserve-3d',
+                    transform: isDoorOpen
+                      ? 'perspective(1400px) rotateY(-85deg) translateZ(15px)'
+                      : 'perspective(1400px) rotateY(0deg)',
+                  }}
+                >
+                  <Image
+                    src="/images/vault/daily-vault-door-clean.png"
+                    alt="Porta do Cofre"
+                    fill
+                    priority
+                    className="object-contain"
+                    sizes="350px"
+                  />
+
+                  {/* Ondas de Choque das Trancas ao Desbloquear */}
+                  {activeLock > 0 && (
+                    <div
+                      key={activeLock}
+                      className="absolute top-[38%] left-[44%] w-[32%] h-[36%] rounded-full border-2 border-emerald-300 shadow-[0_0_25px_#10b981] animate-lock-shockwave pointer-events-none"
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* Sombra de Chão */}
+              <div className="absolute -bottom-4 w-56 sm:w-72 h-5 rounded-full bg-black/90 blur-md" />
             </div>
 
-            {/* 4. RECOMPENSA REVELADA (EMERGE DE DENTRO DO COFRE EM 3D) */}
-            {animStage === 'REWARD_REVEALED' && (
-              <div className="absolute z-30 inset-0 flex items-center justify-center pointer-events-none animate-reward-ascend">
-                <div className="relative flex flex-col items-center justify-center">
-                  {/* Pedestal / Aura Holográfica da Recompensa */}
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-amber-400/30 via-yellow-500/40 to-amber-600/30 border-2 border-amber-300 flex items-center justify-center text-4xl sm:text-5xl shadow-[0_0_50px_rgba(234,179,8,0.9)] backdrop-blur-md">
+            {/* 4. RECOMPENSA DE NÍVEL PROFISSIONAL (JACKPOT / MOMENTO DE IMPACTO) */}
+            {animStage === 'JACKPOT_REVEAL' && (
+              <div className="relative z-50 mt-6 w-full max-w-sm flex flex-col items-center gap-3 animate-reward-ascend">
+                {/* Cartão de Glória e Impacto */}
+                <div className="w-full p-5 sm:p-6 rounded-3xl bg-slate-950/95 border-2 border-amber-400/80 text-center shadow-[0_0_50px_rgba(234,179,8,0.4)] backdrop-blur-2xl animate-jackpot-pulse">
+                  <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-[10px] font-black tracking-widest uppercase mb-3">
+                    <Sparkles className="w-3 h-3 text-amber-400" />
+                    <span>RECOMPENSA DIÁRIA</span>
+                  </div>
+
+                  {/* Grande Ícone da Recompensa */}
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl bg-gradient-to-br from-amber-400/30 via-yellow-500/40 to-amber-600/30 border-2 border-amber-300 flex items-center justify-center text-4xl sm:text-5xl shadow-[0_0_40px_rgba(234,179,8,0.8)] mb-3">
                     <span className="animate-bounce" style={{ animationDuration: '2s' }}>
                       {claimedReward?.icon || '🪙'}
                     </span>
                   </div>
 
-                  <span className="mt-2 text-xs sm:text-sm font-black text-amber-300 font-mono tracking-wider px-3 py-1 rounded-full bg-slate-950/90 border border-amber-400/60 shadow-xl drop-shadow-md">
+                  {/* Valor da Recompensa com Grande Tipografia */}
+                  <h3 className="text-xl sm:text-2xl font-black text-white font-mono tracking-wider drop-shadow-md">
                     {claimedReward?.label || '+100 Acordas'}
-                  </span>
+                  </h3>
+
+                  {/* Streak de Dias Consecutivos */}
+                  {currentStreak > 0 && (
+                    <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-300 text-xs font-bold font-mono">
+                      <Flame className="w-3.5 h-3.5 fill-orange-400" />
+                      <span>{currentStreak} {currentStreak === 1 ? 'dia consecutivo' : 'dias consecutivos'}!</span>
+                    </div>
+                  )}
                 </div>
+
+                {/* Botão de Recolha Elegante */}
+                <button
+                  onClick={handleCollectReward}
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(234,179,8,0.7)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 border border-amber-200"
+                >
+                  <span>RECOLHER RECOMPENSA</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             )}
           </div>
+        </div>
+      )}
 
-          {/* BASE / SOMBRA DE CHÃO DINÂMICA (Ajusta com a respiração do cofre) */}
-          <div className="relative w-48 sm:w-64 h-6 mt-1 flex flex-col items-center justify-center">
+      {/* 2. ESTADO NORMAL NA HOME OU PÁGINA (APENAS O COFRE) */}
+      {/*
+          REGRA ABSOLUTA:
+          - Apenas o cofre.
+          - Sem card, sem painel, sem texto ao lado, sem contador, sem etiquetas.
+          - Na Home: Posicionado num canto elegante da tela (bottom-right).
+          - Na Página: Posicionado no centro com flutuação heroica.
+      */}
+      {!isInCinematic && canClaim && (
+        <div
+          onClick={handleTriggerOpen}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className={cn(
+            'cursor-pointer select-none transition-transform duration-300 group',
+            variant === 'home'
+              ? 'fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-30 hover:scale-110 active:scale-95'
+              : 'relative my-6 flex flex-col items-center justify-center hover:scale-105 active:scale-95'
+          )}
+          style={{
+            perspective: 1000,
+          }}
+          title="Cofre Diário Secreto"
+          aria-label="Cofre Diário Secreto"
+        >
+          {/* Halo de Brilho Cinematográfico Subtil */}
+          <div
+            className={cn(
+              'pointer-events-none absolute -inset-3 rounded-full bg-emerald-500/20 blur-xl opacity-75 group-hover:opacity-100 group-hover:bg-emerald-400/35 transition-all',
+              variant === 'page' && 'w-64 h-64 -inset-6 bg-emerald-500/25'
+            )}
+          />
+
+          {/* O COFRE ISOLADO (Proporções 538x407) */}
+          <div
+            className={cn(
+              'relative transition-transform duration-300',
+              variant === 'home'
+                ? 'w-24 h-[72px] sm:w-32 sm:h-[97px] md:w-36 md:h-[109px]'
+                : 'w-48 h-[145px] sm:w-64 sm:h-[194px] md:w-72 md:h-[218px]',
+              !reducedMotion && 'animate-vault-breathing'
+            )}
+            style={{
+              transform:
+                !reducedMotion
+                  ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+                  : undefined,
+            }}
+          >
+            <Image
+              src="/images/vault/daily-vault-isolated.png"
+              alt="Cofre Diário Secreto"
+              fill
+              priority
+              className="object-contain drop-shadow-[0_12px_20px_rgba(0,0,0,0.85)] filter group-hover:brightness-110 transition-all"
+              sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 144px"
+            />
+
+            {/* Reflexo Metálico Dinâmico no Metal (Sheen) */}
+            {!reducedMotion && (
+              <div className="absolute inset-0 overflow-hidden pointer-events-none mix-blend-color-dodge opacity-50 rounded-2xl">
+                <div className="w-[140%] h-[200%] -top-[50%] -left-[20%] bg-gradient-to-r from-transparent via-white/40 to-transparent animate-vault-sheen" />
+              </div>
+            )}
+
+            {/* Conduítes Neon Verde com Pulsação Subtil */}
             <div
               className={cn(
-                'w-44 sm:w-56 h-4 rounded-full bg-black/90 blur-md transition-all duration-500',
-                animStage === 'IDLE' && !reducedMotion && 'animate-vault-shadow',
-                isDoorOpen && 'scale-125 bg-amber-950/80 shadow-[0_0_30px_rgba(234,179,8,0.6)]'
+                'absolute inset-0 pointer-events-none transition-opacity duration-300',
+                !reducedMotion && 'animate-vault-conduit',
+                microTwitch && 'brightness-150'
+              )}
+            >
+              <div className="absolute top-[8.5%] left-[52.5%] w-[12%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] opacity-75" />
+              <div className="absolute bottom-[8%] left-[53.5%] w-[12%] h-[2.5%] rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] opacity-75" />
+            </div>
+          </div>
+
+          {/* Sombra de Chão Dinâmica */}
+          <div className="relative w-20 sm:w-28 h-2 mx-auto mt-0.5 flex items-center justify-center">
+            <div
+              className={cn(
+                'w-full h-full rounded-full bg-black/80 blur-sm transition-all',
+                !reducedMotion && 'animate-vault-shadow'
               )}
             />
           </div>
         </div>
-
-        {/* 3. HUD INFERIOR COM TIPOGRAFIA OFICIAL & BOTÃO METÁLICO REATIVO */}
-        <div
-          className={cn(
-            'flex flex-col items-center text-center mt-2 w-full max-w-sm transition-all duration-500',
-            isInCinematic && animStage !== 'REWARD_REVEALED' && 'opacity-0 translate-y-4 pointer-events-none'
-          )}
-        >
-          {/* TÍTULO OFICIAL "COFRE DIÁRIO" */}
-          <h2 className="text-base sm:text-lg font-black tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-emerald-100 to-emerald-400 drop-shadow-[0_2px_8px_rgba(16,185,129,0.3)]">
-            COFRE DIÁRIO
-          </h2>
-
-          {/* SUBTÍTULO "1 POR 24H" OU CONTAGEM DE COOLDOWN */}
-          <div className="text-[11px] font-mono tracking-widest text-emerald-400/80 uppercase mt-0.5">
-            {canClaim ? (
-              <span>1 POR 24H</span>
-            ) : (
-              <span className="text-amber-400 font-bold">
-                PRÓXIMO: {formatCooldownTime(cooldownMs, false)}
-              </span>
-            )}
-          </div>
-
-          {/* BOTÃO METÁLICO "[ 🔑 ABRIR ]" IDENTICO AO DESIGN ORIGINAL */}
-          {animStage === 'IDLE' && (
-            <button
-              onClick={handleTriggerOpen}
-              disabled={!canClaim && cooldownMs > 0}
-              className={cn(
-                'relative mt-3 px-8 py-2 rounded-xl border transition-all duration-300 font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-95 group',
-                canClaim
-                  ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 border-emerald-500/60 hover:border-emerald-400 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)]'
-                  : 'bg-slate-950/80 border-slate-800 text-slate-500 cursor-not-allowed'
-              )}
-            >
-              {/* Brilho neon na base do botão */}
-              {canClaim && (
-                <div className="absolute -bottom-1 inset-x-4 h-1.5 bg-emerald-400/70 blur-sm rounded-full group-hover:bg-emerald-300" />
-              )}
-              {canClaim ? (
-                <>
-                  <Key className="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
-                  <span className="tracking-widest">ABRIR</span>
-                </>
-              ) : (
-                <>
-                  <Lock className="w-3.5 h-3.5 text-slate-500" />
-                  <span>BLOQUEADO</span>
-                </>
-              )}
-            </button>
-          )}
-
-          {/* BOTÃO E MODAL DE CONFIRMAÇÃO DA RECOMPENSA REVELADA */}
-          {animStage === 'REWARD_REVEALED' && (
-            <div className="relative z-50 mt-4 w-full flex flex-col items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="w-full p-4 rounded-2xl bg-slate-950/95 border border-amber-400/60 text-center shadow-2xl backdrop-blur-xl">
-                <span className="text-sm font-black text-amber-400 uppercase tracking-wider block">
-                  🎉 RECOMPENSA CONFIRMADA!
-                </span>
-                <p className="text-xs text-slate-300 mt-1">
-                  A recompensa foi depositada diretamente na tua conta.
-                </p>
-                {currentStreak > 0 && (
-                  <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-300 text-xs font-bold font-mono">
-                    <Flame className="w-3.5 h-3.5 fill-orange-400" />
-                    <span>Streak: {currentStreak} {currentStreak === 1 ? 'dia' : 'dias'} consecutivos!</span>
-                  </div>
-                )}
-              </div>
-
-              <button
-                onClick={handleCollectReward}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(234,179,8,0.7)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 border border-amber-200"
-              >
-                <span>RECOLHER E CONTINUAR</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-
-          {/* Mensagem de Erro, se houver */}
-          {errorMessage && (
-            <div className="mt-3 px-4 py-2 rounded-xl bg-rose-950/90 border border-rose-500/50 text-rose-300 text-xs font-bold flex items-center gap-2 max-w-sm animate-in fade-in z-50">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
-              <span>{errorMessage}</span>
-            </div>
-          )}
-        </div>
-      </section>
+      )}
     </>
   )
 }
