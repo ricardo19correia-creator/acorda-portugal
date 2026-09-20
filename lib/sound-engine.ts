@@ -608,4 +608,30 @@ export function playVaultRewardFanfare() {
   } catch {}
 }
 
+/**
+ * 6. Desmaterialização / Saída Elegante do Cofre da Cena
+ */
+export function playVaultExitHum() {
+  if (!isSfxAllowed()) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  try {
+    const t = ctx.currentTime
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(480, t)
+    osc.frequency.exponentialRampToValueAtTime(70, t + 0.6)
+
+    gain.gain.setValueAtTime(0.2, t)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.65)
+
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.start(t)
+    osc.stop(t + 0.65)
+  } catch {}
+}
+
 

@@ -407,31 +407,75 @@ export function DailyVaultView({ onRewardClaimed, onClose, isModal = false }: Da
                         {phase === 'PHASE_3_OPENING' && 'DESBLOQUEANDO TRANCA...'}
                       </span>
                     )}
-                  </div>
-                )}
-              </div>
+                      {/* TRANCA 1 (ESQUERDA) */}
+                      <div
+                        className={cn(
+                          'absolute -left-4 w-4 h-3.5 rounded-l-md border border-slate-700 transition-all duration-300',
+                          activeLockIndex >= 1 || phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
+                            ? 'bg-amber-400 border-amber-300 translate-x-2 shadow-[0_0_8px_rgba(234,179,8,0.8)]'
+                            : 'bg-slate-800 border-emerald-500/40'
+                        )}
+                      />
 
-              {/* Trancas Inferiores (CLIC 1, CLIC 2, CLIC 3) */}
-              <div className="w-full flex items-center justify-center gap-2 z-10 pt-2 border-t border-white/5">
-                {[1, 2, 3].map((idx) => {
-                  const isUnlocked = activeLockIndex >= idx || phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
-                  return (
-                    <div
-                      key={idx}
-                      className={cn(
-                        'flex items-center gap-1 px-2.5 py-1 rounded-lg border text-[10px] font-mono font-bold transition-all duration-300',
-                        isUnlocked
-                          ? 'border-emerald-400/80 bg-emerald-500/20 text-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.4)]'
-                          : 'border-slate-800 bg-slate-900/40 text-slate-500'
-                      )}
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                      <span>T-{idx}</span>
+                      {/* TRANCA 2 (DIREITA) */}
+                      <div
+                        className={cn(
+                          'absolute -right-4 w-4 h-3.5 rounded-r-md border border-slate-700 transition-all duration-300',
+                          activeLockIndex >= 2 || phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
+                            ? 'bg-amber-400 border-amber-300 -translate-x-2 shadow-[0_0_8px_rgba(234,179,8,0.8)]'
+                            : 'bg-slate-800 border-emerald-500/40'
+                        )}
+                      />
+
+                      {/* TRANCA 3 (INFERIOR) */}
+                      <div
+                        className={cn(
+                          'absolute -bottom-4 w-3.5 h-4 rounded-b-md border border-slate-700 transition-all duration-300',
+                          activeLockIndex >= 3 || phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
+                            ? 'bg-amber-400 border-amber-300 -translate-y-2 shadow-[0_0_8px_rgba(234,179,8,0.8)]'
+                            : 'bg-slate-800 border-emerald-500/40'
+                        )}
+                      />
                     </div>
-                  )
-                })}
-              </div>
+                  )}
+                </div>
+
+                {/* Trancas Inferiores (CLIC 1, CLIC 2, CLIC 3) */}
+                <div className="w-full flex items-center justify-center gap-2 z-10 pt-2 border-t border-white/5">
+                  {[1, 2, 3].map((idx) => {
+                    const isUnlocked = activeLockIndex >= idx || phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
+                    return (
+                      <div
+                        key={idx}
+                        className={cn(
+                          'flex items-center gap-1 px-2.5 py-1 rounded-lg border text-[10px] font-mono font-bold transition-all duration-300',
+                          isUnlocked
+                            ? 'border-emerald-400/80 bg-emerald-500/20 text-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.4)]'
+                            : 'border-slate-800 bg-slate-900/40 text-slate-500'
+                        )}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                        <span>T-{idx}</span>
+                      </div>
+                    )
+                  })}
+                </div>
             </div>
+          </div>
+        </div>
+
+        {/* PEDESTAL / BASE ILUMINADA NO CHÃO */}
+        <div className="relative w-64 sm:w-80 h-10 mt-1 flex flex-col items-center justify-center">
+          <div className="absolute top-2 w-56 sm:w-72 h-6 rounded-full bg-black/80 blur-md" />
+          <div
+            className={cn(
+              'relative w-52 sm:w-64 h-4 rounded-full border transition-all duration-500 shadow-lg',
+              phase === 'PHASE_4_REVEALING' || phase === 'PHASE_5_RESULT'
+                ? 'border-amber-400 bg-gradient-to-r from-slate-900 via-amber-950/60 to-slate-900 shadow-[0_0_25px_rgba(234,179,8,0.7)]'
+                : 'border-emerald-500/40 bg-gradient-to-r from-slate-950 via-emerald-950/40 to-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+            )}
+          >
+            <div className="absolute inset-0.5 rounded-full border border-white/10 opacity-70" />
           </div>
         </div>
 
