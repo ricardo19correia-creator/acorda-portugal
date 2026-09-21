@@ -852,28 +852,66 @@ export function GameHub() {
         </div>
 
         <div className="w-full">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-slate-900/90 via-[#0a1633] to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-xl">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-slate-800 border border-white/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase text-slate-400">
-                  Sem eventos ativos
+          <div className="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-gradient-to-r from-[#071330] via-[#050b1d] to-[#200713] p-6 sm:p-8 backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            {/* Luzes decorativas azul e encarnada */}
+            <div className="absolute -top-16 -left-16 h-48 w-48 rounded-full bg-blue-600/20 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-rose-600/20 blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-3 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-3 py-1 text-[0.65rem] sm:text-xs font-black uppercase text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.3)]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  Evento Especial Ativo
+                </span>
+                <span className="rounded-full bg-amber-500/10 border border-amber-400/30 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase text-amber-300">
+                  Dificuldade Extrema
                 </span>
               </div>
-              <h4 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-tight">
-                Nenhum evento disponível neste momento.
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300">
-                Fica atento às próximas novidades. Novas competições nacionais e desafios temporários serão anunciados aqui.
-              </p>
+
+              <div className="space-y-1">
+                <h4 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-tight flex items-center gap-2 flex-wrap">
+                  <span className="text-blue-400">PORTO</span>
+                  <span className="text-amber-400">⚔️</span>
+                  <span className="text-rose-400">LISBOA</span>
+                  <span className="text-sm sm:text-lg text-slate-300 font-bold">— O Grande Duelo</span>
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  O confronto definitivo de conhecimento entre as duas capitais e os dois gigantes do futebol (FC Porto e SL Benfica). Perguntas exclusivas de elite e <strong className="text-amber-300">15.000 Acordas</strong> para o campeão!
+                </p>
+              </div>
+
+              {/* Badges de Regras */}
+              <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
+                <span className="rounded-xl bg-slate-950/70 border border-white/10 px-2.5 py-1 text-slate-300 font-bold">
+                  🔵 Cidade do Porto &amp; FC Porto
+                </span>
+                <span className="rounded-xl bg-slate-950/70 border border-white/10 px-2.5 py-1 text-slate-300 font-bold">
+                  🔴 Cidade de Lisboa &amp; SL Benfica
+                </span>
+                <span className="rounded-xl bg-slate-950/70 border border-white/10 px-2.5 py-1 text-amber-300 font-bold">
+                  🥇 15.000 Acordas
+                </span>
+              </div>
             </div>
 
-            <div className="flex items-center shrink-0">
+            <div className="relative z-10 flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center gap-3 shrink-0">
+              <Link
+                href="/eventos?event=porto-lisboa"
+                className="button-game-gold inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 font-display text-xs sm:text-sm font-black uppercase tracking-wider cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-transform text-slate-950"
+              >
+                <Swords className="h-4 w-4" />
+                <span>Entrar no Duelo</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+
               <Link
                 href="/eventos"
-                className="button-game-gold inline-flex items-center gap-2 rounded-2xl px-6 py-3 font-display text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-transform"
+                className="inline-flex items-center justify-center gap-1.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-white/15 px-4 py-2.5 text-xs font-bold uppercase text-slate-300 transition text-center"
               >
-                <span>Ver Página de Eventos</span>
-                <ChevronRight className="h-4 w-4" />
+                <span>Ver Todos os Eventos</span>
               </Link>
             </div>
           </div>

@@ -4,6 +4,8 @@ import { FieldValue } from 'firebase-admin/firestore'
 import {
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  OFFICIAL_PORTO_LISBOA_ID,
+  OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   getEventStatus,
   getEventStatusLabel,
   getEventCountdown,
@@ -16,16 +18,25 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url)
+    const requestedEventId =
+      searchParams.get('eventId') || searchParams.get('id') || OFFICIAL_PORTO_LISBOA_ID
+
+    const baseDefaultConfig =
+      requestedEventId === OFFICIAL_PORTUGAL_EM_JOGO_ID
+        ? OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+        : OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+
     const db = getAdminFirestore()
-    const eventRef = db.collection('events').doc(OFFICIAL_PORTUGAL_EM_JOGO_ID)
+    const eventRef = db.collection('events').doc(requestedEventId)
     const snap = await eventRef.get().catch(() => null)
 
     let eventData: OfficialEventConfig
 
     if (!snap || !snap.exists) {
-      // Criação/Auto-seed idempotente do primeiro evento oficial real no Firestore
+      // Criação/Auto-seed idempotente do evento solicitado no Firestore
       eventData = {
-        ...OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+        ...baseDefaultConfig,
       }
 
       await eventRef
@@ -44,34 +55,36 @@ export async function GET(request: NextRequest) {
       const d = snap.data() || {}
       eventData = {
         id: snap.id,
-        name: d.name || d.title || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.name,
-        title: d.title || d.name || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.title,
-        subtitle: d.subtitle || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.subtitle,
-        tag: d.tag || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.tag,
-        type: d.type || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.type,
-        theme: d.theme || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.theme,
-        description: d.description || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.description,
-        startDate: d.startDate || d.startAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.startDate,
-        endDate: d.endDate || d.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate,
-        startAt: d.startAt || d.startDate || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.startAt,
-        endAt: d.endAt || d.endDate || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endAt,
-        timezone: d.timezone || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.timezone,
+        name: d.name || d.title || baseDefaultConfig.name,
+        title: d.title || d.name || baseDefaultConfig.title,
+        subtitle: d.subtitle || baseDefaultConfig.subtitle,
+        tag: d.tag || baseDefaultConfig.tag,
+        type: d.type || baseDefaultConfig.type,
+        theme: d.theme || baseDefaultConfig.theme,
+        description: d.description || baseDefaultConfig.description,
+        startDate: d.startDate || d.startAt || baseDefaultConfig.startDate,
+        endDate: d.endDate || d.endAt || baseDefaultConfig.endDate,
+        startAt: d.startAt || d.startDate || baseDefaultConfig.startAt,
+        endAt: d.endAt || d.endDate || baseDefaultConfig.endAt,
+        timezone: d.timezone || baseDefaultConfig.timezone,
         published: Boolean(d.published ?? true),
         active: Boolean(d.active ?? true),
         enabled: Boolean(d.enabled ?? true),
-        rewards: Array.isArray(d.rewards) ? d.rewards : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.rewards,
+        rewards: Array.isArray(d.rewards) ? d.rewards : baseDefaultConfig.rewards,
         rules: {
-          maxDailyMatches: Number(d.rules?.maxDailyMatches || 10),
-          pointDivisor: Number(d.rules?.pointDivisor || 10),
-          maxEventPointsPerMatch: Number(d.rules?.maxEventPointsPerMatch || 100),
-        },
-        scoring: {
-          pointDivisor: Number(d.scoring?.pointDivisor || d.rules?.pointDivisor || 10),
+          maxDailyMatches: Number(d.rules?.maxDailyMatches || baseDefaultConfig.rules.maxDailyMatches),
+          pointDivisor: Number(d.rules?.pointDivisor || baseDefaultConfig.rules.pointDivisor),
           maxEventPointsPerMatch: Number(
-            d.scoring?.maxEventPointsPerMatch || d.rules?.maxEventPointsPerMatch || 100
+            d.rules?.maxEventPointsPerMatch || baseDefaultConfig.rules.maxEventPointsPerMatch || 100
           ),
         },
-        dailyMatchLimit: Number(d.dailyMatchLimit || d.rules?.maxDailyMatches || 10),
+        scoring: {
+          pointDivisor: Number(d.scoring?.pointDivisor || d.rules?.pointDivisor || baseDefaultConfig.rules.pointDivisor),
+          maxEventPointsPerMatch: Number(
+            d.scoring?.maxEventPointsPerMatch || d.rules?.maxEventPointsPerMatch || baseDefaultConfig.rules.maxEventPointsPerMatch || 100
+          ),
+        },
+        dailyMatchLimit: Number(d.dailyMatchLimit || d.rules?.maxDailyMatches || baseDefaultConfig.rules.maxDailyMatches),
         rewardsDistributed: Boolean(d.rewardsDistributed),
       }
     }
@@ -126,6 +139,14 @@ export async function GET(request: NextRequest) {
           dailyMatches: data.dailyMatches || {},
           bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
           totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
+          correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
+          incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
+          questionsAnswered:
+            typeof data.questionsAnswered === 'number'
+              ? data.questionsAnswered
+              : typeof data.correctAnswers === 'number'
+              ? data.correctAnswers + (data.incorrectAnswers || 0)
+              : 0,
           lastPlayedDate: data.lastPlayedDate,
           lastPlayedAt: data.lastPlayedAt,
           updatedAt: data.updatedAt,
@@ -181,6 +202,14 @@ export async function GET(request: NextRequest) {
               dailyMatches: uData.dailyMatches || {},
               bestScore: typeof uData.bestScore === 'number' ? uData.bestScore : 0,
               totalScore: typeof uData.totalScore === 'number' ? uData.totalScore : 0,
+              correctAnswers: typeof uData.correctAnswers === 'number' ? uData.correctAnswers : 0,
+              incorrectAnswers: typeof uData.incorrectAnswers === 'number' ? uData.incorrectAnswers : 0,
+              questionsAnswered:
+                typeof uData.questionsAnswered === 'number'
+                  ? uData.questionsAnswered
+                  : typeof uData.correctAnswers === 'number'
+                  ? uData.correctAnswers + (uData.incorrectAnswers || 0)
+                  : 0,
               lastPlayedDate: uData.lastPlayedDate,
               lastPlayedAt: uData.lastPlayedAt,
               updatedAt: uData.updatedAt,

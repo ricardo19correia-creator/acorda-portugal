@@ -8,6 +8,7 @@ import { doc, getDoc, updateDoc, arrayUnion, serverTimestamp } from 'firebase/fi
 import { db } from '@/lib/firebase'
 import type { Question, QuizDifficulty } from '@/src/types/quiz'
 import { QuestionRegistry } from '@/lib/question-system/registry'
+import { PORTO_LISBOA_QUESTIONS } from '@/lib/data/porto-lisboa-questions'
 import {
   getLocalUserHistory,
   fetchUserQuestionHistory,
@@ -216,9 +217,24 @@ export function loadQuestionsPool(
     catLower === 'evento-portugal-em-jogo' ||
     catLower === 'primeiro-desafio-nacional-portugal-em-jogo'
 
+  const isPortoLisboaEvent =
+    catLower === 'porto-vs-lisboa' ||
+    catLower === 'porto-lisboa' ||
+    catLower === 'porto-lisboa-duelo' ||
+    catLower === 'porto-lisboa-o-grande-duelo' ||
+    (catLower.includes('porto') && catLower.includes('lisboa'))
+
   let filtered: Question[] = []
 
-  if (isEvent) {
+  if (isPortoLisboaEvent) {
+    // EVENTO OFICIAL: Porto ⚔️ Lisboa — O Grande Duelo
+    const plQuestions = registry.getPortoLisboaQuestions()
+    if (plQuestions && plQuestions.length > 0) {
+      filtered = plQuestions
+    } else {
+      filtered = PORTO_LISBOA_QUESTIONS
+    }
+  } else if (isEvent) {
     // EVENTO OFICIAL: Portugal em Jogo (Multi-tema: História, Geografia, Cultura, Desporto, etc. 0% Maluco)
     const all = registry.getAllQuestions()
     const ELIGIBLE_THEMES = new Set([

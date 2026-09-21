@@ -8,6 +8,7 @@ import { MAIN_CATEGORIES, getCategoryBySlug, normalizeCategorySlug } from '@/lib
 import type { Question, QuizDifficulty, OfficialQuestion } from '@/src/types/quiz'
 import { validateQuestion } from '@/lib/question-system/validator'
 import { deduplicateQuestions } from '@/lib/question-system/deduplicator'
+import { PORTO_LISBOA_QUESTIONS } from '@/lib/data/porto-lisboa-questions'
 
 // Importações dos bancos de dados do ecossistema
 import questionsDesafioNacionalRaw from '@/src/data/questions_desafio_nacional.json'
@@ -139,6 +140,19 @@ export class QuestionRegistry {
       }
     }
 
+    // 5. Banco Oficial: Porto ⚔️ Lisboa — O Grande Duelo
+    if (Array.isArray(PORTO_LISBOA_QUESTIONS)) {
+      for (const q of PORTO_LISBOA_QUESTIONS) {
+        rawList.push({
+          ...q,
+          defaultCategory: 'porto-vs-lisboa',
+          tema: 'porto-vs-lisboa',
+          temaSlug: 'porto-vs-lisboa',
+          subtema: q.subcategory,
+        })
+      }
+    }
+
     // Validação e normalização de cada pergunta com deduplicação rigorosa
     const seenIds = new Set<string>()
     const seenPrompts = new Set<string>()
@@ -245,6 +259,18 @@ export class QuestionRegistry {
   }
 
   /**
+   * Obtém todas as perguntas exclusivas do evento Porto ⚔️ Lisboa
+   */
+  public getPortoLisboaQuestions(): Question[] {
+    return this.questions.filter(
+      (q) =>
+        q.category === 'porto-vs-lisboa' ||
+        String(q.id).startsWith('pld_') ||
+        (q as any).universe !== undefined
+    )
+  }
+
+  /**
    * Seleção para "Tema Completo" — Mistura perguntas de todos os subtemas daquele tema
    */
   public getTemaCompleto(themeSlug: string, difficulty?: number): Question[] {
@@ -289,6 +315,30 @@ export class QuestionRegistry {
     }
 
     return list
+  }
+
+  /**
+   * Obtém as perguntas exclusivas do evento oficial Porto ⚔️ Lisboa — O Grande Duelo
+   */
+  public getPortoLisboaQuestions(universe?: string): Question[] {
+    const list = this.questions.filter((q) => {
+      return (
+        q.category === 'porto-vs-lisboa' ||
+        q.id.startsWith('pld_')
+      )
+    })
+    if (list.length > 0) {
+      if (universe) {
+        const u = universe.toLowerCase()
+        return list.filter((q) => (q.subcategory || '').toLowerCase().includes(u))
+      }
+      return list
+    }
+    return PORTO_LISBOA_QUESTIONS
+  }
+
+  public static getPortoLisboaQuestions(universe?: string): Question[] {
+    return QuestionRegistry.getInstance().getPortoLisboaQuestions(universe)
   }
 
   /**

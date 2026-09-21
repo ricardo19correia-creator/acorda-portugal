@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import {
   Calendar,
   Gamepad2,
@@ -22,10 +22,12 @@ import {
   ArrowRight,
   Gift,
   HelpCircle,
+  Swords,
 } from 'lucide-react'
 import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useAuth } from '@/components/auth-provider'
+import { PortoLisboaEvent } from '@/components/events/PortoLisboaEvent'
 import {
   subscribePublishedEvents,
   subscribeEventRanking,
@@ -35,6 +37,7 @@ import {
   getEventCountdown,
   getDailyMatchesCount,
   getLisbonDateString,
+  sortEventParticipants,
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   type OfficialEventConfig,
@@ -45,9 +48,24 @@ import { cn, safeRandomUUID } from '@/lib/utils'
 
 export function Events() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { user, profile } = useAuth()
 
-  // Configuração oficial do evento
+  // Seletor de evento em exibição (default: Porto ⚔️ Lisboa, o Grande Duelo)
+  const eventParam = searchParams?.get('event')
+  const [selectedEvent, setSelectedEvent] = useState<'porto-lisboa' | 'portugal-em-jogo'>(
+    eventParam === 'portugal-em-jogo' ? 'portugal-em-jogo' : 'porto-lisboa'
+  )
+
+  useEffect(() => {
+    if (eventParam === 'portugal-em-jogo') {
+      setSelectedEvent('portugal-em-jogo')
+    } else if (eventParam === 'porto-lisboa') {
+      setSelectedEvent('porto-lisboa')
+    }
+  }, [eventParam])
+
+  // Configuração oficial do evento Portugal em Jogo
   const [eventConfig, setEventConfig] = useState<OfficialEventConfig>(
     OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
   )
@@ -288,6 +306,48 @@ export function Events() {
         </div>
       </div>
 
+      {/* ========================================================================= */}
+      {/* SELETOR DE EVENTO EM DESTAQUE: PORTO ⚔️ LISBOA vs PORTUGAL EM JOGO        */}
+      {/* ========================================================================= */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1.5 rounded-3xl bg-slate-950/90 border border-white/10 backdrop-blur-xl shadow-2xl">
+        <div className="flex items-center gap-2 p-1 flex-1">
+          <button
+            type="button"
+            onClick={() => setSelectedEvent('porto-lisboa')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-3 px-3 sm:px-5 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer',
+              selectedEvent === 'porto-lisboa'
+                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-rose-600 text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] border border-white/25'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            )}
+          >
+            <Swords className="h-4 w-4 text-amber-400 shrink-0" />
+            <span className="truncate">Porto ⚔️ Lisboa</span>
+            <span className="px-1.5 py-0.5 text-[9px] rounded-md bg-amber-400 text-slate-950 font-black shrink-0">
+              NOVO
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setSelectedEvent('portugal-em-jogo')}
+            className={cn(
+              'flex-1 flex items-center justify-center gap-2 py-3 px-3 sm:px-5 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer',
+              selectedEvent === 'portugal-em-jogo'
+                ? 'bg-gradient-to-r from-emerald-600 via-teal-600 to-amber-600 text-white shadow-[0_0_25px_rgba(16,185,129,0.5)] border border-white/25'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            )}
+          >
+            <Shield className="h-4 w-4 text-emerald-400 shrink-0" />
+            <span className="truncate">Portugal em Jogo</span>
+          </button>
+        </div>
+      </div>
+
+      {selectedEvent === 'porto-lisboa' ? (
+        <PortoLisboaEvent embedded={true} />
+      ) : (
+        <>
       {/* ========================================================================= */}
       {/* 2. CARD PREMIUM HERÓICO: PRIMEIRO DESAFIO NACIONAL — PORTUGAL EM JOGO     */}
       {/* ========================================================================= */}
@@ -844,6 +904,8 @@ export function Events() {
           </div>
         )}
       </section>
+        </>
+      )}
     </div>
   )
 }

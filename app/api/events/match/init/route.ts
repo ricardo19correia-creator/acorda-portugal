@@ -6,9 +6,12 @@ import type { Question } from '@/src/types/quiz'
 import {
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  OFFICIAL_PORTO_LISBOA_ID,
+  OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   getLisbonDateString,
   type OfficialEventConfig,
 } from '@/lib/events-service'
+import { PORTO_LISBOA_QUESTIONS } from '@/lib/data/porto-lisboa-questions'
 
 export const dynamic = 'force-dynamic'
 
@@ -124,29 +127,38 @@ export async function POST(request: NextRequest) {
     const db = getAdminFirestore()
     const targetEventId = requestedEventId
 
+    const isPortoLisboa =
+      targetEventId === OFFICIAL_PORTO_LISBOA_ID ||
+      eventSlug.includes('porto') ||
+      eventSlug.includes('duelo')
+
+    const baseEventConfig = isPortoLisboa
+      ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+      : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+
     // 1. Obter e validar o evento oficial no Firestore
     const eventDocRef = db.collection('events').doc(targetEventId)
     const eventSnap = await eventDocRef.get().catch(() => null)
 
-    let eventConfig: OfficialEventConfig = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+    let eventConfig: OfficialEventConfig = baseEventConfig
     if (eventSnap && eventSnap.exists) {
       eventConfig = {
-        ...OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+        ...baseEventConfig,
         ...(eventSnap.data() as OfficialEventConfig),
       }
     }
 
     // 2. Validação Temporal: Europe/Lisbon
     const nowMs = Date.now()
-    const startStr = eventConfig.startDate || eventConfig.startAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.startDate
-    const endStr = eventConfig.endDate || eventConfig.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate
+    const startStr = eventConfig.startDate || eventConfig.startAt || baseEventConfig.startDate
+    const endStr = eventConfig.endDate || eventConfig.endAt || baseEventConfig.endDate
     const startMs = new Date(startStr).getTime()
     const endMs = new Date(endStr).getTime()
 
     if (nowMs < startMs) {
       return NextResponse.json(
         {
-          error: 'O evento ainda não iniciou. Início a 16/09/2026 às 20:00 (Europe/Lisbon).',
+          error: `O evento ainda não iniciou. Início previsto: ${startStr}.`,
           status: 'upcoming',
         },
         { status: 403 }
@@ -156,7 +168,7 @@ export async function POST(request: NextRequest) {
     if (nowMs > endMs) {
       return NextResponse.json(
         {
-          error: 'O evento já terminou em 30/09/2026 às 23:59 (Europe/Lisbon). Não são aceites novas partidas.',
+          error: `O evento já terminou em ${endStr}. Não são aceites novas partidas.`,
           status: 'ended',
         },
         { status: 403 }
@@ -235,9 +247,15 @@ export async function POST(request: NextRequest) {
       console.warn('[EVENT_INIT_HISTORY_WARN] Falha menor ao ler histórico cloud:', histErr)
     }
 
-    // 5. Filtrar perguntas elegíveis do Registry oficial
-    const allQuestions = registry.getAllQuestions()
-    const eligiblePool = allQuestions.filter(isEligibleEventQuestion)
+    // 5. Filtrar perguntas elegíveis
+    let eligiblePool: Question[] = []
+    if (isPortoLisboa) {
+      const plQuestions = registry.getPortoLisboaQuestions()
+      eligiblePool = plQuestions && plQuestions.length > 0 ? plQuestions : PORTO_LISBOA_QUESTIONS
+    } else {
+      const allQuestions = registry.getAllQuestions()
+      eligiblePool = allQuestions.filter(isEligibleEventQuestion)
+    }
 
     // Separar entre não respondidas e já respondidas
     const unseenPool: Question[] = []
@@ -255,15 +273,17 @@ export async function POST(request: NextRequest) {
     const selected: Question[] = []
     const shuffledUnseen = shuffleArray(unseenPool)
 
-    // Agrupar por tema para garantir equilíbrio
+    // Agrupar por tema / universo para garantir equilíbrio
     const byCategory = new Map<string, Question[]>()
     for (const q of shuffledUnseen) {
-      const cat = (q.category || 'portugal').toLowerCase()
+      const cat = isPortoLisboa
+        ? ((q as any).universe || q.subcategory || 'porto').toLowerCase()
+        : (q.category || 'portugal').toLowerCase()
       if (!byCategory.has(cat)) byCategory.set(cat, [])
       byCategory.get(cat)!.push(q)
     }
 
-    // Round-robin por categoria
+    // Round-robin por categoria/universo
     const catKeys = Array.from(byCategory.keys())
     let round = 0
     while (selected.length < 10 && catKeys.length > 0 && round < 10) {

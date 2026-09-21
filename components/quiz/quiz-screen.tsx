@@ -132,6 +132,19 @@ function resolveCategoryInfo(
     }
   }
   if (
+    categorySlug === 'porto-vs-lisboa' ||
+    categorySlug === 'porto-lisboa' ||
+    categorySlug === 'porto-lisboa-duelo' ||
+    (categorySlug.includes('porto') && categorySlug.includes('lisboa'))
+  ) {
+    return {
+      name: 'PORTO ⚔️ LISBOA',
+      subtitle: 'O Grande Duelo — Evento Oficial Especial',
+      emoji: '⚔️',
+      special: true,
+    }
+  }
+  if (
     categorySlug === 'portugal-em-jogo' ||
     categorySlug.includes('portugal-em-jogo') ||
     categorySlug === 'evento' ||
@@ -1236,7 +1249,26 @@ export function QuizScreen({
           const timeBonus = calculateTimeBonus(seconds, MAX_SECONDS)
           const nextStreak = streak + 1
 
-          setScore((currentScore) => currentScore + q.points + timeBonus)
+          // Multiplicador de dificuldade oficial do evento Porto vs Lisboa
+          let diffMultiplier = 1.0
+          if (eventId === 'porto-lisboa-duelo' || categorySlug === 'porto-vs-lisboa') {
+            const d = q.difficulty || 3
+            if (d >= 5) diffMultiplier = 1.5
+            else if (d === 4) diffMultiplier = 1.25
+            else diffMultiplier = 1.0
+          }
+
+          // Streak bónus a cada 3 acertos seguidos (+10% por streak ativo)
+          let streakBonusPercent = 0
+          if (nextStreak >= 3) {
+            streakBonusPercent = Math.min(0.5, Math.floor(nextStreak / 3) * 0.1)
+          }
+
+          const basePoints = Math.round(q.points * diffMultiplier)
+          const streakPoints = Math.round(basePoints * streakBonusPercent)
+          const totalPointsAwarded = basePoints + streakPoints + timeBonus
+
+          setScore((currentScore) => currentScore + totalPointsAwarded)
           setCorrectCount((current) => current + 1)
           setStreak(nextStreak)
           setCurrentStreak(nextStreak)
@@ -1613,6 +1645,20 @@ export function QuizScreen({
         {/* 2. PAINEL CENTRAL DA PERGUNTA                             */}
         {/* ========================================================= */}
         <div className="w-full flex-1 min-h-0 flex flex-col justify-center items-center py-0.5 sm:py-1">
+          {/* Badge Oficial do Grande Duelo quando for o evento Porto vs Lisboa */}
+          {(eventId === 'porto-lisboa-duelo' || categorySlug === 'porto-vs-lisboa') && (
+            <div className="mb-1 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-950/90 border border-amber-400/60 shadow-[0_0_12px_rgba(245,158,11,0.3)] backdrop-blur-md shrink-0 animate-fade-in">
+              <span className="h-2 w-2 rounded-full bg-blue-500 shrink-0" />
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-amber-300">
+                PORTO ⚔️ LISBOA
+              </span>
+              <span className="h-2 w-2 rounded-full bg-rose-500 shrink-0" />
+              <span className="text-[8px] sm:text-[9px] font-mono font-bold text-slate-300">
+                • {q.difficulty >= 5 ? 'EXPERT 1.5x' : q.difficulty === 4 ? 'MUITO DIFÍCIL 1.25x' : 'DIFÍCIL 1.0x'}
+              </span>
+            </div>
+          )}
+
           {/* GRANDE PAINEL CENTRAL CHANFRADO */}
           <div className="relative w-full p-[1.5px] sm:p-[2px] bg-gradient-to-b from-amber-400/90 via-blue-500/80 to-cyan-400/90 rounded-xl sm:rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.85),0_0_24px_rgba(30,58,138,0.4)]">
             <div className="relative w-full min-h-[56px] max-h-[125px] sm:min-h-[85px] sm:max-h-[175px] md:min-h-[110px] md:max-h-[220px] px-3 sm:px-6 py-2 sm:py-4 flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#08183d]/98 via-[#040c24]/98 to-[#061333]/98 backdrop-blur-2xl rounded-xl sm:rounded-2xl overflow-y-auto">

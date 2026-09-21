@@ -71,6 +71,9 @@ export interface EventParticipant {
   dailyMatches?: Record<string, number>
   bestScore?: number
   totalScore?: number
+  correctAnswers?: number
+  incorrectAnswers?: number
+  questionsAnswered?: number
   lastPlayedDate?: string
   lastPlayedAt?: any
   updatedAt?: any
@@ -88,7 +91,47 @@ export interface CountdownDetails {
 }
 
 export const OFFICIAL_PORTUGAL_EM_JOGO_ID = 'portugal-em-jogo-2026'
-export const DEFAULT_OFFICIAL_EVENT_ID = OFFICIAL_PORTUGAL_EM_JOGO_ID
+export const OFFICIAL_PORTO_LISBOA_ID = 'porto-lisboa-duelo'
+export const OFFICIAL_PORTO_LISBOA_SLUG = 'porto-lisboa-o-grande-duelo'
+export const DEFAULT_OFFICIAL_EVENT_ID = OFFICIAL_PORTO_LISBOA_ID
+
+export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
+  id: OFFICIAL_PORTO_LISBOA_ID,
+  name: 'PORTO ⚔️ LISBOA — O GRANDE DUELO',
+  title: 'PORTO ⚔️ LISBOA',
+  subtitle: 'O GRANDE DUELO',
+  tag: 'Grande Duelo',
+  type: 'Grande Duelo',
+  theme: 'Porto, Lisboa, FC Porto, SL Benfica e Confrontos Diretos',
+  description:
+    'Dois territórios. Dois gigantes. Um desafio. O confronto supremo de conhecimento exclusivo entre a Invicta e a Capital, FC Porto e SL Benfica. Perguntas de alta dificuldade para verdadeiros especialistas.',
+  startDate: '2026-09-20T00:00:00+01:00',
+  endDate: '2026-10-31T23:59:59+01:00',
+  startAt: '2026-09-20T00:00:00+01:00',
+  endAt: '2026-10-31T23:59:59+01:00',
+  timezone: 'Europe/Lisbon',
+  published: true,
+  active: true,
+  enabled: true,
+  dailyMatchLimit: 10,
+  scoring: {
+    pointDivisor: 10,
+    maxEventPointsPerMatch: 150,
+  },
+  rules: {
+    maxDailyMatches: 10,
+    pointDivisor: 10,
+    maxEventPointsPerMatch: 150,
+  },
+  rewards: [
+    { position: 1, title: '1.º Lugar', acordas: 15000, medal: '🥇', label: '15.000 Acordas' },
+    { position: 2, title: '2.º Lugar', acordas: 10000, medal: '🥈', label: '10.000 Acordas' },
+    { position: 3, title: '3.º Lugar', acordas: 7500, medal: '🥉', label: '7.500 Acordas' },
+    { position: 4, title: 'Top 10 Nacional', acordas: 2500, medal: '🎖️', label: '2.500 Acordas' },
+    { position: 5, title: 'Participação (Mín. 5 partidas)', acordas: 500, medal: '🏅', label: '500 Acordas' },
+  ],
+  rewardsDistributed: false,
+}
 
 export const OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO: OfficialEventConfig = {
   id: OFFICIAL_PORTUGAL_EM_JOGO_ID,
@@ -127,7 +170,7 @@ export const OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO: OfficialEventConfig = {
   rewardsDistributed: false,
 }
 
-export const OFFICIAL_EVENT: OfficialEventConfig = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+export const OFFICIAL_EVENT: OfficialEventConfig = OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
 
 /**
  * Devolve a data atual em formato YYYY-MM-DD no fuso horário Europe/Lisbon (Portugal Continental)
@@ -297,6 +340,10 @@ export function sortEventParticipants(list: EventParticipant[]): EventParticipan
       const matchesB = Number(b.countedMatches ?? b.totalMatches ?? 0)
       if (matchesA !== matchesB) return matchesA - matchesB
 
+      const correctA = Number(a.correctAnswers || 0)
+      const correctB = Number(b.correctAnswers || 0)
+      if (correctB !== correctA) return correctB - correctA
+
       const nameDiff = (a.displayName || '').localeCompare(b.displayName || '', 'pt-PT')
       if (nameDiff !== 0) return nameDiff
 
@@ -363,20 +410,26 @@ export function subscribePublishedEvents(
         })
 
         if (list.length === 0) {
-          // Fallback autoritativo para o evento canónico oficial
-          callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
+          // Fallback autoritativo para os eventos canónicos oficiais
+          callback([OFFICIAL_EVENT_CONFIG_PORTO_LISBOA, OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
         } else {
-          callback(list)
+          // Assegurar que os eventos canónicos configurados estão sempre presentes
+          const hasPortoLisboa = list.some((e) => e.id === OFFICIAL_PORTO_LISBOA_ID)
+          const hasPortugal = list.some((e) => e.id === OFFICIAL_PORTUGAL_EM_JOGO_ID)
+          const merged = [...list]
+          if (!hasPortoLisboa) merged.unshift(OFFICIAL_EVENT_CONFIG_PORTO_LISBOA)
+          if (!hasPortugal) merged.push(OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO)
+          callback(merged)
         }
       },
       (err) => {
         console.warn('[EVENTS] Aviso na subscrição de eventos, a usar configuração oficial:', err)
-        callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
+        callback([OFFICIAL_EVENT_CONFIG_PORTO_LISBOA, OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
       }
     )
   } catch (err) {
     console.error('[EVENTS] Falha na subscrição de eventos:', err)
-    callback([OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
+    callback([OFFICIAL_EVENT_CONFIG_PORTO_LISBOA, OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO])
     return () => {}
   }
 }
@@ -438,6 +491,14 @@ export function subscribeEventRanking(
         dailyMatches: data.dailyMatches || {},
         bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
         totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
+        correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
+        incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
+        questionsAnswered:
+          typeof data.questionsAnswered === 'number'
+            ? data.questionsAnswered
+            : typeof data.correctAnswers === 'number'
+            ? data.correctAnswers + (data.incorrectAnswers || 0)
+            : 0,
         lastPlayedDate: data.lastPlayedDate,
         lastPlayedAt: data.lastPlayedAt,
         updatedAt: data.updatedAt,
@@ -536,6 +597,14 @@ export function subscribeUserEventProgress(
           dailyMatches: data.dailyMatches || {},
           bestScore: typeof data.bestScore === 'number' ? data.bestScore : 0,
           totalScore: typeof data.totalScore === 'number' ? data.totalScore : 0,
+          correctAnswers: typeof data.correctAnswers === 'number' ? data.correctAnswers : 0,
+          incorrectAnswers: typeof data.incorrectAnswers === 'number' ? data.incorrectAnswers : 0,
+          questionsAnswered:
+            typeof data.questionsAnswered === 'number'
+              ? data.questionsAnswered
+              : typeof data.correctAnswers === 'number'
+              ? data.correctAnswers + (data.incorrectAnswers || 0)
+              : 0,
           lastPlayedDate: data.lastPlayedDate,
           lastPlayedAt: data.lastPlayedAt,
           updatedAt: data.updatedAt,

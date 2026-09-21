@@ -123,10 +123,15 @@ function QuizPageContent(props: QuizPageProps) {
       ? 'conquista-do-distrito'
       : rawCategorySlug
 
-  // Entrada direta no jogo: se for evento oficial, usa 'portugal-em-jogo'
+  // Entrada direta no jogo: se for evento oficial, determina a categoria oficial do evento
+  const defaultEventCategory =
+    eventId === 'porto-lisboa-duelo' || rawEventId === 'porto-lisboa-duelo'
+      ? 'porto-vs-lisboa'
+      : 'portugal-em-jogo'
+
   const categorySlug =
     normalizedRawCat ||
-    (isEventMatch ? 'portugal-em-jogo' : null) ||
+    (isEventMatch ? defaultEventCategory : null) ||
     (district ? 'conquista-do-distrito' : null) ||
     (city ? 'desafio-cidade' : null) ||
     (gameIdFromUrl ? 'desafio-nacional' : null) ||

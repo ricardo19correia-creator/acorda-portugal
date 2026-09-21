@@ -5,6 +5,8 @@ import {
   sortEventParticipants,
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  OFFICIAL_PORTO_LISBOA_ID,
+  OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   type EventParticipant,
   type OfficialEventConfig,
 } from '@/lib/events-service'
@@ -28,7 +30,12 @@ export async function POST(request: NextRequest) {
 
     const userId = decodedToken.uid
     const body = await request.json().catch(() => ({}))
-    const targetEventId = body.eventId || OFFICIAL_PORTUGAL_EM_JOGO_ID
+    const targetEventId = body.eventId || OFFICIAL_PORTO_LISBOA_ID
+
+    const baseEvent =
+      targetEventId === OFFICIAL_PORTO_LISBOA_ID
+        ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+        : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
 
     const db = getAdminFirestore()
     const eventDocRef = db.collection('events').doc(targetEventId)
@@ -36,18 +43,18 @@ export async function POST(request: NextRequest) {
 
     let eventData: OfficialEventConfig = eventSnap?.exists
       ? (eventSnap.data() as OfficialEventConfig)
-      : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+      : baseEvent
 
     // Verificar se o evento já terminou
     const now = Date.now()
-    const endStr = eventData.endDate || eventData.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate
+    const endStr = eventData.endDate || eventData.endAt || baseEvent.endDate
     const endMs = new Date(endStr).getTime()
 
     if (now < endMs) {
       return NextResponse.json(
         {
           error:
-            'O evento ainda está a decorrer! As recompensas ficam disponíveis imediatamente após o encerramento oficial (30/09/2026 às 23:59).',
+            `O evento ainda está a decorrer! As recompensas ficam disponíveis imediatamente após o encerramento oficial (${endStr}).`,
         },
         { status: 400 }
       )

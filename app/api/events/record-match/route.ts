@@ -6,6 +6,8 @@ import {
   getLisbonDateString,
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  OFFICIAL_PORTO_LISBOA_ID,
+  OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   type OfficialEventConfig,
 } from '@/lib/events-service'
 import { calculateLevelProgress } from '@/lib/progression'
@@ -79,8 +81,13 @@ export async function POST(request: NextRequest) {
 
     let activeEvent: OfficialEventConfig
 
+    const baseDefaultEvent =
+      targetEventId === OFFICIAL_PORTO_LISBOA_ID
+        ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+        : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+
     if (!eventSnap || !eventSnap.exists) {
-      activeEvent = OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+      activeEvent = baseDefaultEvent
       await eventDocRef
         .set(
           {
@@ -97,15 +104,15 @@ export async function POST(request: NextRequest) {
 
     // Verificar datas oficiais de vigência (Europe/Lisbon)
     const now = Date.now()
-    const startStr = activeEvent.startDate || activeEvent.startAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.startDate
-    const endStr = activeEvent.endDate || activeEvent.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate
+    const startStr = activeEvent.startDate || activeEvent.startAt || baseDefaultEvent.startDate
+    const endStr = activeEvent.endDate || activeEvent.endAt || baseDefaultEvent.endDate
     const startMs = new Date(startStr).getTime()
     const endMs = new Date(endStr).getTime()
 
     if (now < startMs) {
       return NextResponse.json({
         success: false,
-        message: 'O evento ainda não iniciou (início a 16/09/2026 às 20:00).',
+        message: `O evento ainda não iniciou (início previsto para ${startStr}).`,
         eventPointsAdded: 0,
       })
     }
@@ -113,7 +120,7 @@ export async function POST(request: NextRequest) {
     if (now > endMs) {
       return NextResponse.json({
         success: false,
-        message: 'O evento já terminou (encerrado a 30/09/2026 às 23:59). Novas partidas não pontuam.',
+        message: `O evento já terminou em ${endStr}. Novas partidas não pontuam.`,
         eventPointsAdded: 0,
         eventEnded: true,
       })
@@ -321,6 +328,9 @@ export async function POST(request: NextRequest) {
             district,
             distrito: district,
             totalMatches: FieldValue.increment(1),
+            correctAnswers: FieldValue.increment(correctAnswers),
+            incorrectAnswers: FieldValue.increment(Math.max(0, totalQuestions - correctAnswers)),
+            questionsAnswered: FieldValue.increment(totalQuestions),
             lastPlayedDate: todayDateStr,
             lastPlayedAt: FieldValue.serverTimestamp(),
             updatedAt: FieldValue.serverTimestamp(),
@@ -413,6 +423,9 @@ export async function POST(request: NextRequest) {
           matchesToday: newDailyCount,
           totalScore,
           bestScore,
+          correctAnswers: FieldValue.increment(correctAnswers),
+          incorrectAnswers: FieldValue.increment(Math.max(0, totalQuestions - correctAnswers)),
+          questionsAnswered: FieldValue.increment(totalQuestions),
           dailyMatches: {
             ...dailyMatches,
             [todayDateStr]: newDailyCount,
