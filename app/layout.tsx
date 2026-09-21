@@ -143,6 +143,24 @@ export default function RootLayout({
     }
   } catch(e) {}
 })();
+
+// Auto-recuperação transparente e silenciosa de novas versões e chunks em produção
+(function() {
+  try {
+    window.addEventListener('error', function(event) {
+      var msg = (event && (event.message || (event.error && event.error.message)) || '').toLowerCase();
+      if (msg.indexOf('loading chunk') !== -1 || msg.indexOf('chunkloaderror') !== -1 || msg.indexOf('failed to fetch dynamically imported module') !== -1 || msg.indexOf('failed to load module script') !== -1) {
+        var key = 'ap_chunk_reload_ts';
+        var last = sessionStorage.getItem(key);
+        var now = Date.now();
+        if (!last || (now - parseInt(last, 10)) > 20000) {
+          sessionStorage.setItem(key, String(now));
+          window.location.reload();
+        }
+      }
+    });
+  } catch(e) {}
+})();
             `,
           }}
         />

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
-import { onAuthStateChanged, type User } from 'firebase/auth'
+import { onAuthStateChanged, signOut, type User } from 'firebase/auth'
 import { doc, setDoc, onSnapshot, serverTimestamp, getDoc, getDocFromServer } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { performLogout } from '@/lib/auth-helpers'
@@ -368,9 +368,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('[AUTH] Conta marcada como eliminada. Ignorando subscrição e terminando sessão.')
       setProfile(null)
       setUser(null)
-      setIsLoading(false)
+      setProfileLoading(false)
+      setAuthStatus('AUTH_UNAUTHENTICATED')
       try {
-        const { signOut } = require('firebase/auth')
         signOut(auth)
       } catch {}
       return

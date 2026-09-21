@@ -45,7 +45,13 @@ export default function GlobalError({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               type="button"
-              onClick={() => reset()}
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.reload()
+                } else {
+                  reset()
+                }
+              }}
               className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
             >
               <RefreshCw className="h-4 w-4" />

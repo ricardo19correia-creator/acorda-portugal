@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
-import { RefreshCw, Home, ShieldCheck, Play, Sparkles } from 'lucide-react'
+import { RefreshCw, Home, ShieldCheck, Play, Sparkles, AlertCircle } from 'lucide-react'
 
 export default function Error({
   error,
@@ -31,14 +30,16 @@ export default function Error({
       error,
     })
 
-    // 2. Auto-recuperação transparente e silenciosa para erros transitórios de chunks ou rede
+    // 2. Auto-recuperação transparente e resiliente para erros transitórios de chunks ou rede
     const errorMsg = String(error?.message || '').toLowerCase()
     const isTransient =
       errorMsg.includes('chunk') ||
       errorMsg.includes('loading chunk') ||
       errorMsg.includes('failed to fetch') ||
       errorMsg.includes('network') ||
-      errorMsg.includes('dynamically imported module')
+      errorMsg.includes('dynamically imported module') ||
+      errorMsg.includes('failed to load module script') ||
+      errorMsg.includes('load failed')
 
     if (isTransient) {
       const hasAutoRetried = sessionStorage.getItem('ap_error_auto_retried')
@@ -46,15 +47,38 @@ export default function Error({
         sessionStorage.setItem('ap_error_auto_retried', 'true')
         setAutoRetrying(true)
         const timer = setTimeout(() => {
-          reset()
-        }, 1000)
+          if (typeof window !== 'undefined') {
+            window.location.reload()
+          } else {
+            reset()
+          }
+        }, 800)
         return () => clearTimeout(timer)
       }
     }
   }, [error, reset, pathname, isPublicRoute])
 
   const handleManualReset = () => {
-    sessionStorage.removeItem('ap_error_auto_retried')
+    try {
+      sessionStorage.removeItem('ap_error_auto_retried')
+      if (typeof window !== 'undefined') {
+        window.location.reload()
+        return
+      }
+    } catch {}
+    reset()
+  }
+
+  const handleHardCleanReset = () => {
+    try {
+      sessionStorage.clear()
+      localStorage.removeItem('ap_error_auto_retried')
+      localStorage.removeItem('active_game_session')
+      if (typeof window !== 'undefined') {
+        window.location.href = '/'
+        return
+      }
+    } catch {}
     reset()
   }
 
@@ -92,14 +116,14 @@ export default function Error({
               <span>{autoRetrying ? 'A carregar...' : 'Recarregar'}</span>
             </button>
 
-            <Link
+            <a
               href="/"
               onClick={() => sessionStorage.removeItem('ap_error_auto_retried')}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-5 py-3 text-xs font-bold text-slate-200 transition-all active:scale-95 cursor-pointer"
             >
               <Home className="h-4 w-4" />
               <span>Página Inicial</span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -144,26 +168,48 @@ export default function Error({
             <span>{autoRetrying ? 'A restaurar...' : 'Recarregar Jogo'}</span>
           </button>
 
-          <Link
+          <a
             href="/jogar"
             onClick={() => sessionStorage.removeItem('ap_error_auto_retried')}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-5 py-3 text-xs font-bold text-slate-200 transition-all active:scale-95 cursor-pointer"
           >
             <Play className="h-4 w-4 text-emerald-400" />
             <span>Central de Jogos</span>
-          </Link>
+          </a>
         </div>
 
-        <div className="pt-2">
-          <Link
+        <div className="flex items-center justify-center gap-4 pt-1 text-xs">
+          <a
             href="/"
             onClick={() => sessionStorage.removeItem('ap_error_auto_retried')}
-            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
           >
             <Home className="h-3.5 w-3.5" />
-            <span>Voltar à Página Principal</span>
-          </Link>
+            <span>Página Principal</span>
+          </a>
+
+          <span className="text-white/20">•</span>
+
+          <button
+            type="button"
+            onClick={handleHardCleanReset}
+            className="text-slate-400 hover:text-amber-300 transition-colors cursor-pointer"
+          >
+            Restaurar Sessão
+          </button>
         </div>
+
+        {error?.message && (
+          <details className="text-left pt-2">
+            <summary className="text-[10px] text-slate-500 hover:text-slate-300 cursor-pointer font-medium tracking-wide uppercase">
+              Detalhes de Diagnóstico
+            </summary>
+            <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-white/10 text-left font-mono text-[10px] text-rose-300 max-h-24 overflow-y-auto break-all">
+              {error.message}
+              {error.digest && <div className="text-slate-500 mt-1">Digest: {error.digest}</div>}
+            </div>
+          </details>
+        )}
       </div>
     </div>
   )
