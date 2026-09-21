@@ -416,7 +416,14 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       {/* ========================================================================= */}
       <section
         aria-label="Porto × Lisboa — O Grande Duelo"
-        className="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-gradient-to-b from-[#060e22]/98 via-[#040817]/98 to-[#02040b] shadow-[0_0_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
+        className={cn(
+          'relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#060e22]/98 via-[#040817]/98 to-[#02040b] backdrop-blur-2xl transition-all duration-500',
+          userTeam === 'porto'
+            ? 'border-2 border-blue-500/60 shadow-[0_0_60px_rgba(37,99,235,0.35)]'
+            : userTeam === 'lisboa'
+            ? 'border-2 border-rose-500/60 shadow-[0_0_60px_rgba(244,63,94,0.35)]'
+            : 'border border-amber-500/40 shadow-[0_0_60px_rgba(0,0,0,0.9)]'
+        )}
       >
         {/* Iluminação Dual: Azul Elétrico (Porto) à esquerda, Carmesim Profundo (Lisboa) à direita */}
         <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-600/25 blur-3xl pointer-events-none animate-pulse" />
@@ -429,11 +436,31 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
         <div className="relative z-10 p-4 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
           {/* Topo do Hero: Badges de Estado e Identidade Oficial */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-            <div className="inline-flex items-center gap-2 rounded-2xl bg-slate-950/85 border border-amber-500/30 px-3.5 py-1.5 shadow-inner">
-              <Swords className="h-4 w-4 text-amber-400 shrink-0" />
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
-                Evento Especial Oficial
-              </span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="inline-flex items-center gap-2 rounded-2xl bg-slate-950/85 border border-amber-500/30 px-3.5 py-1.5 shadow-inner">
+                <Swords className="h-4 w-4 text-amber-400 shrink-0" />
+                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
+                  Evento Especial Oficial
+                </span>
+              </div>
+
+              {/* Identidade do Lado Escolhido pelo Jogador */}
+              {userTeam === 'porto' ? (
+                <div className="inline-flex items-center gap-1.5 rounded-2xl bg-blue-600/25 border border-blue-400/60 px-3 py-1.5 text-xs font-black text-blue-300 shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                  <span>🔵</span>
+                  <span className="uppercase tracking-wider">A Defender a Equipa Porto</span>
+                </div>
+              ) : userTeam === 'lisboa' ? (
+                <div className="inline-flex items-center gap-1.5 rounded-2xl bg-rose-600/25 border border-rose-400/60 px-3 py-1.5 text-xs font-black text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.4)]">
+                  <span>🔴</span>
+                  <span className="uppercase tracking-wider">A Defender a Equipa Lisboa</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 rounded-2xl bg-amber-500/15 border border-amber-400/40 px-3 py-1.5 text-xs font-black text-amber-300">
+                  <span>⚔️</span>
+                  <span className="uppercase tracking-wider">Escolha do Lado Pendente</span>
+                </div>
+              )}
             </div>
 
             {/* Badge de Estado Dinâmico Autorizado */}
@@ -495,6 +522,33 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             </p>
           </div>
 
+          {/* Banner Panorâmico Oficial da Arena com Iluminação Temática */}
+          <div className="relative mx-auto max-w-3xl h-44 sm:h-56 md:h-64 w-full rounded-2xl overflow-hidden border border-white/15 shadow-[0_0_40px_rgba(0,0,0,0.8)]">
+            <Image
+              src="/arenas/porto-lisboa-arena.jpg"
+              alt="Arena Oficial Porto vs Lisboa"
+              fill
+              className="object-cover object-center scale-105 filter brightness-90 hover:scale-100 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 800px"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#040817] via-transparent to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-transparent to-rose-950/40" />
+
+            {/* Badges Flutuantes dos Lados da Arena */}
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-black">
+              <span className="px-3 py-1 rounded-xl bg-blue-950/90 text-blue-300 border border-blue-500/40 backdrop-blur-md shadow">
+                🔵 Porto & FC Porto
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-slate-950/85 text-amber-400 border border-amber-500/40 backdrop-blur-md font-mono text-[10px] hidden sm:inline-block">
+                ARENA OFICIAL
+              </span>
+              <span className="px-3 py-1 rounded-xl bg-rose-950/90 text-rose-300 border border-rose-500/40 backdrop-blur-md shadow">
+                Lisboa & SL Benfica 🔴
+              </span>
+            </div>
+          </div>
+
           {/* CTA Principal de Entrada no Duelo */}
           <div className="pt-2 flex flex-col items-center justify-center gap-3">
             {dynamicStatus === 'active' && (
@@ -506,12 +560,22 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                   'w-full sm:w-auto min-w-[280px] sm:min-w-[340px] inline-flex items-center justify-center gap-3 rounded-2xl font-display text-base sm:text-lg font-black uppercase tracking-wider px-8 py-4.5 shadow-2xl transition-all cursor-pointer select-none',
                   dailyLimitReached
                     ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/10'
-                    : 'bg-gradient-to-r from-blue-600 via-amber-500 to-rose-600 hover:from-blue-500 hover:via-amber-400 hover:to-rose-500 text-white shadow-[0_0_35px_rgba(245,158,11,0.5)] hover:shadow-[0_0_50px_rgba(245,158,11,0.7)] hover:scale-[1.02] active:scale-95'
+                    : userTeam === 'porto'
+                    ? 'bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500 hover:from-blue-600 hover:to-sky-400 text-white shadow-[0_0_35px_rgba(37,99,235,0.6)] hover:scale-[1.02] active:scale-95'
+                    : userTeam === 'lisboa'
+                    ? 'bg-gradient-to-r from-rose-700 via-rose-600 to-red-500 hover:from-rose-600 hover:to-red-400 text-white shadow-[0_0_35px_rgba(244,63,94,0.6)] hover:scale-[1.02] active:scale-95'
+                    : 'bg-gradient-to-r from-blue-600 via-amber-500 to-rose-600 hover:from-blue-500 hover:via-amber-400 hover:to-rose-500 text-white shadow-[0_0_35px_rgba(245,158,11,0.5)] hover:scale-[1.02] active:scale-95'
                 )}
               >
                 <Swords className="h-5 w-5 text-amber-300" />
                 <span>
-                  {dailyLimitReached ? 'Limite Diário Atingido' : 'Entrar no Grande Duelo'}
+                  {dailyLimitReached
+                    ? 'Limite Diário Atingido'
+                    : !userTeam
+                    ? 'Escolhe o Teu Lado para Jogar'
+                    : userTeam === 'porto'
+                    ? 'Jogar pela Equipa Porto 🔵'
+                    : 'Jogar pela Equipa Lisboa 🔴'}
                 </span>
                 <ChevronRight className="h-5 w-5 text-amber-300" />
               </button>
@@ -591,49 +655,317 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. RIVALIDADE TEMÁTICA: LINHAS DE ENERGIA AZUL × VERMELHO                  */}
+      {/* 1.5 ECRÃ DE VITÓRIA / CONSAGRAÇÃO OFICIAL (QUANDO O EVENTO TERMINA)       */}
       {/* ========================================================================= */}
-      <section
-        aria-label="Rivalidade Temática Porto vs Lisboa"
-        className="rounded-3xl border border-white/10 bg-slate-950/70 p-5 sm:p-8 backdrop-blur-xl shadow-xl relative overflow-hidden"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-          {/* Lado Esquerdo: Porto */}
-          <div className="flex-1 text-center md:text-left space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-black uppercase tracking-wider">
-              <span>🔵 Invicta & Dragões</span>
-            </div>
-            <h3 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-              Porto & FC Porto
-            </h3>
-            <p className="text-xs text-slate-300">
-              Séculos de história cívica, pontes icónicas do Douro e glórias europeias em Viena, Sevilha e Gelsenkirchen.
+      {dynamicStatus === 'ended' && (
+        <section
+          aria-label="Vencedor Oficial do Grande Duelo"
+          className={cn(
+            'relative overflow-hidden rounded-3xl p-6 sm:p-10 text-center space-y-6 border-2 shadow-2xl backdrop-blur-2xl',
+            winningTeam === 'porto'
+              ? 'border-blue-400/80 bg-gradient-to-b from-blue-950 via-slate-900 to-slate-950 shadow-[0_0_60px_rgba(37,99,235,0.4)]'
+              : winningTeam === 'lisboa'
+              ? 'border-rose-400/80 bg-gradient-to-b from-rose-950 via-slate-900 to-slate-950 shadow-[0_0_60px_rgba(244,63,94,0.4)]'
+              : 'border-amber-400/80 bg-gradient-to-b from-amber-950 via-slate-900 to-slate-950'
+          )}
+        >
+          <div className="text-5xl sm:text-6xl animate-bounce">🏆</div>
+          <div className="space-y-2">
+            <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-widest shadow">
+              RESULTADO FINAL CONSAGRADO
+            </span>
+            <h2 className="font-display text-3xl sm:text-5xl font-black uppercase text-white tracking-wide">
+              {winningTeam === 'porto'
+                ? '🔵 A EQUIPA PORTO É A GRANDE CAMPEÃ!'
+                : winningTeam === 'lisboa'
+                ? '🔴 A EQUIPA LISBOA É A GRANDE CAMPEÃ!'
+                : 'EMPATE HISTÓRICO ENTRE PORTO E LISBOA!'}
+            </h2>
+            <p className="text-sm sm:text-base font-bold text-slate-300 max-w-2xl mx-auto">
+              {winningTeam === 'porto'
+                ? `A Invicta e os Dragões triunfaram no Grande Duelo com um total de ${portoTeamStats.points.toLocaleString('pt-PT')} pontos contra ${lisboaTeamStats.points.toLocaleString('pt-PT')} pontos de Lisboa.`
+                : winningTeam === 'lisboa'
+                ? `A Capital e as Águias triunfaram no Grande Duelo com um total de ${lisboaTeamStats.points.toLocaleString('pt-PT')} pontos contra ${portoTeamStats.points.toLocaleString('pt-PT')} pontos do Porto.`
+                : 'Porto e Lisboa terminaram rigorosamente empatados neste duelo memorável!'}
             </p>
           </div>
 
-          {/* Centro: Nexus de Energia */}
-          <div className="flex flex-col items-center justify-center shrink-0 px-4">
-            <div className="relative flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-600 via-slate-900 to-rose-600 border border-amber-400/60 shadow-[0_0_25px_rgba(245,158,11,0.5)]">
-              <Swords className="h-7 w-7 text-amber-300" />
+          {/* Destaque dos Líderes de Cada Equipa */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto pt-4 text-left">
+            {portoLeader && (
+              <div className="p-4 rounded-2xl bg-blue-950/70 border border-blue-400/50 flex items-center gap-3">
+                <PlayerAvatar
+                  photoURL={portoLeader.photoURL || null}
+                  name={portoLeader.displayName || 'Porto Leader'}
+                  className="h-12 w-12 rounded-xl border border-blue-400"
+                />
+                <div className="min-w-0">
+                  <span className="text-[10px] font-black uppercase text-blue-300 tracking-wider">
+                    👑 Campeão da Equipa Porto
+                  </span>
+                  <p className="font-display text-sm font-black text-white truncate">
+                    {portoLeader.displayName || 'Jogador'}
+                  </p>
+                  <p className="text-xs font-mono text-blue-400 font-bold">
+                    {(portoLeader.eventPoints || 0).toLocaleString('pt-PT')} pts
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {lisboaLeader && (
+              <div className="p-4 rounded-2xl bg-rose-950/70 border border-rose-400/50 flex items-center gap-3">
+                <PlayerAvatar
+                  photoURL={lisboaLeader.photoURL || null}
+                  name={lisboaLeader.displayName || 'Lisboa Leader'}
+                  className="h-12 w-12 rounded-xl border border-rose-400"
+                />
+                <div className="min-w-0">
+                  <span className="text-[10px] font-black uppercase text-rose-300 tracking-wider">
+                    👑 Campeão da Equipa Lisboa
+                  </span>
+                  <p className="font-display text-sm font-black text-white truncate">
+                    {lisboaLeader.displayName || 'Jogador'}
+                  </p>
+                  <p className="text-xs font-mono text-rose-400 font-bold">
+                    {(lisboaLeader.eventPoints || 0).toLocaleString('pt-PT')} pts
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 2. PLACAR EM TEMPO REAL: PORTO 🔵 × LISBOA 🔴 (PONTOS E JOGADORES REAIS)  */}
+      {/* ========================================================================= */}
+      <section
+        aria-label="Placar Oficial Porto vs Lisboa"
+        className="rounded-3xl border border-white/10 bg-slate-950/80 p-5 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6 relative overflow-hidden"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-blue-500/20 via-amber-500/20 to-rose-500/20 text-amber-400 border border-amber-500/30">
+              <Swords className="h-5 w-5" />
             </div>
-            <span className="font-display text-xs font-black uppercase tracking-widest text-amber-400 mt-2">
-              VS
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="font-display text-lg sm:text-xl font-black uppercase text-white">
+                  PLACAR DO GRANDE DUELO
+                </h2>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400">
+                  Em Direto
+                </span>
+              </div>
+              <p className="text-xs text-slate-400">
+                Pontos e jogadores sincronizados atomicamente com o servidor
+              </p>
+            </div>
+          </div>
+
+          <div className="text-right">
+            <span className="text-[11px] font-bold text-slate-400">
+              Total Acumulado:{' '}
+              <strong className="text-amber-400 font-mono">
+                {totalTeamPoints.toLocaleString('pt-PT')} pts
+              </strong>
+            </span>
+          </div>
+        </div>
+
+        {/* Comparador Visual das Duas Equipas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 relative">
+          {/* Card Equipa Porto */}
+          <div
+            className={cn(
+              'relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border space-y-4',
+              userTeam === 'porto'
+                ? 'bg-gradient-to-b from-blue-950/80 via-slate-900/90 to-slate-950 border-blue-400/80 shadow-[0_0_30px_rgba(37,99,235,0.3)] ring-1 ring-blue-400/40'
+                : 'bg-gradient-to-b from-blue-950/40 via-slate-900/60 to-slate-950/80 border-blue-500/30 hover:border-blue-400/50'
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-black uppercase tracking-wider">
+                <span>🔵 EQUIPA PORTO</span>
+              </div>
+              {winningTeam === 'porto' && (
+                <span className="px-2.5 py-0.5 rounded-full bg-blue-500 text-white text-[10px] font-black uppercase tracking-wider shadow">
+                  🔥 Em Vantagem
+                </span>
+              )}
+              {userTeam === 'porto' && (
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow">
+                  ⭐ O Teu Lado
+                </span>
+              )}
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-wide">
+                Porto + FC Porto
+              </h3>
+              <p className="text-xs text-slate-300">
+                A Invicta e a mística dos Dragões. Glórias europeias e tradição inabalável.
+              </p>
+            </div>
+
+            {/* Métricas Reais da Equipa Porto */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="rounded-xl bg-slate-900/80 border border-blue-500/20 p-3 text-left">
+                <p className="text-[10px] font-bold uppercase text-slate-400">Pontos da Equipa</p>
+                <p className="font-display text-2xl sm:text-3xl font-black text-blue-400 mt-0.5">
+                  {(portoTeamStats.points || 0).toLocaleString('pt-PT')}
+                </p>
+              </div>
+              <div className="rounded-xl bg-slate-900/80 border border-blue-500/20 p-3 text-left">
+                <p className="text-[10px] font-bold uppercase text-slate-400">Jogadores Alistados</p>
+                <p className="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">
+                  {(portoTeamStats.playerCount || 0).toLocaleString('pt-PT')}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs font-bold pt-1 border-t border-white/10">
+              <span className="text-slate-400">Partidas Disputadas:</span>
+              <span className="text-white font-mono">{portoTeamStats.matchesPlayed || 0}</span>
+            </div>
+          </div>
+
+          {/* Card Equipa Lisboa */}
+          <div
+            className={cn(
+              'relative rounded-2xl p-5 sm:p-6 transition-all duration-300 border space-y-4',
+              userTeam === 'lisboa'
+                ? 'bg-gradient-to-b from-rose-950/80 via-slate-900/90 to-slate-950 border-rose-400/80 shadow-[0_0_30px_rgba(244,63,94,0.3)] ring-1 ring-rose-400/40'
+                : 'bg-gradient-to-b from-rose-950/40 via-slate-900/60 to-slate-950/80 border-rose-500/30 hover:border-rose-400/50'
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-black uppercase tracking-wider">
+                <span>🔴 EQUIPA LISBOA</span>
+              </div>
+              {winningTeam === 'lisboa' && (
+                <span className="px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black uppercase tracking-wider shadow">
+                  🔥 Em Vantagem
+                </span>
+              )}
+              {userTeam === 'lisboa' && (
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow">
+                  ⭐ O Teu Lado
+                </span>
+              )}
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-wide">
+                Lisboa + SL Benfica
+              </h3>
+              <p className="text-xs text-slate-300">
+                A Capital das 7 colinas e a lenda das Águias. Conquistas eternas de Berna e Amesterdão.
+              </p>
+            </div>
+
+            {/* Métricas Reais da Equipa Lisboa */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 text-left">
+                <p className="text-[10px] font-bold uppercase text-slate-400">Pontos da Equipa</p>
+                <p className="font-display text-2xl sm:text-3xl font-black text-rose-400 mt-0.5">
+                  {(lisboaTeamStats.points || 0).toLocaleString('pt-PT')}
+                </p>
+              </div>
+              <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 text-left">
+                <p className="text-[10px] font-bold uppercase text-slate-400">Jogadores Alistados</p>
+                <p className="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">
+                  {(lisboaTeamStats.playerCount || 0).toLocaleString('pt-PT')}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs font-bold pt-1 border-t border-white/10">
+              <span className="text-slate-400">Partidas Disputadas:</span>
+              <span className="text-white font-mono">{lisboaTeamStats.matchesPlayed || 0}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Barra Dinâmica de Domínio: Porto vs Lisboa */}
+        <div className="space-y-2 pt-2">
+          <div className="flex items-center justify-between text-xs font-black uppercase">
+            <span className="text-blue-400 flex items-center gap-1.5">
+              <span>🔵 PORTO</span>
+              <span className="font-mono text-sm">{portoPercentage}%</span>
+            </span>
+            <span className="text-amber-400 font-display text-[11px] tracking-widest">
+              DISPUTA DO DOMÍNIO
+            </span>
+            <span className="text-rose-400 flex items-center gap-1.5">
+              <span className="font-mono text-sm">{lisboaPercentage}%</span>
+              <span>LISBOA 🔴</span>
             </span>
           </div>
 
-          {/* Lado Direito: Lisboa */}
-          <div className="flex-1 text-center md:text-right space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[10px] font-black uppercase tracking-wider">
-              <span>🔴 Capital & Águias</span>
+          <div className="relative h-6 w-full rounded-full bg-slate-900 border border-white/10 overflow-hidden flex shadow-inner">
+            <div
+              className="h-full bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400 transition-all duration-700 flex items-center justify-start pl-3 text-[10px] sm:text-xs font-black text-white"
+              style={{ width: `${portoPercentage}%` }}
+            >
+              {portoPercentage >= 15 && `${portoPercentage}%`}
             </div>
-            <h3 className="font-display text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-              Lisboa & SL Benfica
-            </h3>
-            <p className="text-xs text-slate-300">
-              Património das 7 colinas, reconstrução pombalina de 1755 e o legado bicampeão europeu de Eusébio e Coluna.
-            </p>
+            <div
+              className="h-full bg-gradient-to-l from-rose-700 via-rose-600 to-rose-400 transition-all duration-700 flex items-center justify-end pr-3 text-[10px] sm:text-xs font-black text-white"
+              style={{ width: `${lisboaPercentage}%` }}
+            >
+              {lisboaPercentage >= 15 && `${lisboaPercentage}%`}
+            </div>
           </div>
         </div>
+
+        {/* Callout de Ação para o Utilizador */}
+        {!userTeam ? (
+          <div className="rounded-2xl border border-amber-500/40 bg-gradient-to-r from-blue-950/60 via-amber-950/40 to-rose-950/60 p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+            <div>
+              <p className="font-display text-sm font-black text-amber-300 uppercase">
+                ⚔️ Ainda Não Escolheste o Teu Lado!
+              </p>
+              <p className="text-xs text-slate-300">
+                A tua escolha é definitiva para este evento e os teus pontos somam para o total da tua equipa.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowTeamSelectModal(true)}
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition cursor-pointer shadow-lg shrink-0"
+            >
+              Escolher Equipa Agora ⚔️
+            </button>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              'rounded-2xl p-4 flex items-center justify-between gap-3 text-left border',
+              userTeam === 'porto'
+                ? 'bg-blue-950/40 border-blue-500/30 text-blue-200'
+                : 'bg-rose-950/40 border-rose-500/30 text-rose-200'
+            )}
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-xl">{userTeam === 'porto' ? '🔵' : '🔴'}</span>
+              <p className="text-xs">
+                Estás a lutar pela <strong>Equipa {userTeam === 'porto' ? 'Porto' : 'Lisboa'}</strong>
+                {userTeamRankPosition && (
+                  <span className="ml-1 text-amber-300 font-bold">
+                    (És o #{userTeamRankPosition} na tua equipa)
+                  </span>
+                )}. Cada partida tua soma diretamente para este placar nacional!
+              </p>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ========================================================================= */}
@@ -1033,7 +1365,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
         aria-label="Ranking do Grande Duelo"
         className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-8 backdrop-blur-xl shadow-xl space-y-6 text-left"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
             <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
               <Trophy className="h-5 w-5" />
@@ -1048,8 +1380,46 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             </div>
           </div>
 
-          <div className="text-xs text-slate-400 font-medium">
-            {effectiveRanking.length} participantes registados
+          {/* Abas de Filtragem: Todos / Porto / Lisboa */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={() => setRankingFilter('all')}
+              className={cn(
+                'px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer',
+                rankingFilter === 'all'
+                  ? 'bg-amber-400 text-slate-950 shadow-md'
+                  : 'bg-slate-900/80 text-slate-400 border border-white/10 hover:text-white'
+              )}
+            >
+              Todos ({effectiveRanking.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setRankingFilter('porto')}
+              className={cn(
+                'px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5',
+                rankingFilter === 'porto'
+                  ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
+                  : 'bg-slate-900/80 text-blue-400 border border-blue-500/30 hover:text-blue-300'
+              )}
+            >
+              <span>🔵 Equipa Porto</span>
+              <span className="font-mono">({portoParticipants.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setRankingFilter('lisboa')}
+              className={cn(
+                'px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5',
+                rankingFilter === 'lisboa'
+                  ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)]'
+                  : 'bg-slate-900/80 text-rose-400 border border-rose-500/30 hover:text-rose-300'
+              )}
+            >
+              <span>🔴 Equipa Lisboa</span>
+              <span className="font-mono">({lisboaParticipants.length})</span>
+            </button>
           </div>
         </div>
 
@@ -1058,14 +1428,22 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             <div className="h-8 w-8 mx-auto rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
             <p className="text-xs font-bold">A sincronizar ranking em tempo real...</p>
           </div>
-        ) : effectiveRanking.length === 0 ? (
+        ) : filteredRanking.length === 0 ? (
           <div className="p-10 text-center rounded-3xl border border-dashed border-white/10 bg-slate-950/40 space-y-3">
             <Swords className="h-12 w-12 text-amber-400/50 mx-auto" />
             <h3 className="font-display font-black text-sm uppercase text-white">
-              O Ranking está à tua espera!
+              {rankingFilter === 'porto'
+                ? 'Ainda sem jogadores na Equipa Porto'
+                : rankingFilter === 'lisboa'
+                ? 'Ainda sem jogadores na Equipa Lisboa'
+                : 'O Ranking está à tua espera!'}
             </h3>
             <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-              Sê o primeiro jogador a concluir uma partida de 10 perguntas do Grande Duelo para assumir o topo da classificação nacional.
+              {rankingFilter === 'porto'
+                ? 'Sê o primeiro a defender as cores do Porto e do FC Porto nesta tabela de honra!'
+                : rankingFilter === 'lisboa'
+                ? 'Sê o primeiro a defender as cores de Lisboa e do SL Benfica nesta tabela de honra!'
+                : 'Sê o primeiro jogador a concluir uma partida de 10 perguntas do Grande Duelo para assumir o topo da classificação nacional.'}
             </p>
             <button
               type="button"
@@ -1079,67 +1457,92 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
         ) : (
           <div className="space-y-6">
             {/* Pódio dos 3 Primeiros */}
-            {effectiveRanking.length >= 1 && (
+            {filteredRanking.length >= 1 && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 {/* 2.º Lugar */}
-                {effectiveRanking[1] && (
+                {filteredRanking[1] && (
                   <div className="order-2 sm:order-1 rounded-2xl border border-slate-400/40 bg-slate-950/80 p-4 text-center space-y-2">
                     <span className="text-2xl">🥈</span>
                     <p className="text-[10px] font-black uppercase tracking-wider text-slate-300">
                       2.º Lugar
                     </p>
                     <PlayerAvatar
-                      photoURL={effectiveRanking[1].photoURL || null}
-                      name={effectiveRanking[1].displayName || 'Jogador'}
+                      photoURL={filteredRanking[1].photoURL || null}
+                      name={filteredRanking[1].displayName || 'Jogador'}
                       className="h-10 w-10 mx-auto rounded-xl border border-slate-400/40"
                     />
-                    <p className="font-display text-xs font-black uppercase text-white truncate">
-                      {effectiveRanking[1].displayName || 'Jogador'}
-                    </p>
+                    <div className="truncate">
+                      <p className="font-display text-xs font-black uppercase text-white truncate">
+                        {filteredRanking[1].displayName || 'Jogador'}
+                      </p>
+                      {filteredRanking[1].team && (
+                        <span className="text-[9px] font-bold text-slate-400">
+                          {filteredRanking[1].team === 'porto' ? '🔵 Porto' : '🔴 Lisboa'}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-[11px] font-black text-slate-300 font-display">
-                      {(effectiveRanking[1].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[1].eventPoints || 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
 
                 {/* 1.º Lugar */}
-                {effectiveRanking[0] && (
+                {filteredRanking[0] && (
                   <div className="order-1 sm:order-2 rounded-2xl border-2 border-amber-400/60 bg-gradient-to-b from-amber-500/20 to-slate-950 p-5 text-center space-y-2 shadow-[0_0_25px_rgba(245,158,11,0.25)] sm:-translate-y-2">
                     <span className="text-3xl">🥇</span>
                     <p className="text-[10px] font-black uppercase tracking-wider text-amber-400">
-                      Líder do Duelo
+                      {rankingFilter === 'porto'
+                        ? 'Líder Equipa Porto'
+                        : rankingFilter === 'lisboa'
+                        ? 'Líder Equipa Lisboa'
+                        : 'Líder do Duelo'}
                     </p>
                     <PlayerAvatar
-                      photoURL={effectiveRanking[0].photoURL || null}
-                      name={effectiveRanking[0].displayName || 'Jogador'}
+                      photoURL={filteredRanking[0].photoURL || null}
+                      name={filteredRanking[0].displayName || 'Jogador'}
                       className="h-12 w-12 mx-auto rounded-xl border border-amber-400/60 shadow"
                     />
-                    <p className="font-display text-sm font-black uppercase text-white truncate">
-                      {effectiveRanking[0].displayName || 'Jogador'}
-                    </p>
+                    <div className="truncate">
+                      <p className="font-display text-sm font-black uppercase text-white truncate">
+                        {filteredRanking[0].displayName || 'Jogador'}
+                      </p>
+                      {filteredRanking[0].team && (
+                        <span className="text-[10px] font-bold text-amber-300">
+                          {filteredRanking[0].team === 'porto' ? '🔵 Equipa Porto' : '🔴 Equipa Lisboa'}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs font-black text-amber-400 font-display">
-                      {(effectiveRanking[0].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[0].eventPoints || 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
 
                 {/* 3.º Lugar */}
-                {effectiveRanking[2] && (
+                {filteredRanking[2] && (
                   <div className="order-3 rounded-2xl border border-amber-700/40 bg-slate-950/80 p-4 text-center space-y-2">
                     <span className="text-2xl">🥉</span>
                     <p className="text-[10px] font-black uppercase tracking-wider text-amber-600">
                       3.º Lugar
                     </p>
                     <PlayerAvatar
-                      photoURL={effectiveRanking[2].photoURL || null}
-                      name={effectiveRanking[2].displayName || 'Jogador'}
+                      photoURL={filteredRanking[2].photoURL || null}
+                      name={filteredRanking[2].displayName || 'Jogador'}
                       className="h-10 w-10 mx-auto rounded-xl border border-amber-700/40"
                     />
-                    <p className="font-display text-xs font-black uppercase text-white truncate">
-                      {effectiveRanking[2].displayName || 'Jogador'}
-                    </p>
+                    <div className="truncate">
+                      <p className="font-display text-xs font-black uppercase text-white truncate">
+                        {filteredRanking[2].displayName || 'Jogador'}
+                      </p>
+                      {filteredRanking[2].team && (
+                        <span className="text-[9px] font-bold text-slate-400">
+                          {filteredRanking[2].team === 'porto' ? '🔵 Porto' : '🔴 Lisboa'}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-[11px] font-black text-amber-500 font-display">
-                      {(effectiveRanking[2].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[2].eventPoints || 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
@@ -1153,6 +1556,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                   <tr className="border-b border-white/10 text-[10px] font-black uppercase tracking-wider text-slate-400">
                     <th className="py-3 px-3 w-14 text-center">Pos.</th>
                     <th className="py-3 px-3">Jogador</th>
+                    <th className="py-3 px-3 text-center">Lado</th>
                     <th className="py-3 px-3 hidden sm:table-cell">Distrito</th>
                     <th className="py-3 px-3 text-center">Partidas</th>
                     <th className="py-3 px-3 text-center hidden md:table-cell">Acertos</th>
@@ -1161,7 +1565,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 font-medium">
-                  {effectiveRanking.map((p, idx) => {
+                  {filteredRanking.map((p, idx) => {
                     const isCurrentUser = Boolean(user?.uid && p.userId === user.uid)
                     const pos = idx + 1
                     const isTop1 = pos === 1
@@ -1217,6 +1621,21 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                               )}
                             </div>
                           </div>
+                        </td>
+
+                        {/* Lado / Equipa */}
+                        <td className="py-3.5 px-3 text-center">
+                          {p.team === 'porto' ? (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-black">
+                              🔵 Porto
+                            </span>
+                          ) : p.team === 'lisboa' ? (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-black">
+                              🔴 Lisboa
+                            </span>
+                          ) : (
+                            <span className="text-slate-500 text-[10px]">—</span>
+                          )}
                         </td>
 
                         {/* Distrito */}
@@ -1309,6 +1728,15 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
           </div>
         </div>
       </section>
+
+      {/* Modal Interativo de Escolha do Lado Oficial (Porto vs Lisboa) */}
+      <PortoLisboaTeamSelectModal
+        isOpen={showTeamSelectModal}
+        onClose={() => setShowTeamSelectModal(false)}
+        onTeamSelected={handleTeamSelected}
+        portoStats={portoTeamStats}
+        lisboaStats={lisboaTeamStats}
+      />
     </div>
   )
 }
