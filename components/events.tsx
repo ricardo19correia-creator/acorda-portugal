@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import {
   Calendar,
   Gamepad2,
+  ChevronLeft,
   ChevronRight,
   Trophy,
   Sparkles,
@@ -64,6 +65,49 @@ export function Events() {
       setSelectedEvent('porto-lisboa')
     }
   }, [eventParam])
+
+  // Controlo do carrossel móvel com snap de alta precisão
+  const carouselRef = React.useRef<HTMLDivElement>(null)
+
+  const handleSelectEvent = useCallback((evt: 'porto-lisboa' | 'portugal-em-jogo') => {
+    setSelectedEvent(evt)
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('event', evt)
+      window.history.replaceState({}, '', url.toString())
+    }
+    if (carouselRef.current) {
+      const idx = evt === 'porto-lisboa' ? 0 : 1
+      carouselRef.current.scrollTo({
+        left: idx * carouselRef.current.clientWidth,
+        behavior: 'smooth',
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      const idx = selectedEvent === 'porto-lisboa' ? 0 : 1
+      carouselRef.current.scrollLeft = idx * carouselRef.current.clientWidth
+    }
+  }, [selectedEvent])
+
+  const handleCarouselScroll = useCallback(() => {
+    if (!carouselRef.current) return
+    const width = carouselRef.current.clientWidth
+    if (width > 0) {
+      const idx = Math.round(carouselRef.current.scrollLeft / width)
+      const target = idx === 0 ? 'porto-lisboa' : 'portugal-em-jogo'
+      if (target !== selectedEvent) {
+        setSelectedEvent(target)
+        if (typeof window !== 'undefined') {
+          const url = new URL(window.location.href)
+          url.searchParams.set('event', target)
+          window.history.replaceState({}, '', url.toString())
+        }
+      }
+    }
+  }, [selectedEvent])
 
   // Configuração oficial do evento Portugal em Jogo
   const [eventConfig, setEventConfig] = useState<OfficialEventConfig>(
@@ -307,39 +351,235 @@ export function Events() {
       </div>
 
       {/* ========================================================================= */}
-      {/* SELETOR DE EVENTO EM DESTAQUE: PORTO ⚔️ LISBOA vs PORTUGAL EM JOGO        */}
+      {/* SELETOR DE EVENTO RESPONSIVO (MOBILE CAROUSEL SNAP + DESKTOP DUAL GRID)   */}
       {/* ========================================================================= */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1.5 rounded-3xl bg-slate-950/90 border border-white/10 backdrop-blur-xl shadow-2xl">
-        <div className="flex items-center gap-2 p-1 flex-1">
+      <div className="w-full space-y-2 select-none">
+        {/* Vista Mobile (<640px): Carrossel Snap Controlado com 100% de Largura por Cartão */}
+        <div className="block sm:hidden w-full">
+          <div
+            ref={carouselRef}
+            onScroll={handleCarouselScroll}
+            className="w-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar gap-3 pb-1"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {/* Cartão 1: Porto × Lisboa */}
+            <div className="w-full shrink-0 snap-center">
+              <button
+                type="button"
+                onClick={() => handleSelectEvent('porto-lisboa')}
+                className={cn(
+                  'w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden',
+                  selectedEvent === 'porto-lisboa'
+                    ? 'bg-gradient-to-r from-blue-950/90 via-slate-900/95 to-rose-950/90 border-amber-400/60 shadow-[0_0_25px_rgba(59,130,246,0.35)]'
+                    : 'bg-slate-950/70 border-white/10 hover:border-white/20'
+                )}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <div className="grid h-7 w-7 place-items-center rounded-lg bg-blue-500/20 text-amber-400 border border-blue-500/30">
+                      <Swords className="h-4 w-4" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-400">
+                      Grande Duelo
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 text-[9px] rounded-md bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black tracking-wider shadow">
+                    ESPECIAL
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="font-display text-base font-black uppercase text-white tracking-wide">
+                    Porto <span className="text-amber-400 font-serif">×</span> Lisboa
+                  </h3>
+                  <span className={cn(
+                    'text-[10px] font-bold uppercase tracking-wider',
+                    selectedEvent === 'porto-lisboa' ? 'text-blue-400' : 'text-slate-500'
+                  )}>
+                    {selectedEvent === 'porto-lisboa' ? '● Ativo' : 'Tocar para ver'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300 font-medium mt-0.5">
+                  O Grande Duelo: Invicta contra Capital
+                </p>
+              </button>
+            </div>
+
+            {/* Cartão 2: Portugal em Jogo */}
+            <div className="w-full shrink-0 snap-center">
+              <button
+                type="button"
+                onClick={() => handleSelectEvent('portugal-em-jogo')}
+                className={cn(
+                  'w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden',
+                  selectedEvent === 'portugal-em-jogo'
+                    ? 'bg-gradient-to-r from-emerald-950/90 via-slate-900/95 to-amber-950/90 border-emerald-400/60 shadow-[0_0_25px_rgba(16,185,129,0.35)]'
+                    : 'bg-slate-950/70 border-white/10 hover:border-white/20'
+                )}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <div className="grid h-7 w-7 place-items-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                      <Shield className="h-4 w-4" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                      Competição Nacional
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 text-[9px] rounded-md bg-emerald-500 text-slate-950 font-black tracking-wider shadow">
+                    OFICIAL
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="font-display text-base font-black uppercase text-white tracking-wide">
+                    Portugal em Jogo
+                  </h3>
+                  <span className={cn(
+                    'text-[10px] font-bold uppercase tracking-wider',
+                    selectedEvent === 'portugal-em-jogo' ? 'text-emerald-400' : 'text-slate-500'
+                  )}>
+                    {selectedEvent === 'portugal-em-jogo' ? '● Ativo' : 'Tocar para ver'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300 font-medium mt-0.5">
+                  Desafio Nacional dos 18 Distritos e Ilhas
+                </p>
+              </button>
+            </div>
+          </div>
+
+          {/* Navegação Mobile: Indicadores e Setas Rápidas */}
+          <div className="flex items-center justify-between px-2 pt-1">
+            <button
+              type="button"
+              onClick={() => handleSelectEvent('porto-lisboa')}
+              aria-label="Ver Porto vs Lisboa"
+              className={cn(
+                'p-1.5 rounded-xl border transition-all cursor-pointer',
+                selectedEvent === 'porto-lisboa'
+                  ? 'bg-blue-500/20 text-blue-400 border-blue-500/40'
+                  : 'bg-slate-900/60 text-slate-500 border-white/5'
+              )}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => handleSelectEvent('porto-lisboa')}
+                aria-label="Selecionar Porto vs Lisboa"
+                className={cn(
+                  'transition-all duration-300 rounded-full',
+                  selectedEvent === 'porto-lisboa'
+                    ? 'w-7 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-rose-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]'
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => handleSelectEvent('portugal-em-jogo')}
+                aria-label="Selecionar Portugal em Jogo"
+                className={cn(
+                  'transition-all duration-300 rounded-full',
+                  selectedEvent === 'portugal-em-jogo'
+                    ? 'w-7 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]'
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                )}
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleSelectEvent('portugal-em-jogo')}
+              aria-label="Ver Portugal em Jogo"
+              className={cn(
+                'p-1.5 rounded-xl border transition-all cursor-pointer',
+                selectedEvent === 'portugal-em-jogo'
+                  ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                  : 'bg-slate-900/60 text-slate-500 border-white/5'
+              )}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Vista Desktop / Tablet (>=640px): Grid de Dois Cartões Amplos Sem Qualquer Compressão */}
+        <div className="hidden sm:grid sm:grid-cols-2 gap-3 p-1.5 rounded-3xl bg-slate-950/80 border border-white/10 backdrop-blur-xl shadow-2xl">
           <button
             type="button"
-            onClick={() => setSelectedEvent('porto-lisboa')}
+            onClick={() => handleSelectEvent('porto-lisboa')}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-3 px-3 sm:px-5 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer',
+              'flex items-center justify-between gap-3 p-4 rounded-2xl text-left transition-all cursor-pointer border',
               selectedEvent === 'porto-lisboa'
-                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-rose-600 text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] border border-white/25'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-gradient-to-r from-blue-950/90 via-indigo-950/80 to-rose-950/90 border-amber-400/50 shadow-[0_0_30px_rgba(59,130,246,0.35)]'
+                : 'bg-slate-900/40 border-transparent hover:bg-white/5 hover:border-white/10'
             )}
           >
-            <Swords className="h-4 w-4 text-amber-400 shrink-0" />
-            <span className="truncate">Porto ⚔️ Lisboa</span>
-            <span className="px-1.5 py-0.5 text-[9px] rounded-md bg-amber-400 text-slate-950 font-black shrink-0">
-              NOVO
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-500/20 text-amber-400 border border-blue-500/30">
+                <Swords className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-display text-sm lg:text-base font-black uppercase text-white tracking-wider">
+                    Porto <span className="text-amber-400 font-serif">×</span> Lisboa
+                  </h3>
+                  <span className="px-1.5 py-0.5 text-[9px] rounded-md bg-amber-400 text-slate-950 font-black shrink-0">
+                    NOVO
+                  </span>
+                </div>
+                <p className="text-xs text-slate-300 font-medium">
+                  O Grande Duelo: Invicta vs Capital
+                </p>
+              </div>
+            </div>
+            <div className={cn(
+              'px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shrink-0 transition-all',
+              selectedEvent === 'porto-lisboa'
+                ? 'bg-amber-400 text-slate-950 shadow-md'
+                : 'bg-white/5 text-slate-400'
+            )}>
+              {selectedEvent === 'porto-lisboa' ? 'Selecionado' : 'Selecionar'}
+            </div>
           </button>
 
           <button
             type="button"
-            onClick={() => setSelectedEvent('portugal-em-jogo')}
+            onClick={() => handleSelectEvent('portugal-em-jogo')}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 py-3 px-3 sm:px-5 rounded-2xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer',
+              'flex items-center justify-between gap-3 p-4 rounded-2xl text-left transition-all cursor-pointer border',
               selectedEvent === 'portugal-em-jogo'
-                ? 'bg-gradient-to-r from-emerald-600 via-teal-600 to-amber-600 text-white shadow-[0_0_25px_rgba(16,185,129,0.5)] border border-white/25'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-gradient-to-r from-emerald-950/90 via-teal-950/80 to-amber-950/90 border-emerald-400/50 shadow-[0_0_30px_rgba(16,185,129,0.35)]'
+                : 'bg-slate-900/40 border-transparent hover:bg-white/5 hover:border-white/10'
             )}
           >
-            <Shield className="h-4 w-4 text-emerald-400 shrink-0" />
-            <span className="truncate">Portugal em Jogo</span>
+            <div className="flex items-center gap-3">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <Shield className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-display text-sm lg:text-base font-black uppercase text-white tracking-wider">
+                    Portugal em Jogo
+                  </h3>
+                  <span className="px-1.5 py-0.5 text-[9px] rounded-md bg-emerald-400 text-slate-950 font-black shrink-0">
+                    OFICIAL
+                  </span>
+                </div>
+                <p className="text-xs text-slate-300 font-medium">
+                  Primeiro Desafio Nacional
+                </p>
+              </div>
+            </div>
+            <div className={cn(
+              'px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider shrink-0 transition-all',
+              selectedEvent === 'portugal-em-jogo'
+                ? 'bg-emerald-400 text-slate-950 shadow-md'
+                : 'bg-white/5 text-slate-400'
+            )}>
+              {selectedEvent === 'portugal-em-jogo' ? 'Selecionado' : 'Selecionar'}
+            </div>
           </button>
         </div>
       </div>

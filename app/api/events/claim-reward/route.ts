@@ -108,14 +108,28 @@ export async function POST(request: NextRequest) {
     }
 
     const position = userRankIndex + 1
-    const matchedReward = (eventData.rewards || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.rewards).find(
+    const userMatches = list[userRankIndex]?.countedMatches || list[userRankIndex]?.totalMatches || 0
+
+    // Determinação de recompensa oficial (Top 3 ou Desafiante de Participação)
+    let matchedReward = (eventData.rewards || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.rewards).find(
       (r) => r.position === position
     )
+
+    // Se for o Grande Duelo e o utilizador tiver completado pelo menos 5 partidas, qualifica-se para prémio de participação
+    if (!matchedReward && targetEventId === OFFICIAL_PORTO_LISBOA_ID && userMatches >= 5) {
+      matchedReward = {
+        position,
+        title: 'Desafiante do Grande Duelo',
+        acordas: 500,
+        medal: '⚔️',
+        label: '500 Acordas + Título + Badge',
+      }
+    }
 
     if (!matchedReward) {
       return NextResponse.json(
         {
-          error: `A tua posição final foi #${position}. As recompensas oficiais são exclusivas para o Top 3 nacional.`,
+          error: `A tua posição final foi #${position} (${userMatches} partidas). As recompensas do Grande Duelo são exclusivas para o Top 3 nacional ou desafiantes com pelo menos 5 partidas concluídas.`,
           position,
         },
         { status: 400 }
@@ -123,6 +137,38 @@ export async function POST(request: NextRequest) {
     }
 
     const rewardAmount = matchedReward.acordas
+
+    // Determinar Título, Badge, Troféu e XP exclusivos para o Grande Duelo
+    let titleId: string | null = null
+    let titleName: string | null = null
+    let badgeId: string | null = null
+    let trophyId: string | null = null
+    let xpAmount = 0
+
+    if (targetEventId === OFFICIAL_PORTO_LISBOA_ID) {
+      if (position === 1) {
+        titleId = 'title_campeao_grande_duelo'
+        titleName = 'Campeão do Grande Duelo'
+        badgeId = 'badge_campeao_grande_duelo'
+        trophyId = 'trophy_campeao_grande_duelo'
+        xpAmount = 5000
+      } else if (position === 2) {
+        titleId = 'title_vice_campeao_grande_duelo'
+        titleName = 'Vice-Campeão do Grande Duelo'
+        badgeId = 'badge_vice_campeao_grande_duelo'
+        xpAmount = 3000
+      } else if (position === 3) {
+        titleId = 'title_top3_grande_duelo'
+        titleName = 'Top 3 — Grande Duelo'
+        badgeId = 'badge_top3_grande_duelo'
+        xpAmount = 2000
+      } else if (userMatches >= 5) {
+        titleId = 'title_desafiante_grande_duelo'
+        titleName = 'Desafiante do Grande Duelo'
+        badgeId = 'badge_desafiante_grande_duelo'
+        xpAmount = 500
+      }
+    }
 
     await db.runTransaction(async (transaction: any) => {
       const checkA = await transaction.get(awardRef)
@@ -136,17 +182,47 @@ export async function POST(request: NextRequest) {
         throw new Error('Registo de utilizador não encontrado no sistema.')
       }
 
-      transaction.update(userRef, {
+      const userUpdate: any = {
         coins: FieldValue.increment(rewardAmount),
         euros: FieldValue.increment(rewardAmount),
         [`event_rewards.${targetEventId}`]: {
           position,
           amount: rewardAmount,
+          xp: xpAmount,
+          title: titleName,
+          badge: badgeId,
+          trophy: trophyId,
           claimedAt: FieldValue.serverTimestamp(),
           status: 'awarded',
         },
+        [`events.${targetEventId}`]: {
+          completed: true,
+          position,
+          badge: badgeId,
+          title: titleName,
+          trophy: trophyId,
+          claimedAt: FieldValue.serverTimestamp(),
+        },
         updatedAt: FieldValue.serverTimestamp(),
-      })
+      }
+
+      if (xpAmount > 0) {
+        userUpdate.xp = FieldValue.increment(xpAmount)
+      }
+
+      if (titleId) {
+        userUpdate['inventory.titles'] = FieldValue.arrayUnion(titleId)
+      }
+
+      if (badgeId) {
+        userUpdate.badges = FieldValue.arrayUnion(badgeId)
+      }
+
+      if (trophyId) {
+        userUpdate.trophies = FieldValue.arrayUnion(trophyId)
+      }
+
+      transaction.update(userRef, userUpdate)
 
       const txRef = userRef.collection('transactions').doc()
       transaction.set(txRef, {
@@ -154,7 +230,11 @@ export async function POST(request: NextRequest) {
         userId,
         type: 'event_reward',
         amount: rewardAmount,
-        reason: `Recompensa Oficial de Evento: ${matchedReward.title} no ${eventData.name || 'Primeiro Desafio Nacional'}`,
+        xp: xpAmount,
+        title: titleName,
+        badge: badgeId,
+        trophy: trophyId,
+        reason: `Recompensa Oficial de Evento: ${matchedReward.title} no ${eventData.name || 'Grande Duelo: Porto × Lisboa'}`,
         eventId: targetEventId,
         placement: position,
         createdAt: FieldValue.serverTimestamp(),
@@ -165,6 +245,10 @@ export async function POST(request: NextRequest) {
         userId,
         placement: position,
         reward: rewardAmount,
+        xp: xpAmount,
+        title: titleName,
+        badge: badgeId,
+        trophy: trophyId,
         awardedAt: FieldValue.serverTimestamp(),
         status: 'awarded',
       }
@@ -173,12 +257,19 @@ export async function POST(request: NextRequest) {
       transaction.set(claimRef, awardPayload)
     })
 
+    const titleMsg = titleName ? ` + Título «${titleName}»` : ''
+    const xpMsg = xpAmount > 0 ? ` + ${xpAmount.toLocaleString('pt-PT')} XP` : ''
+
     return NextResponse.json({
       success: true,
       position,
       rewardAmount,
+      xpAmount,
+      title: titleName,
+      badge: badgeId,
+      trophy: trophyId,
       medal: matchedReward.medal,
-      message: `Parabéns! ${rewardAmount.toLocaleString('pt-PT')} Acordas virtuais creditadas com sucesso na tua conta.`,
+      message: `Parabéns! ${rewardAmount.toLocaleString('pt-PT')} Acordas${titleMsg}${xpMsg} creditadas com sucesso no teu perfil e inventário.`,
     })
   } catch (error: any) {
     console.error('[API /api/events/claim-reward ERROR]:', error)

@@ -124,11 +124,11 @@ export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
     maxEventPointsPerMatch: 150,
   },
   rewards: [
-    { position: 1, title: '1.º Lugar', acordas: 15000, medal: '🥇', label: '15.000 Acordas' },
-    { position: 2, title: '2.º Lugar', acordas: 10000, medal: '🥈', label: '10.000 Acordas' },
-    { position: 3, title: '3.º Lugar', acordas: 7500, medal: '🥉', label: '7.500 Acordas' },
-    { position: 4, title: 'Top 10 Nacional', acordas: 2500, medal: '🎖️', label: '2.500 Acordas' },
-    { position: 5, title: 'Participação (Mín. 5 partidas)', acordas: 500, medal: '🏅', label: '500 Acordas' },
+    { position: 1, title: 'Campeão do Grande Duelo', acordas: 15000, medal: '🏆', label: 'Troféu + Título Mítico + Badge + 15.000 Acordas + 5.000 XP' },
+    { position: 2, title: 'Vice-Campeão do Grande Duelo', acordas: 10000, medal: '🥈', label: 'Título Lendário + Badge + 10.000 Acordas + 3.000 XP' },
+    { position: 3, title: 'Top 3 — Grande Duelo', acordas: 7500, medal: '🥉', label: 'Título Épico + Badge + 7.500 Acordas + 2.000 XP' },
+    { position: 4, title: 'Top 10 Nacional', acordas: 2500, medal: '🎖️', label: '2.500 Acordas + 1.000 XP' },
+    { position: 5, title: 'Desafiante do Grande Duelo (Mín. 5 partidas)', acordas: 500, medal: '⚔️', label: 'Título Raro + Badge + 500 Acordas + 500 XP' },
   ],
   rewardsDistributed: false,
 }

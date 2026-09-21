@@ -155,6 +155,56 @@ export const PROGRESSION_TITLES: TitleItem[] = PROGRESSION_LEVELS.map((lvl) => {
 })
 
 /**
+ * Títulos exclusivos de Eventos Oficiais (não compráveis na Loja)
+ */
+export const EVENT_EXCLUSIVE_TITLES: TitleItem[] = [
+  {
+    id: 'title_campeao_grande_duelo',
+    name: 'Campeão do Grande Duelo',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: '1.º Lugar Oficial no Grande Duelo: Porto × Lisboa',
+    rarity: 'Mítico',
+    badgeColor: getTitleRarityBadge('Mítico'),
+  },
+  {
+    id: 'title_vice_campeao_grande_duelo',
+    name: 'Vice-Campeão do Grande Duelo',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: '2.º Lugar Oficial no Grande Duelo: Porto × Lisboa',
+    rarity: 'Lendário',
+    badgeColor: getTitleRarityBadge('Lendário'),
+  },
+  {
+    id: 'title_top3_grande_duelo',
+    name: 'Top 3 — Grande Duelo',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: 'Top 3 Oficial no Grande Duelo: Porto × Lisboa',
+    rarity: 'Épico',
+    badgeColor: getTitleRarityBadge('Épico'),
+  },
+  {
+    id: 'title_desafiante_grande_duelo',
+    name: 'Desafiante do Grande Duelo',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: 'Participação oficial (mín. 5 partidas) no Grande Duelo: Porto × Lisboa',
+    rarity: 'Raro',
+    badgeColor: getTitleRarityBadge('Raro'),
+  },
+]
+
+/**
  * Catálogo Mestre Completo (Une todos os títulos do ecossistema sem duplicados)
  */
 const MASTER_CATALOG_MAP: Map<string, TitleItem> = new Map()
@@ -176,6 +226,13 @@ for (const item of PRESTIGE_TITLES) {
 
 // Inserir títulos de progressão por nível
 for (const item of PROGRESSION_TITLES) {
+  if (!MASTER_CATALOG_MAP.has(item.id)) {
+    MASTER_CATALOG_MAP.set(item.id, item)
+  }
+}
+
+// Inserir títulos exclusivos de eventos oficiais
+for (const item of EVENT_EXCLUSIVE_TITLES) {
   if (!MASTER_CATALOG_MAP.has(item.id)) {
     MASTER_CATALOG_MAP.set(item.id, item)
   }
@@ -220,6 +277,13 @@ const TITLE_ALIASES: Record<string, string> = {
   'conquistador supremo': 'title_conquistador_supremo',
   'lenda viva': 'title_lenda_viva',
   'filho de portugal': 'tit_pt_1',
+  'campeão do grande duelo': 'title_campeao_grande_duelo',
+  'campeao do grande duelo': 'title_campeao_grande_duelo',
+  'vice-campeão do grande duelo': 'title_vice_campeao_grande_duelo',
+  'vice-campeao do grande duelo': 'title_vice_campeao_grande_duelo',
+  'top 3 — grande duelo': 'title_top3_grande_duelo',
+  'top 3 - grande duelo': 'title_top3_grande_duelo',
+  'desafiante do grande duelo': 'title_desafiante_grande_duelo',
 }
 
 /**
