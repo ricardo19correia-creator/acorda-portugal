@@ -278,11 +278,11 @@ export async function POST(request: NextRequest) {
 
       const userUpdatePayload: Record<string, any> = {
         uid: userId,
-        xp: newTotalXp,
-        coins: newTotalCoins,
-        euros: newTotalCoins,
-        acordas: newTotalCoins,
-        moedas: newTotalCoins,
+        xp: FieldValue.increment(xpReward),
+        coins: FieldValue.increment(totalAwardedCoins),
+        euros: FieldValue.increment(totalAwardedCoins),
+        acordas: FieldValue.increment(totalAwardedCoins),
+        moedas: FieldValue.increment(totalAwardedCoins),
         level: newLevel,
         streak: nextStreak,
         lastPlayedDate: todayStr,
@@ -320,7 +320,7 @@ export async function POST(request: NextRequest) {
       // Atualizar documento do utilizador (merge: true previne destruição de campos)
       transaction.set(userRef, userUpdatePayload, { merge: true })
 
-      // Atualizar Perfil Público (SSOT para Rankings)
+      // Atualizar Perfil Público (SSOT para Rankings - Atómico para Concorrência)
       transaction.set(
         publicProfileRef,
         {
@@ -330,7 +330,7 @@ export async function POST(request: NextRequest) {
           district: userData.district || district || 'Portugal',
           city: userData.city || city || '',
           level: newLevel,
-          xp: newTotalXp,
+          xp: FieldValue.increment(xpReward),
           gamesPlayed: FieldValue.increment(1),
           updatedAt: FieldValue.serverTimestamp(),
         },

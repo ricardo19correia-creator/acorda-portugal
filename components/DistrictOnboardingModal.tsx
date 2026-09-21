@@ -85,17 +85,9 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
           window.dispatchEvent(new CustomEvent('profile_updated'))
         }
       } else {
-        // 1. Novo registo completo com saldo e inventário inicial (preservando XP e nível se já existentes)
-        const cachedXp = (() => {
-          try {
-            const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
-            const n = Number(raw)
-            return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
-          } catch {
-            return 0
-          }
-        })()
-        const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
+        // 1. Novo registo completo com saldo e inventário inicial (SSOT estrito: 0 XP e nível 1)
+        const initialXp = 0
+        const initialLevel = 1
 
         await setDoc(
           userRef,
@@ -112,9 +104,11 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             representedDistrict: selectedDistrict,
             districtLocked: true,
             level: initialLevel,
-            xp: cachedXp,
+            xp: initialXp,
             coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+            acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
             euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+            moedas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
             title: DEFAULT_STARTER_TITLE_NAME,
             equippedTitle: DEFAULT_STARTER_TITLE_NAME,
             equippedTitleId: DEFAULT_STARTER_TITLE_ID,
@@ -130,11 +124,7 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
               titles: [DEFAULT_STARTER_TITLE_ID],
               taunts: ['pack_basico'],
               frames: ['default'],
-              utilities: {
-                fiftyFifty: 0,
-                freezeTime: 0,
-                publicVote: 0,
-              },
+              utilities: { fiftyFifty: 0, freezeTime: 0, publicVote: 0 },
             },
             equipped: {
               avatar: chosenAvatarUrl,
@@ -171,7 +161,7 @@ export function DistrictOnboardingModal({ user, onComplete }: DistrictOnboarding
             district: selectedDistrict,
             representedDistrict: selectedDistrict,
             level: initialLevel,
-            xp: cachedXp,
+            xp: initialXp,
             title: DEFAULT_STARTER_TITLE_NAME,
             equippedTitle: DEFAULT_STARTER_TITLE_NAME,
             equippedTitleId: DEFAULT_STARTER_TITLE_ID,

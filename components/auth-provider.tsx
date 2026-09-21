@@ -568,6 +568,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 publicVote: invData.utilities.publicVote,
                 hints: invData.utilities.hints,
               },
+              acordas: coinsVal,
+              moedas: coinsVal,
+              rating: typeof data.rating === 'number' ? data.rating : 1000,
+              unlockedArenas: Array.isArray(data.unlockedArenas) ? data.unlockedArenas : invData.arenas,
+              unlockedFrames: Array.isArray(data.unlockedFrames) ? data.unlockedFrames : invData.frames,
+              unlockedAvatars: sanitizedInventoryAvatars,
+              itemsPurchased: Array.isArray(data.itemsPurchased) ? data.itemsPurchased : [],
+              activeSession: data.activeSession || null,
+              currentSessionId: data.currentSessionId || data.activeSession?.sessionId || null,
               lastVaultOpenedAt:
                 typeof data.lastVaultOpenedAt === 'number'
                   ? data.lastVaultOpenedAt
@@ -765,16 +774,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const fallbackAvatar = DEFAULT_AVATAR.image
             const fallbackAvatarId = STARTER_AVATAR_ID
 
-            const cachedXp = (() => {
-              try {
-                const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
-                const n = Number(raw)
-                return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
-              } catch {
-                return 0
-              }
-            })()
-            const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
+            // Novo utilizador genuíno: NUNCA herda XP ou moedas do dispositivo
+            const initialXp = 0
+            const initialLevel = 1
 
             const defaultProfileData = {
               uid: currentUser.uid,
@@ -788,7 +790,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               district: '',
               districtLocked: false,
               level: initialLevel,
-              xp: cachedXp,
+              xp: initialXp,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
@@ -842,7 +844,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 'equipped.avatarId': fallbackAvatarId,
                 district: 'Portugal',
                 level: initialLevel,
-                xp: cachedXp,
+                xp: initialXp,
                 title: DEFAULT_STARTER_TITLE_NAME,
                 equippedTitle: DEFAULT_STARTER_TITLE_NAME,
                 equippedTitleId: DEFAULT_STARTER_TITLE_ID,
@@ -860,7 +862,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               district: '',
               districtLocked: false,
               level: initialLevel,
-              xp: cachedXp,
+              xp: initialXp,
               coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
               euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,

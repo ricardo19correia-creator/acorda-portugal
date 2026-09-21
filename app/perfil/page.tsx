@@ -11,7 +11,7 @@ import {
   Mail, Key, RefreshCw, Eye, EyeOff, AlertCircle, ShieldCheck, Coins,
   Settings, Target, TrendingUp
 } from 'lucide-react'
-import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit } from 'firebase/firestore'
+import { doc, updateDoc, setDoc, deleteDoc, onSnapshot, getDocs, increment, arrayUnion, query, collection, limit, runTransaction } from 'firebase/firestore'
 import { 
   signOut, 
   deleteUser, 
@@ -226,7 +226,7 @@ function PerfilContent() {
     }
   }, [])
   const profileXp = extractUserXp(profile, 0)
-  const userXp = realtimeXp !== null ? realtimeXp : Math.max(profileXp, cachedLocalXp)
+  const userXp = realtimeXp !== null ? realtimeXp : (profile ? profileXp : cachedLocalXp)
   const progressInfo = calculateLevelProgress(userXp)
   const userLevel = progressInfo.currentLevel.level
 
@@ -1016,36 +1016,49 @@ function PerfilContent() {
       setUnlockedItems((prev) => Array.from(new Set([...prev, ach.reward.title!])))
     }
 
-    // 4. Firestore Sync
+    // 4. Firestore Sync Atómico e Idempotente via Transação
     if (auth.currentUser) {
       try {
-        const updatePayload: any = {
-          [`claimedAchievements.${ach.id}`]: true,
-          coins: increment(ach.reward.coins),
-          euros: increment(ach.reward.coins),
-        }
-        if (ach.reward.utilities?.fiftyFifty) {
-          updatePayload['inventory.utilities.fiftyFifty'] = increment(ach.reward.utilities.fiftyFifty)
-          updatePayload['consumables.help5050'] = increment(ach.reward.utilities.fiftyFifty)
-        }
-        if (ach.reward.utilities?.freezeTime) {
-          updatePayload['inventory.utilities.freezeTime'] = increment(ach.reward.utilities.freezeTime)
-          updatePayload['consumables.freezeTime'] = increment(ach.reward.utilities.freezeTime)
-        }
-        if ((ach.reward.utilities as any)?.publicVote) {
-          updatePayload['inventory.utilities.publicVote'] = increment((ach.reward.utilities as any).publicVote)
-          updatePayload['consumables.publicVote'] = increment((ach.reward.utilities as any).publicVote)
-        }
-        if ((ach.reward.utilities as any)?.hints) {
-          updatePayload['inventory.utilities.hints'] = increment((ach.reward.utilities as any).hints)
-          updatePayload['consumables.hints'] = increment((ach.reward.utilities as any).hints)
-        }
-        if (ach.reward.title) {
-          updatePayload['inventory.titles'] = arrayUnion(ach.reward.title)
-        }
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), updatePayload)
+        const userRef = doc(db, 'users', auth.currentUser.uid)
+        await runTransaction(db, async (transaction) => {
+          const userSnap = await transaction.get(userRef)
+          if (!userSnap.exists()) return
+          const uData = userSnap.data()
+          if (uData.claimedAchievements?.[ach.id]) {
+            console.log('[PERFIL] Conquista já reclamada no Firestore:', ach.id)
+            return
+          }
+
+          const updatePayload: any = {
+            [`claimedAchievements.${ach.id}`]: true,
+            coins: increment(ach.reward.coins),
+            acordas: increment(ach.reward.coins),
+            euros: increment(ach.reward.coins),
+            moedas: increment(ach.reward.coins),
+          }
+          if (ach.reward.utilities?.fiftyFifty) {
+            updatePayload['inventory.utilities.fiftyFifty'] = increment(ach.reward.utilities.fiftyFifty)
+            updatePayload['consumables.help5050'] = increment(ach.reward.utilities.fiftyFifty)
+          }
+          if (ach.reward.utilities?.freezeTime) {
+            updatePayload['inventory.utilities.freezeTime'] = increment(ach.reward.utilities.freezeTime)
+            updatePayload['consumables.freezeTime'] = increment(ach.reward.utilities.freezeTime)
+          }
+          if ((ach.reward.utilities as any)?.publicVote) {
+            updatePayload['inventory.utilities.publicVote'] = increment((ach.reward.utilities as any).publicVote)
+            updatePayload['consumables.publicVote'] = increment((ach.reward.utilities as any).publicVote)
+          }
+          if ((ach.reward.utilities as any)?.hints) {
+            updatePayload['inventory.utilities.hints'] = increment((ach.reward.utilities as any).hints)
+            updatePayload['consumables.hints'] = increment((ach.reward.utilities as any).hints)
+          }
+          if (ach.reward.title) {
+            updatePayload['inventory.titles'] = arrayUnion(ach.reward.title)
+          }
+          transaction.set(userRef, updatePayload, { merge: true })
+        })
       } catch (e) {
-        console.error(e)
+        console.error('[PERFIL] Erro ao sincronizar conquista:', e)
       }
     }
 

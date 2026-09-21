@@ -251,6 +251,9 @@ export type UserProfile = {
   xp: number
   euros: number
   coins?: number
+  acordas?: number
+  moedas?: number
+  rating?: number
   streak: number
   gamesPlayed: number
   wins?: number
@@ -279,8 +282,11 @@ export type UserProfile = {
   equippedArena?: string | null
   equippedEmotes?: string[]
   equippedTaunts?: string[]
+  unlockedArenas?: string[]
+  unlockedFrames?: string[]
+  unlockedAvatars?: string[]
+  itemsPurchased?: string[]
   preferences?: Record<string, any>
-  draws?: number
   districtPoints?: number
   districtGamesPlayed?: number
   cityPoints?: number
@@ -297,6 +303,8 @@ export type UserProfile = {
   equipped?: EquippedCosmetics
   lastVaultOpenedAt?: number | null
   dailyVault?: Record<string, any>
+  activeSession?: { sessionId: string; startedAt?: any; platform?: string } | null
+  currentSessionId?: string | null
   createdAt?: unknown
   lastActiveAt?: unknown
   updatedAt?: unknown

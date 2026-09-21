@@ -234,6 +234,11 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
   if (typeof window !== 'undefined') {
     try {
       const keysToRemove = [
+        'cached_uid',
+        'user_xp',
+        'user_level',
+        'user_streak',
+        'user_last_vault_opened_at',
         'user_coins',
         'user_euros',
         'user_display_name',
@@ -251,6 +256,7 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
         'equipped_arena_image',
         'equipped_title',
         'user_equipped_title',
+        'equipped_title_id',
         'equipped_taunt_id',
         'equipped_emotes',
         'equipped_taunts',
@@ -271,6 +277,12 @@ export async function performLogout(redirectUrl = '/'): Promise<void> {
         'acorda_auth_redirect_target',
         'guest_duel_session_id',
         'firebase_user_cache',
+        'daily_reward_last_date',
+        'daily_reward_day',
+        'active_game_session',
+        'active_session_id',
+        'cached_profile_payload',
+        'ap_user_profile',
       ]
       keysToRemove.forEach((key) => localStorage.removeItem(key))
       sessionStorage.clear()
@@ -332,16 +344,9 @@ export async function createNewUserDocument(
       ? rawCity
       : rawCity || getDefaultCityForDistrict(canonicalDistrict)
 
-  const cachedXp = (() => {
-    try {
-      const raw = typeof window !== 'undefined' ? localStorage.getItem('user_xp') : null
-      const n = Number(raw)
-      return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0
-    } catch {
-      return 0
-    }
-  })()
-  const initialLevel = extractUserLevel({ xp: cachedXp }, cachedXp)
+  // Novo utilizador genuíno: NUNCA herda XP ou moedas do dispositivo
+  const initialXp = 0
+  const initialLevel = 1
 
   const initialData = {
     uid: user.uid,
@@ -359,9 +364,11 @@ export async function createNewUserDocument(
     districtLocked: true,
     cityLocked: true,
     level: initialLevel,
-    xp: cachedXp,
+    xp: initialXp,
     coins: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+    acordas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     euros: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
+    moedas: ECONOMY_CONFIG.INITIAL_BONUS_COINS,
     streak: 0,
     gamesPlayed: 0,
     wins: 0,
@@ -479,7 +486,7 @@ export async function createNewUserDocument(
         representedDistrict: canonicalDistrict,
         representedCity: canonicalCity,
         level: initialLevel,
-        xp: cachedXp,
+        xp: initialXp,
         title: DEFAULT_STARTER_TITLE_NAME,
         equippedTitle: DEFAULT_STARTER_TITLE_NAME,
         equippedTitleId: DEFAULT_STARTER_TITLE_ID,
@@ -491,6 +498,47 @@ export async function createNewUserDocument(
   } catch (err) {
     console.warn('[AUTH] Aviso ao sincronizar publicProfiles inicial:', err)
   }
+}
+
+/**
+ * Associa uma credencial do Google ao utilizador atualmente autenticado
+ * para unificar a identidade sob o mesmo uid.
+ */
+export async function linkCurrentUserWithGoogle(): Promise<UserCredential | null> {
+  if (!auth || !auth.currentUser) {
+    throw new Error('Nenhum utilizador autenticado para associar credencial.')
+  }
+  const { linkWithPopup } = await import('firebase/auth')
+  const provider = getGoogleAuthProvider()
+  return await linkWithPopup(auth.currentUser, provider)
+}
+
+/**
+ * Associa Email e Palavra-passe ao utilizador atualmente autenticado
+ * para permitir login com ambos os métodos no mesmo uid.
+ */
+export async function linkCurrentUserWithEmailPassword(email: string, password: string): Promise<UserCredential | null> {
+  if (!auth || !auth.currentUser) {
+    throw new Error('Nenhum utilizador autenticado para associar credencial.')
+  }
+  const { EmailAuthProvider, linkWithCredential } = await import('firebase/auth')
+  const cred = EmailAuthProvider.credential(email.trim(), password)
+  return await linkWithCredential(auth.currentUser, cred)
+}
+
+/**
+ * Resolve conflito de credenciais duplicadas associando uma credencial pendente a uma conta existente.
+ */
+export async function linkPendingGoogleCredential(email: string, password: string, pendingCredential: any): Promise<UserCredential> {
+  if (!auth) {
+    throw new Error('Firebase Auth não inicializado.')
+  }
+  const { signInWithEmailAndPassword, linkWithCredential } = await import('firebase/auth')
+  const userCred = await signInWithEmailAndPassword(auth, email.trim(), password)
+  if (pendingCredential && userCred.user) {
+    await linkWithCredential(userCred.user, pendingCredential)
+  }
+  return userCred
 }
 
 

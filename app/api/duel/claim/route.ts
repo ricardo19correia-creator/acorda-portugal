@@ -307,11 +307,11 @@ export async function POST(request: NextRequest) {
         }
 
         const userUpdates: Record<string, any> = {
-          xp: newTotalXp,
-          coins: newTotalCoins,
-          euros: newTotalCoins,
-          acordas: newTotalCoins,
-          moedas: newTotalCoins,
+          xp: FieldValue.increment(xpReward),
+          coins: FieldValue.increment(totalAwardedCoins),
+          euros: FieldValue.increment(totalAwardedCoins),
+          acordas: FieldValue.increment(totalAwardedCoins),
+          moedas: FieldValue.increment(totalAwardedCoins),
           level: newLevel,
           rating: nextRating,
           gamesPlayed: FieldValue.increment(1),
@@ -370,7 +370,7 @@ export async function POST(request: NextRequest) {
             displayName: userData.displayName || 'Jogador',
             photoURL: userData.photoURL || null,
             district: userData.district || 'Portugal',
-            xp: newTotalXp,
+            xp: FieldValue.increment(xpReward),
             level: newLevel,
             rating: nextRating,
             wins1v1: FieldValue.increment(isWinner ? 1 : 0),

@@ -555,7 +555,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
 
       transaction.set(userRef, userUpdatePayload, { merge: true })
 
-      // J. Atualizar Perfil Público
+      // J. Atualizar Perfil Público (Atómico para Concorrência Multi-Dispositivo)
       transaction.set(
         publicProfileRef,
         {
@@ -564,7 +564,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
           photoURL: userData.photoURL || null,
           district: userData.district || 'Portugal',
           level: newLevel,
-          xp: nextTotalXp,
+          xp: increment(calculatedXp),
           gamesPlayed: increment(1),
           updatedAt: serverTimestamp(),
         },

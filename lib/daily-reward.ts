@@ -186,10 +186,12 @@ export async function claimDailyReward(userId: string): Promise<ClaimRewardResul
       const newLevel = newLevelInfo.currentLevel.level
 
       const updates: Record<string, any> = {
-        xp: newTotalXp,
+        xp: increment(xpGain),
         level: newLevel,
-        coins: newTotalCoins,
-        euros: newTotalCoins,
+        coins: increment(coinsGain),
+        acordas: increment(coinsGain),
+        euros: increment(coinsGain),
+        moedas: increment(coinsGain),
         'dailyReward.lastClaimedDate': today,
         'dailyReward.currentDay': dayToClaim,
         updatedAt: serverTimestamp(),
@@ -203,12 +205,12 @@ export async function claimDailyReward(userId: string): Promise<ClaimRewardResul
 
       transaction.update(userRef, updates)
 
-      // Atualiza também o perfil público para os Rankings Nacionais
+      // Atualiza também o perfil público para os Rankings Nacionais (Atómico para Concorrência)
       transaction.set(
         publicProfileRef,
         {
           uid: userId,
-          xp: newTotalXp,
+          xp: increment(xpGain),
           level: newLevel,
           updatedAt: serverTimestamp(),
         },
