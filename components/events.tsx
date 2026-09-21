@@ -66,8 +66,10 @@ export function Events() {
     }
   }, [eventParam])
 
-  // Controlo do carrossel móvel com snap de alta precisão
+  // Controlo do carrossel móvel com snap de alta precisão e proteção anti-recursão
   const carouselRef = React.useRef<HTMLDivElement>(null)
+  const isProgrammaticScroll = React.useRef(false)
+  const scrollTimeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
   const handleSelectEvent = useCallback((evt: 'porto-lisboa' | 'portugal-em-jogo') => {
     setSelectedEvent(evt)
@@ -77,33 +79,55 @@ export function Events() {
       window.history.replaceState({}, '', url.toString())
     }
     if (carouselRef.current) {
-      const idx = evt === 'porto-lisboa' ? 0 : 1
-      carouselRef.current.scrollTo({
-        left: idx * carouselRef.current.clientWidth,
-        behavior: 'smooth',
-      })
+      const width = carouselRef.current.clientWidth
+      if (width > 0) {
+        const idx = evt === 'porto-lisboa' ? 0 : 1
+        isProgrammaticScroll.current = true
+        carouselRef.current.scrollTo({
+          left: idx * width,
+          behavior: 'smooth',
+        })
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+        scrollTimeoutRef.current = setTimeout(() => {
+          isProgrammaticScroll.current = false
+        }, 500)
+      }
     }
   }, [])
 
   useEffect(() => {
-    if (carouselRef.current) {
-      const idx = selectedEvent === 'porto-lisboa' ? 0 : 1
-      carouselRef.current.scrollLeft = idx * carouselRef.current.clientWidth
+    if (carouselRef.current && !isProgrammaticScroll.current) {
+      const width = carouselRef.current.clientWidth
+      if (width > 0) {
+        const idx = selectedEvent === 'porto-lisboa' ? 0 : 1
+        const targetLeft = idx * width
+        if (Math.abs(carouselRef.current.scrollLeft - targetLeft) > 10) {
+          isProgrammaticScroll.current = true
+          carouselRef.current.scrollLeft = targetLeft
+          if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+          scrollTimeoutRef.current = setTimeout(() => {
+            isProgrammaticScroll.current = false
+          }, 300)
+        }
+      }
     }
   }, [selectedEvent])
 
   const handleCarouselScroll = useCallback(() => {
-    if (!carouselRef.current) return
+    if (!carouselRef.current || isProgrammaticScroll.current) return
     const width = carouselRef.current.clientWidth
-    if (width > 0) {
-      const idx = Math.round(carouselRef.current.scrollLeft / width)
-      const target = idx === 0 ? 'porto-lisboa' : 'portugal-em-jogo'
-      if (target !== selectedEvent) {
-        setSelectedEvent(target)
-        if (typeof window !== 'undefined') {
-          const url = new URL(window.location.href)
-          url.searchParams.set('event', target)
-          window.history.replaceState({}, '', url.toString())
+    if (width > 20) {
+      const rawIdx = carouselRef.current.scrollLeft / width
+      const idx = Math.round(rawIdx)
+      if (idx === 0 || idx === 1) {
+        const target: 'porto-lisboa' | 'portugal-em-jogo' = idx === 0 ? 'porto-lisboa' : 'portugal-em-jogo'
+        if (target !== selectedEvent) {
+          setSelectedEvent(target)
+          if (typeof window !== 'undefined') {
+            const url = new URL(window.location.href)
+            url.searchParams.set('event', target)
+            window.history.replaceState({}, '', url.toString())
+          }
         }
       }
     }

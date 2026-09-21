@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
@@ -330,9 +329,15 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       return
     }
     const matchId = safeRandomUUID()
-    router.push(
-      `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
-    )
+    const targetUrl = `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
+    try {
+      router.push(targetUrl)
+    } catch (navErr) {
+      console.warn('[NAV_FALLBACK] router.push falhou, fallback window.location:', navErr)
+      if (typeof window !== 'undefined') {
+        window.location.href = targetUrl
+      }
+    }
   }, [user, userTeam, router])
 
   // Callback acionado após confirmar escolha de equipa com sucesso no backend
@@ -353,9 +358,15 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       )
       // Entrar diretamente na primeira partida do Grande Duelo
       const matchId = safeRandomUUID()
-      router.push(
-        `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
-      )
+      const targetUrl = `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
+      try {
+        router.push(targetUrl)
+      } catch (navErr) {
+        console.warn('[NAV_FALLBACK] router.push falhou, fallback window.location:', navErr)
+        if (typeof window !== 'undefined') {
+          window.location.href = targetUrl
+        }
+      }
     },
     [user, router]
   )
@@ -412,7 +423,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       )}
     >
       {/* ========================================================================= */}
-      {/* 1. HERO CINEMATOGRÁFICO: ARENA OFICIAL + IDENTIDADE AZUL × VERMELHA       */}
+      {/* 1. HERO CINEMATOGRÁFICO: O GRANDE DUELO (IDENTIDADE AZUL × VERMELHA)       */}
       {/* ========================================================================= */}
       <section
         aria-label="Porto × Lisboa — O Grande Duelo"
@@ -522,30 +533,54 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             </p>
           </div>
 
-          {/* Banner Panorâmico Oficial da Arena com Iluminação Temática */}
-          <div className="relative mx-auto max-w-3xl h-44 sm:h-56 md:h-64 w-full rounded-2xl overflow-hidden border border-white/15 shadow-[0_0_40px_rgba(0,0,0,0.8)]">
-            <Image
-              src="/arenas/porto-lisboa-arena.jpg"
-              alt="Arena Oficial Porto vs Lisboa"
-              fill
-              className="object-cover object-center scale-105 filter brightness-90 hover:scale-100 transition-transform duration-700"
-              sizes="(max-width: 768px) 100vw, 800px"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040817] via-transparent to-black/50" />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-transparent to-rose-950/40" />
+          {/* Confronto Territorial e Métrica de Forças (Invicta × Capital) */}
+          <div className="relative mx-auto max-w-3xl w-full rounded-2xl border border-white/10 bg-slate-950/70 p-3 sm:p-5 backdrop-blur-xl shadow-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-center">
+              {/* Lado Porto */}
+              <div className="flex items-center justify-between sm:justify-start gap-3 p-3 sm:p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30">
+                <div className="flex items-center gap-2.5">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-600/20 text-blue-400 border border-blue-400/40">
+                    <span className="text-xl">🔵</span>
+                  </div>
+                  <div className="text-left">
+                    <p className="font-display text-sm font-black uppercase text-blue-300">
+                      Equipa Porto
+                    </p>
+                    <p className="text-[11px] text-slate-400 font-medium">
+                      A Invicta & Dragões
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right sm:ml-auto">
+                  <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
+                  <p className="font-display text-sm sm:text-base font-black text-blue-300">
+                    {(portoTeamStats.points || 0).toLocaleString('pt-PT')}
+                  </p>
+                </div>
+              </div>
 
-            {/* Badges Flutuantes dos Lados da Arena */}
-            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-black">
-              <span className="px-3 py-1 rounded-xl bg-blue-950/90 text-blue-300 border border-blue-500/40 backdrop-blur-md shadow">
-                🔵 Porto & FC Porto
-              </span>
-              <span className="px-2.5 py-1 rounded-xl bg-slate-950/85 text-amber-400 border border-amber-500/40 backdrop-blur-md font-mono text-[10px] hidden sm:inline-block">
-                ARENA OFICIAL
-              </span>
-              <span className="px-3 py-1 rounded-xl bg-rose-950/90 text-rose-300 border border-rose-500/40 backdrop-blur-md shadow">
-                Lisboa & SL Benfica 🔴
-              </span>
+              {/* Lado Lisboa */}
+              <div className="flex items-center justify-between sm:justify-start gap-3 p-3 sm:p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/30">
+                <div className="flex items-center gap-2.5">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-rose-600/20 text-rose-400 border border-rose-400/40">
+                    <span className="text-xl">🔴</span>
+                  </div>
+                  <div className="text-left">
+                    <p className="font-display text-sm font-black uppercase text-rose-300">
+                      Equipa Lisboa
+                    </p>
+                    <p className="text-[11px] text-slate-400 font-medium">
+                      A Capital & Águias
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right sm:ml-auto">
+                  <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
+                  <p className="font-display text-sm sm:text-base font-black text-rose-300">
+                    {(lisboaTeamStats.points || 0).toLocaleString('pt-PT')}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1733,7 +1768,9 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       <PortoLisboaTeamSelectModal
         isOpen={showTeamSelectModal}
         onClose={() => setShowTeamSelectModal(false)}
+        onSuccess={handleTeamSelected}
         onTeamSelected={handleTeamSelected}
+        teams={eventConfig.teams}
         portoStats={portoTeamStats}
         lisboaStats={lisboaTeamStats}
       />

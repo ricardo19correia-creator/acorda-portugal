@@ -257,7 +257,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('[AUTH] Ligação de rede restaurada.')
       setAuthStatus((prev) => (prev === 'NETWORK_TEMPORARY_ERROR' ? (user ? 'AUTHENTICATED' : 'AUTH_UNAUTHENTICATED') : prev))
 
-      if (user?.uid && !profile) {
+      if (user?.uid && !profileRef.current) {
         subscribeToUserProfile(user)
       }
     }
@@ -268,65 +268,84 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const handleProfileUpdated = (e: Event) => {
-      const customEvt = e as CustomEvent<{
-        xp?: number
-        level?: number
-        coins?: number
-        euros?: number
-        streak?: number
-        gamesPlayed?: number
-        correctAnswers?: number
-        questionsAnswered?: number
-        bestStreak?: number
-        categoryStats?: Record<string, any>
-      }>
-      if (customEvt.detail) {
-        console.log('[AUTH] Sincronização em tempo real via profile_updated:', customEvt.detail)
-        setProfile((prev) => {
-          if (!prev) return prev
-          const newXp = typeof customEvt.detail.xp === 'number' ? customEvt.detail.xp : prev.xp
-          const newLevel = typeof customEvt.detail.level === 'number'
-            ? customEvt.detail.level
-            : (typeof customEvt.detail.xp === 'number' ? calculateLevelProgress(newXp).currentLevel.level : prev.level)
-          const newCoins = typeof customEvt.detail.coins === 'number'
-            ? customEvt.detail.coins
-            : (typeof customEvt.detail.euros === 'number' ? customEvt.detail.euros : (prev.coins ?? prev.euros ?? 0))
-          const newStreak = typeof customEvt.detail.streak === 'number' ? customEvt.detail.streak : prev.streak
+      const customEvt = e as CustomEvent<any>
+      if (!customEvt.detail) return
+      // Ignorar eventos com origem no próprio listener do auth_provider para evitar loops e reflexões
+      if (customEvt.detail._source === 'auth_provider') return
 
-          if (typeof window !== 'undefined') {
-            try {
-              localStorage.setItem('user_xp', String(newXp))
-              localStorage.setItem('user_level', String(newLevel))
-              localStorage.setItem('user_coins', String(newCoins))
-              localStorage.setItem('user_euros', String(newCoins))
-              localStorage.setItem('user_streak', String(newStreak))
-            } catch {}
-          }
+      setProfile((prev) => {
+        if (!prev) return prev
+        const d = customEvt.detail
+        const newXp = typeof d.xp === 'number' ? d.xp : prev.xp
+        const newLevel = typeof d.level === 'number'
+          ? d.level
+          : (typeof d.xp === 'number' ? calculateLevelProgress(newXp).currentLevel.level : prev.level)
+        const newCoins = typeof d.coins === 'number'
+          ? d.coins
+          : (typeof d.euros === 'number' ? d.euros : (prev.coins ?? prev.euros ?? 0))
+        const newStreak = typeof d.streak === 'number' ? d.streak : prev.streak
+        const newGamesPlayed = typeof d.gamesPlayed === 'number' ? d.gamesPlayed : prev.gamesPlayed
+        const newCorrectAnswers = typeof d.correctAnswers === 'number' ? d.correctAnswers : prev.correctAnswers
+        const newQuestionsAnswered = typeof d.questionsAnswered === 'number' ? d.questionsAnswered : prev.questionsAnswered
+        const newBestStreak = typeof d.bestStreak === 'number' ? d.bestStreak : prev.bestStreak
 
-          return {
-            ...prev,
-            xp: newXp,
-            level: newLevel,
-            coins: newCoins,
-            euros: newCoins,
-            streak: newStreak,
-            gamesPlayed: typeof customEvt.detail.gamesPlayed === 'number' ? customEvt.detail.gamesPlayed : prev.gamesPlayed,
-            correctAnswers: typeof customEvt.detail.correctAnswers === 'number' ? customEvt.detail.correctAnswers : prev.correctAnswers,
-            questionsAnswered: typeof customEvt.detail.questionsAnswered === 'number' ? customEvt.detail.questionsAnswered : prev.questionsAnswered,
-            bestStreak: typeof customEvt.detail.bestStreak === 'number' ? customEvt.detail.bestStreak : prev.bestStreak,
-            categoryStats: customEvt.detail.categoryStats
-              ? { ...(prev.categoryStats || {}), ...customEvt.detail.categoryStats }
-              : prev.categoryStats,
-          }
-        })
-      }
+        // Verificação estrita de igualdade: se não há alterações, retorna prev sem re-renderizar
+        if (
+          prev.xp === newXp &&
+          prev.level === newLevel &&
+          prev.coins === newCoins &&
+          prev.euros === newCoins &&
+          prev.streak === newStreak &&
+          prev.gamesPlayed === newGamesPlayed &&
+          prev.correctAnswers === newCorrectAnswers &&
+          prev.questionsAnswered === newQuestionsAnswered &&
+          prev.bestStreak === newBestStreak &&
+          !d.categoryStats
+        ) {
+          return prev
+        }
+
+        console.log('[AUTH] Sincronização em tempo real via profile_updated:', d)
+
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('user_xp', String(newXp))
+            localStorage.setItem('user_level', String(newLevel))
+            localStorage.setItem('user_coins', String(newCoins))
+            localStorage.setItem('user_euros', String(newCoins))
+            localStorage.setItem('user_streak', String(newStreak))
+          } catch {}
+        }
+
+        return {
+          ...prev,
+          xp: newXp,
+          level: newLevel,
+          coins: newCoins,
+          euros: newCoins,
+          streak: newStreak,
+          gamesPlayed: newGamesPlayed,
+          correctAnswers: newCorrectAnswers,
+          questionsAnswered: newQuestionsAnswered,
+          bestStreak: newBestStreak,
+          categoryStats: d.categoryStats
+            ? { ...(prev.categoryStats || {}), ...d.categoryStats }
+            : prev.categoryStats,
+        }
+      })
     }
 
     const handleBalanceUpdated = (e: Event) => {
-      const customEvt = e as CustomEvent<{ coins?: number }>
+      const customEvt = e as CustomEvent<any>
+      if (!customEvt.detail) return
+      if (customEvt.detail._source === 'auth_provider') return
+
       if (typeof customEvt.detail?.coins === 'number') {
         const c = customEvt.detail.coins
-        setProfile((prev) => (prev ? { ...prev, coins: c, euros: c } : prev))
+        setProfile((prev) => {
+          if (!prev || (prev.coins === c && prev.euros === c)) return prev
+          return { ...prev, coins: c, euros: c }
+        })
         if (typeof window !== 'undefined') {
           try {
             localStorage.setItem('user_coins', String(c))
@@ -346,7 +365,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('profile_updated', handleProfileUpdated)
       window.removeEventListener('balance_updated', handleBalanceUpdated)
     }
-  }, [user, profile])
+  }, [user?.uid])
 
   // 2. Função segura de subscrição ao perfil Firestore com Silent Retry
   const subscribeToUserProfile = useCallback((currentUser: User) => {
@@ -458,37 +477,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               ...rawUserAvatars,
               ...(Array.isArray(data.unlockedAvatars) ? data.unlockedAvatars : []),
             ]))
-
-            // Se o perfil necessita de migração para a versão canónica 2
-            if (data.avatarCanonicalVersion !== 2 || data.avatarId !== avatarIdVal || data.photoURL !== avatarVal) {
-              setDoc(
-                userDocRef,
-                {
-                  avatarId: avatarIdVal,
-                  equippedAvatar: avatarIdVal,
-                  avatar: avatarVal,
-                  photoURL: avatarVal,
-                  'inventory.avatars': sanitizedInventoryAvatars,
-                  unlockedAvatars: sanitizedInventoryAvatars,
-                  'equipped.avatar': avatarVal,
-                  'equipped.avatarId': avatarIdVal,
-                  avatarCanonicalVersion: 2,
-                },
-                { merge: true }
-              ).catch((mErr) => console.warn('[AUTH] Auto-migração não fatal:', mErr))
-            }
-
-            // Se o documento Firestore ainda não tem o campo oficial 'xp' mas contém valor equivalente
-            if ((data.xp === undefined || data.xp === 0) && xpVal > 0) {
-              setDoc(
-                userDocRef,
-                {
-                  xp: xpVal,
-                  level: levelVal,
-                },
-                { merge: true }
-              ).catch((xpErr) => console.warn('[AUTH] Auto-migração não fatal de XP:', xpErr))
-            }
 
             const invData = extractUserInventory(data)
             const equippedData = extractUserEquipped(data, xpVal)
@@ -624,8 +612,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('equipped_title', equippedTitleNameVal)
                 localStorage.setItem('user_equipped_title', equippedTitleNameVal)
 
-                window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: coinsVal } }))
-                window.dispatchEvent(new CustomEvent('profile_updated', { detail: loadedProfile }))
+                window.dispatchEvent(new CustomEvent('balance_updated', { detail: { coins: coinsVal, _source: 'auth_provider' } }))
+                window.dispatchEvent(new CustomEvent('profile_updated', { detail: { ...loadedProfile, _source: 'auth_provider' } }))
                 window.dispatchEvent(new CustomEvent('inventory_updated'))
                 window.dispatchEvent(new Event('avatarChanged'))
                 window.dispatchEvent(new Event('frameChanged'))
@@ -635,62 +623,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               } catch (storageErr) {
                 console.warn('[AUTH] Storage local restrito:', storageErr)
               }
-            }
-
-            // Sincronização em background do publicProfiles (segura e não bloqueante)
-            if (districtVal) {
-              const publicProfileRef = doc(db, 'publicProfiles', currentUser.uid)
-              setDoc(
-                publicProfileRef,
-                {
-                  uid: currentUser.uid,
-                  displayName: nameVal,
-                  photoURL: avatarVal,
-                  avatarId: avatarIdVal,
-                  district: districtVal,
-                  city: cityVal,
-                  representedDistrict: districtVal,
-                  representedCity: cityVal,
-                  level: levelVal,
-                  xp: xpVal,
-                  title: equippedTitleNameVal,
-                  equippedTitle: equippedTitleNameVal,
-                  equippedTitleId: equippedTitleIdVal,
-                  equippedFrame: equippedData.frameId || null,
-                  wins1v1: typeof data.stats?.duelsWon === 'number' ? data.stats.duelsWon : (typeof data.wins1v1 === 'number' ? data.wins1v1 : (typeof data.wins === 'number' ? data.wins : 0)),
-                  losses1v1: typeof data.stats?.duelsLost === 'number' ? data.stats.duelsLost : (typeof data.losses1v1 === 'number' ? data.losses1v1 : 0),
-                  gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalGames || 0),
-                  updatedAt: serverTimestamp(),
-                },
-                { merge: true },
-              ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles:', syncErr))
-            } else {
-              // Sincronização fallback para utilizadores ainda sem distrito definido (para garantir presença nos rankings)
-              const publicProfileRef = doc(db, 'publicProfiles', currentUser.uid)
-              setDoc(
-                publicProfileRef,
-                {
-                  uid: currentUser.uid,
-                  displayName: nameVal,
-                  photoURL: avatarVal,
-                  avatarId: avatarIdVal,
-                  district: 'Portugal',
-                  city: cityVal || '',
-                  representedDistrict: 'Portugal',
-                  representedCity: cityVal || '',
-                  level: levelVal,
-                  xp: xpVal,
-                  title: equippedTitleNameVal,
-                  equippedTitle: equippedTitleNameVal,
-                  equippedTitleId: equippedTitleIdVal,
-                  equippedFrame: equippedData.frameId || null,
-                  wins1v1: typeof data.stats?.duelsWon === 'number' ? data.stats.duelsWon : (typeof data.wins1v1 === 'number' ? data.wins1v1 : (typeof data.wins === 'number' ? data.wins : 0)),
-                  losses1v1: typeof data.stats?.duelsLost === 'number' ? data.stats.duelsLost : (typeof data.losses1v1 === 'number' ? data.losses1v1 : 0),
-                  gamesPlayed: typeof data.gamesPlayed === 'number' ? data.gamesPlayed : (data.stats?.totalGames || 0),
-                  updatedAt: serverTimestamp(),
-                },
-                { merge: true },
-              ).catch((syncErr) => console.warn('[AUTH] Aviso não-fatal ao sincronizar publicProfiles (fallback Portugal):', syncErr))
             }
           } else {
             // PROTEÇÃO CRÍTICA ANTI-RESET E ANTI-RESSURREIÇÃO:

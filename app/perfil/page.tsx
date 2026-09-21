@@ -686,18 +686,6 @@ function PerfilContent() {
               setRealtimeXp(liveXp)
               localStorage.setItem('user_xp', String(liveXp))
               localStorage.setItem('user_level', String(liveLevel))
-              if (typeof window !== 'undefined') {
-                window.dispatchEvent(
-                  new CustomEvent('profile_updated', {
-                    detail: {
-                      xp: liveXp,
-                      level: liveLevel,
-                      coins: coinsVal,
-                      euros: coinsVal,
-                    },
-                  })
-                )
-              }
 
               if (data.claimedAchievements) {
                 setClaimedAchievements(data.claimedAchievements)
@@ -794,7 +782,7 @@ function PerfilContent() {
       window.removeEventListener('profile_updated', syncProfile)
       window.removeEventListener('storage', syncProfile)
     }
-  }, [user, profile])
+  }, [user?.uid])
 
   // Ação de Equipar / Desequipar Provocações nos 4 Atalhos Rápidos 1v1
   const handleEquipEmote = async (emoteId: string) => {

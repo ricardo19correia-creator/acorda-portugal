@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import {
   Swords,
   Shield,
@@ -18,18 +17,36 @@ import { cn } from '@/lib/utils'
 import type { EventTeamId, OfficialEventTeams } from '@/lib/events-service'
 import { useAuth } from '@/components/auth-provider'
 
-interface PortoLisboaTeamSelectModalProps {
+export interface PortoLisboaTeamSelectModalProps {
   isOpen: boolean
   onClose?: () => void
-  onSuccess: (chosenTeam: EventTeamId) => void
+  onSuccess?: (chosenTeam: EventTeamId) => void
+  onTeamSelected?: (chosenTeam: EventTeamId) => void
   teams?: OfficialEventTeams
+  portoStats?: {
+    points: number
+    playerCount: number
+    name?: string
+    club?: string
+    city?: string
+  }
+  lisboaStats?: {
+    points: number
+    playerCount: number
+    name?: string
+    club?: string
+    city?: string
+  }
 }
 
 export function PortoLisboaTeamSelectModal({
   isOpen,
   onClose,
   onSuccess,
+  onTeamSelected,
   teams,
+  portoStats: propPortoStats,
+  lisboaStats: propLisboaStats,
 }: PortoLisboaTeamSelectModalProps) {
   const { user } = useAuth()
   const [selectedPendingTeam, setSelectedPendingTeam] = useState<EventTeamId | null>(null)
@@ -39,7 +56,7 @@ export function PortoLisboaTeamSelectModal({
 
   if (!isOpen) return null
 
-  const portoStats = teams?.porto || {
+  const portoStats = propPortoStats || teams?.porto || {
     points: 0,
     playerCount: 0,
     name: 'Equipa Porto',
@@ -47,12 +64,29 @@ export function PortoLisboaTeamSelectModal({
     city: 'Porto',
   }
 
-  const lisboaStats = teams?.lisboa || {
+  const lisboaStats = propLisboaStats || teams?.lisboa || {
     points: 0,
     playerCount: 0,
     name: 'Equipa Lisboa',
     club: 'SL Benfica',
     city: 'Lisboa',
+  }
+
+  const notifyChosen = (team: EventTeamId) => {
+    if (typeof onTeamSelected === 'function') {
+      try {
+        onTeamSelected(team)
+      } catch (err) {
+        console.error('[SELECT_TEAM_NOTIFY_ERROR] onTeamSelected:', err)
+      }
+    }
+    if (typeof onSuccess === 'function') {
+      try {
+        onSuccess(team)
+      } catch (err) {
+        console.error('[SELECT_TEAM_NOTIFY_ERROR] onSuccess:', err)
+      }
+    }
   }
 
   const handleSelectSide = (team: EventTeamId) => {
@@ -89,7 +123,9 @@ export function PortoLisboaTeamSelectModal({
       const data = await res.json().catch(() => null)
 
       if (res.ok && data?.success) {
-        onSuccess(data.team || selectedPendingTeam)
+        notifyChosen(data.team || selectedPendingTeam)
+      } else if (data?.alreadyChosen || (data?.alreadySet && data?.team === selectedPendingTeam)) {
+        notifyChosen(data.team || selectedPendingTeam)
       } else {
         setErrorMsg(
           data?.error ||
@@ -164,7 +200,7 @@ export function PortoLisboaTeamSelectModal({
             </div>
           )}
 
-          {/* Painel Central com Arena e os 2 Lados */}
+          {/* Painel Central com os 2 Lados do Confronto */}
           <div className="relative grid grid-cols-1 md:grid-cols-11 gap-4 items-stretch">
             {/* LADO AZUL: EQUIPA PORTO */}
             <div className="md:col-span-5 rounded-3xl border-2 border-blue-500/40 bg-gradient-to-b from-blue-950/60 via-slate-950/90 to-slate-950 p-5 sm:p-6 flex flex-col justify-between space-y-5 shadow-[0_0_35px_rgba(37,99,235,0.25)] relative overflow-hidden group hover:border-blue-400 transition-all duration-300">
@@ -227,7 +263,7 @@ export function PortoLisboaTeamSelectModal({
               </button>
             </div>
 
-            {/* CENTRO: VS + FUSÃO DA ARENA */}
+            {/* CENTRO: VS HERÁLDICO */}
             <div className="md:col-span-1 flex flex-col items-center justify-center my-auto py-2 relative">
               <div className="relative flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-600 via-slate-950 to-rose-600 border border-amber-400/60 shadow-[0_0_25px_rgba(245,158,11,0.5)]">
                 <Swords className="h-7 w-7 text-amber-300" />
@@ -235,16 +271,6 @@ export function PortoLisboaTeamSelectModal({
               <span className="font-display text-xs font-black uppercase tracking-widest text-amber-400 mt-2">
                 VS
               </span>
-
-              {/* Mini visual da arena */}
-              <div className="hidden md:block relative w-12 h-20 mt-3 rounded-lg overflow-hidden border border-white/20 shadow-md">
-                <Image
-                  src="/arenas/porto-lisboa-arena.jpg"
-                  alt="Arena"
-                  fill
-                  className="object-cover"
-                />
-              </div>
             </div>
 
             {/* LADO VERMELHO: EQUIPA LISBOA */}
