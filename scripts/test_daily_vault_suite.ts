@@ -175,6 +175,7 @@ async function runVaultTestSuite() {
 
       const updates: Record<string, any> = {
         'dailyVault.lastOpenedAt': nowServer,
+        lastVaultOpenedAt: nowServer,
         'dailyVault.currentStreak': calc.newStreak,
         'dailyVault.bestStreak': calc.newBestStreak,
         'dailyVault.totalOpened': (curVault.totalOpened || 0) + 1,
@@ -224,6 +225,7 @@ async function runVaultTestSuite() {
     assert(afterFirst.dailyVault.currentStreak === 1, 'Streak atualizado para 1 no Firestore')
     assert(afterFirst.dailyVault.totalOpened === 1, 'Total de cofres abertos incrementado para 1')
     assert(afterFirst.dailyVault.lastOpenedAt === nowServer, 'Timestamp do servidor gravado com exatidão')
+    assert(afterFirst.lastVaultOpenedAt === nowServer, 'lastVaultOpenedAt gravado com exatidão na raiz do utilizador')
 
     // -------------------------------------------------------------
     // TESTE 4: Bloqueio Estrito de 24 Horas

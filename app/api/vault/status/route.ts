@@ -51,17 +51,13 @@ export async function GET(req: NextRequest) {
     const userRef = db.collection('users').doc(userId)
     const userSnap = await userRef.get()
 
-    if (!userSnap.exists) {
-      return NextResponse.json(
-        { ok: false, error: 'Utilizador não encontrado.', code: 'USER_NOT_FOUND' },
-        { status: 404 }
-      )
-    }
-
-    const userData = userSnap.data() || {}
+    const userData = userSnap.exists ? (userSnap.data() || {}) : {}
     const vaultData = userData.dailyVault || {}
 
-    const lastOpenedAt = typeof vaultData.lastOpenedAt === 'number' ? vaultData.lastOpenedAt : null
+    const lastOpenedAt =
+      typeof vaultData.lastOpenedAt === 'number'
+        ? vaultData.lastOpenedAt
+        : (typeof userData.lastVaultOpenedAt === 'number' ? userData.lastVaultOpenedAt : null)
     const currentStreak = typeof vaultData.currentStreak === 'number' ? vaultData.currentStreak : 0
     const bestStreak = typeof vaultData.bestStreak === 'number' ? vaultData.bestStreak : currentStreak
     const totalOpened = typeof vaultData.totalOpened === 'number' ? vaultData.totalOpened : 0

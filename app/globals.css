@@ -1394,4 +1394,48 @@ iframe[title*="chat"],
   animation: jackpot-pulse 2.2s ease-in-out infinite;
 }
 
+@keyframes vault-sparkle-float {
+  0% {
+    transform: translateY(0px) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-26px) scale(1.1) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.animate-vault-sparkle {
+  animation: vault-sparkle-float 3.2s ease-in-out infinite;
+}
+
+@keyframes vault-dissolve-fade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1) blur(0px);
+  }
+  40% {
+    transform: scale(1.06);
+    opacity: 0.9;
+    filter: brightness(1.6) drop-shadow(0 0 35px rgba(16, 185, 129, 0.95));
+  }
+  100% {
+    transform: scale(0.45);
+    opacity: 0;
+    filter: brightness(2) blur(10px);
+  }
+}
+
+.animate-vault-dissolve {
+  animation: vault-dissolve-fade 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+
 

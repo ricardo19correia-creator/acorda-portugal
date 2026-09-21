@@ -1,14 +1,28 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { AppBackground } from '@/components/AppBackground'
 import { DailyVaultView } from '@/components/vault/DailyVaultView'
 import { GlobalBackButton } from '@/components/navigation/GlobalBackButton'
+import { useAuth } from '@/components/auth-provider'
 import { ShieldCheck, Flame, Gift, Clock, Sparkles } from 'lucide-react'
 
 export default function CofrePage() {
+  const router = useRouter()
+  const { user, profile } = useAuth()
+
+  useEffect(() => {
+    if (user && profile?.lastVaultOpenedAt) {
+      const elapsed = Date.now() - profile.lastVaultOpenedAt
+      if (elapsed < 24 * 60 * 60 * 1000) {
+        router.replace('/')
+      }
+    }
+  }, [user, profile, router])
+
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-transparent text-foreground flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
       <AppBackground />

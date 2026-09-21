@@ -8,6 +8,7 @@ import {
   ArrowRight,
   Sparkles,
 } from 'lucide-react'
+import { useAuth } from '@/components/auth-provider'
 import {
   claimDailyVault,
   fetchVaultStatus,
@@ -48,9 +49,11 @@ export function InteractiveDailyVault({
   variant = 'home',
 }: InteractiveDailyVaultProps) {
   const router = useRouter()
+  const { user, profile } = useAuth()
   const [status, setStatus] = useState<VaultStatusResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [animStage, setAnimStage] = useState<VaultAnimStage>('IDLE')
+  const [isOpening, setIsOpening] = useState(false)
   const [claimedReward, setClaimedReward] = useState<VaultRewardInfo | null>(null)
   const [currentStreak, setCurrentStreak] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -59,7 +62,7 @@ export function InteractiveDailyVault({
   const [activeLock, setActiveLock] = useState<number>(0)
   const [hasClaimedNow, setHasClaimedNow] = useState(false)
 
-  // 1. Deteção de Reduced Motion
+  // 1. Deteção de Acessibilidade / Reduced Motion
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -68,17 +71,11 @@ export function InteractiveDailyVault({
     }
   }, [])
 
-  // 2. Carregar Status Autoritativo do Servidor / Firebase
+  // 2. Carregar Status Autoritativo do Servidor / Firestore (SSOT)
   const loadStatus = useCallback(async () => {
-    setIsLoading(true)
-    const data = await fetchVaultStatus()
-    setIsLoading(false)
-
-    if (data && data.success) {
-      setStatus(data)
-      setCurrentStreak(data.currentStreak || 0)
-    } else {
-      // Se utilizador não estiver autenticado ainda, permitir ver o cofre no modo visitante
+    if (!user && !isAuthenticated) {
+      // Visitante não autenticado: visualiza o cofre na Home; ao clicar é convidado a registar/entrar
+      setIsLoading(false)
       setStatus({
         ok: true,
         success: true,
@@ -97,8 +94,21 @@ export function InteractiveDailyVault({
         isDay7Special: false,
         serverTime: Date.now(),
       })
+      return
     }
-  }, [])
+
+    setIsLoading(true)
+    const data = await fetchVaultStatus()
+    setIsLoading(false)
+
+    if (data && data.success) {
+      setStatus(data)
+      setCurrentStreak(data.currentStreak || 0)
+    } else {
+      // Se a chamada de rede falhar temporariamente, manter estado anterior ou não permitir flash
+      setStatus((prev) => prev || null)
+    }
+  }, [user, isAuthenticated])
 
   useEffect(() => {
     loadStatus()
@@ -113,7 +123,23 @@ export function InteractiveDailyVault({
     }
   }, [loadStatus])
 
-  // 3. Micro-animação mecânica subtil a cada 8s em IDLE
+  // 3. Temporizador Inteligente: Quando as 24h exatas expirarem, o cofre reaparece automaticamente
+  useEffect(() => {
+    if (!status || status.canClaim || !status.nextAvailableAt) return
+
+    const now = Date.now()
+    const msUntilAvailable = Math.max(1000, status.nextAvailableAt - now + 500)
+
+    // Se estiver a menos de 24 horas, definir timeout reativo
+    if (msUntilAvailable <= 24 * 60 * 60 * 1000) {
+      const timer = setTimeout(() => {
+        loadStatus()
+      }, msUntilAvailable)
+      return () => clearTimeout(timer)
+    }
+  }, [status, loadStatus])
+
+  // 4. Micro-vibração mecânica sutil a cada 8s em IDLE
   useEffect(() => {
     if (animStage !== 'IDLE' || reducedMotion) return
 
@@ -125,7 +151,7 @@ export function InteractiveDailyVault({
     return () => clearInterval(interval)
   }, [animStage, reducedMotion])
 
-  // 4. Parallax 3D / Tilt ao passar o rato ou arrastar
+  // 5. Parallax 3D / Tilt Dinâmico ao interagir com o cursor/touch
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (animStage !== 'IDLE' || reducedMotion) return
     const rect = e.currentTarget.getBoundingClientRect()
@@ -141,13 +167,14 @@ export function InteractiveDailyVault({
     setTilt({ x: 0, y: 0 })
   }
 
-  // 5. SEQUÊNCIA CINEMATOGRÁFICA DE ABERTURA — NÍVEL PROFISSIONAL DE VIDEOJOGO
+  // 6. SEQUÊNCIA CINEMATOGRÁFICA DE ABERTURA — NÍVEL PROFISSIONAL DE VIDEOJOGO
   const handleTriggerOpen = async (e: React.MouseEvent) => {
     e.stopPropagation()
-    if (animStage !== 'IDLE' || isLoading) return
+    // Anti-Spam / Anti-Duplicação: Se já estiver a abrir ou em animação, ignorar imediatamente
+    if (animStage !== 'IDLE' || isOpening || isLoading) return
 
-    // Se o jogador não estiver autenticado, abrir fluxo de login
-    if (!isAuthenticated) {
+    // Se o jogador não estiver autenticado, abrir fluxo de login oficial
+    if (!isAuthenticated || !user) {
       if (onOpenAuth) {
         onOpenAuth()
       } else {
@@ -156,12 +183,13 @@ export function InteractiveDailyVault({
       return
     }
 
-    // FASE 1: Reação imediata ao toque & Foco Cinematográfico Central
+    // FASE 1: Bloqueio Síncrono Imediato, Reação ao Toque & Foco Cinematográfico
+    setIsOpening(true)
     setAnimStage('CINEMA_FOCUS')
     playVaultButtonClick()
     triggerVaultHaptic('click')
 
-    // Disparar requisição de claim autoritativo ao backend imediatamente
+    // Disparar requisição de claim autoritativo ao backend imediatamente (Transação Firestore no servidor)
     const claimPromise = claimDailyVault()
 
     // FASE 2: Aceleração, Vibração Mecânica e Rumble Magnético (após 350ms)
@@ -175,13 +203,17 @@ export function InteractiveDailyVault({
         claimResult = await claimPromise
       } catch (err: any) {
         setAnimStage('IDLE')
+        setIsOpening(false)
         return
       }
 
+      // Se o servidor rejeitar (por exemplo, cooldown ativo em outro separador), abortar graciosamente
       if (!claimResult || !claimResult.success || !claimResult.reward) {
         setAnimStage('IDLE')
+        setIsOpening(false)
         if (claimResult?.cooldownRemainingMs && claimResult.cooldownRemainingMs > 0) {
           setHasClaimedNow(true)
+          setStatus((prev) => (prev ? { ...prev, canClaim: false } : null))
         }
         return
       }
@@ -214,7 +246,7 @@ export function InteractiveDailyVault({
         playVaultLightBurst()
         triggerVaultHaptic('burst')
 
-        // FASE 6 & 7: Explosão de Partículas, Fanfarra & Revelação JACKPOT
+        // FASE 6 & 7: Explosão de Partículas, Fanfarra Triunfal & Revelação da Recompensa
         setTimeout(() => {
           setAnimStage('JACKPOT_REVEAL')
           playVaultRewardFanfare()
@@ -227,7 +259,7 @@ export function InteractiveDailyVault({
     }, reducedMotion ? 250 : 450)
   }
 
-  // 6. Terminar e Recolher: O cofre dissolve-se e desaparece para sempre da Home
+  // 7. Terminar e Recolher: O cofre dissolve-se suavemente e desaparece para sempre da Home
   const handleCollectReward = () => {
     playVaultExitHum()
     triggerVaultHaptic('click')
@@ -235,39 +267,51 @@ export function InteractiveDailyVault({
 
     setTimeout(() => {
       setHasClaimedNow(true)
+      setStatus((prev) =>
+        prev
+          ? {
+              ...prev,
+              canClaim: false,
+              cooldownRemainingMs: 24 * 60 * 60 * 1000,
+              nextAvailableAt: Date.now() + 24 * 60 * 60 * 1000,
+              lastOpenedAt: Date.now(),
+            }
+          : null
+      )
       setAnimStage('IDLE')
+      setIsOpening(false)
       loadStatus()
     }, 700)
   }
 
-  // REGRA FUNDAMENTAL:
-  // Na HOME: Se já abriu nas últimas 24h, o cofre DESAPARECE COMPLETAMENTE DA HOME.
-  const canClaim = (status?.canClaim ?? true) && !hasClaimedNow
+  // ==========================================================================
+  // REGRA FUNDAMENTAL E DEFINITIVA DO COFRE:
+  // Se o utilizador já abriu o cofre nas últimas 24h reais:
+  // → NÃO mostrar Cofre;
+  // → NÃO mostrar Cofre bloqueado;
+  // → NÃO mostrar contador nem tempo restante;
+  // → NÃO mostrar mensagens de cooldown;
+  // → NÃO mostrar placeholder nem deixar espaço vazio.
+  // SILÊNCIO VISUAL ABSOLUTO: O componente retorna rigorosamente null.
+  // ==========================================================================
+  const lastOpened = profile?.lastVaultOpenedAt || status?.lastOpenedAt
+  const isProfileInCooldown =
+    typeof lastOpened === 'number' && Date.now() - lastOpened < 24 * 60 * 60 * 1000
 
-  if (!canClaim && animStage === 'IDLE') {
-    if (variant === 'home') {
-      return null
-    }
+  // Se já fez claim agora, ou o perfil diz cooldown, ou o servidor diz canClaim = false:
+  const isCurrentlyAvailable =
+    !hasClaimedNow &&
+    !isProfileInCooldown &&
+    (status ? status.canClaim : !user ? true : false)
 
-    return (
-      <div className="w-full max-w-md mx-auto my-6 p-6 rounded-3xl bg-slate-950/80 border border-slate-800 text-center shadow-xl backdrop-blur-md">
-        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-3">
-          <Sparkles className="w-6 h-6" />
-        </div>
-        <h3 className="text-base font-black text-white uppercase tracking-wider">
-          Cofre Diário Recolhido
-        </h3>
-        <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-          Já resgataste o teu cofre diário. Passadas 24 horas da tua última abertura, o cofre voltará a aparecer automaticamente.
-        </p>
-      </div>
-    )
+  if (!isCurrentlyAvailable && animStage === 'IDLE') {
+    return null
   }
 
   const isInCinematic = animStage !== 'IDLE' && animStage !== 'DISSOLVE_EXIT'
   const isDoorOpen = animStage === 'DOOR_OPENING' || animStage === 'JACKPOT_REVEAL'
 
-  // Partículas simuladas de moedas para explosão de jackpot
+  // Partículas de moedas douradas para a explosão de jackpot
   const coins = Array.from({ length: 12 }, (_, i) => {
     const angle = (i / 12) * Math.PI * 2
     const dist = 120 + (i % 3) * 40
@@ -282,11 +326,11 @@ export function InteractiveDailyVault({
       {/* 1. AMBIENTE CINEMATOGRÁFICO DE ABERTURA (QUANDO EM FOCO) */}
       {isInCinematic && (
         <div
-          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-xl transition-opacity duration-700 animate-in fade-in flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-50 bg-black/94 backdrop-blur-xl transition-opacity duration-700 animate-in fade-in flex items-center justify-center overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Luz Ambiente e Feixes de Foco */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.15)_0%,_rgba(0,0,0,0.95)_70%)] pointer-events-none" />
+          {/* Luz Ambiente e Feixes Volumétricos de Foco */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.18)_0%,_rgba(0,0,0,0.96)_70%)] pointer-events-none" />
 
           {/* CHUVA / EXPLOSÃO DE MOEDAS E PARTÍCULAS EM JACKPOT */}
           {animStage === 'JACKPOT_REVEAL' && (
@@ -312,7 +356,7 @@ export function InteractiveDailyVault({
           )}
 
           {/* PALCO CENTRAL DO COFRE EM CINEMA */}
-          <div className="relative flex flex-col items-center justify-center z-50">
+          <div className="relative flex flex-col items-center justify-center z-50 px-4">
             {/* CONTAINER 3D DO COFRE EM TAMANHO HERO */}
             <div
               className={cn(
@@ -332,8 +376,8 @@ export function InteractiveDailyVault({
                 )}
               />
 
-              {/* COFRE EM TAMANHO HERO (Proporções 538x407) */}
-              <div className="relative w-[300px] h-[227px] sm:w-[420px] sm:h-[318px] md:w-[480px] md:h-[363px]">
+              {/* COFRE EM TAMANHO HERO (Proporções exatas 538x407) */}
+              <div className="relative w-[290px] h-[219px] sm:w-[380px] sm:h-[287px] md:w-[450px] md:h-[340px]">
                 {/* 1. CHASSIS DO COFRE ISOLADO (100% TRANSPARENTE, SEM FUNDO NEM TEXTOS) */}
                 <div className="absolute inset-0 z-10 pointer-events-none">
                   <Image
@@ -341,8 +385,8 @@ export function InteractiveDailyVault({
                     alt="Cofre Diário Secreto"
                     fill
                     priority
-                    className="object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.95)]"
-                    sizes="(max-width: 640px) 300px, (max-width: 768px) 420px, 480px"
+                    className="object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]"
+                    sizes="(max-width: 640px) 290px, (max-width: 768px) 380px, 450px"
                   />
 
                   {/* Conduítes Neon a energizar no Rumble */}
@@ -352,8 +396,8 @@ export function InteractiveDailyVault({
                         src="/images/vault/daily-vault-isolated.png"
                         alt="Cofre Neon"
                         fill
-                        className="object-contain opacity-35 mix-blend-screen"
-                        sizes="480px"
+                        className="object-contain opacity-40 mix-blend-screen"
+                        sizes="450px"
                       />
                     </div>
                   )}
@@ -425,7 +469,7 @@ export function InteractiveDailyVault({
             {animStage === 'JACKPOT_REVEAL' && (
               <div className="relative z-50 mt-6 w-full max-w-sm flex flex-col items-center gap-3 animate-reward-ascend">
                 {/* Cartão de Glória e Impacto */}
-                <div className="w-full p-5 sm:p-6 rounded-3xl bg-slate-950/95 border-2 border-amber-400/80 text-center shadow-[0_0_50px_rgba(234,179,8,0.4)] backdrop-blur-2xl animate-jackpot-pulse">
+                <div className="w-full p-5 sm:p-6 rounded-3xl bg-slate-950/95 border-2 border-amber-400/80 text-center shadow-[0_0_50px_rgba(234,179,8,0.45)] backdrop-blur-2xl animate-jackpot-pulse">
                   <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-[10px] font-black tracking-widest uppercase mb-3">
                     <Sparkles className="w-3 h-3 text-amber-400" />
                     <span>RECOMPENSA DIÁRIA</span>
@@ -438,7 +482,7 @@ export function InteractiveDailyVault({
                     </span>
                   </div>
 
-                  {/* Valor da Recompensa com Grande Tipografia */}
+                  {/* Valor da Recompensa com Tipografia Oficial */}
                   <h3 className="text-xl sm:text-2xl font-black text-white font-mono tracking-wider drop-shadow-md">
                     {claimedReward?.label || '+100 Acordas'}
                   </h3>
@@ -447,7 +491,9 @@ export function InteractiveDailyVault({
                   {currentStreak > 0 && (
                     <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-300 text-xs font-bold font-mono">
                       <Flame className="w-3.5 h-3.5 fill-orange-400" />
-                      <span>{currentStreak} {currentStreak === 1 ? 'dia consecutivo' : 'dias consecutivos'}!</span>
+                      <span>
+                        {currentStreak} {currentStreak === 1 ? 'dia consecutivo' : 'dias consecutivos'}!
+                      </span>
                     </div>
                   )}
                 </div>
@@ -466,30 +512,24 @@ export function InteractiveDailyVault({
         </div>
       )}
 
-      {/* 2. ESTADO NORMAL NA HOME OU PÁGINA (APENAS O COFRE) */}
-      {/*
-          REGRA ABSOLUTA:
-          - Apenas o cofre.
-          - Sem card, sem painel, sem texto ao lado, sem contador, sem etiquetas.
-          - Na Home: Posicionado num canto elegante da tela (bottom-right).
-          - Na Página: Posicionado no centro com flutuação heroica.
-      */}
-      {!isInCinematic && canClaim && (
+      {/* 2. ESTADO IDLE NA HOMEPAGE: ELEMENTO 3D VIVO, RESPONSIVO E SEM CORTES */}
+      {!isInCinematic && isCurrentlyAvailable && (
         <div
           onClick={handleTriggerOpen}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            'cursor-pointer select-none transition-transform duration-300 group',
+            'cursor-pointer select-none group',
             variant === 'home'
-              ? 'fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-30 hover:scale-110 active:scale-95'
-              : 'relative my-6 flex flex-col items-center justify-center hover:scale-105 active:scale-95'
+              ? 'fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] right-3.5 sm:bottom-20 sm:right-6 lg:bottom-8 lg:right-8 z-35 transition-transform duration-300 hover:scale-105 active:scale-95'
+              : 'relative my-6 flex flex-col items-center justify-center transition-transform duration-300 hover:scale-105 active:scale-95',
+            animStage === 'DISSOLVE_EXIT' && 'animate-vault-dissolve pointer-events-none'
           )}
           style={{
             perspective: 1000,
           }}
-          title="Cofre Diário Secreto"
-          aria-label="Cofre Diário Secreto"
+          title="Cofre Diário Secreto — Toca para abrir"
+          aria-label="Cofre Diário Secreto — Toca para abrir"
         >
           {/* Halo de Brilho Cinematográfico Subtil */}
           <div
@@ -499,13 +539,37 @@ export function InteractiveDailyVault({
             )}
           />
 
-          {/* O COFRE ISOLADO (Proporções 538x407) */}
+          {/* Micro-brilhos Flutuantes (Ambient Idle Sparkles) */}
+          {!reducedMotion && (
+            <div className="absolute inset-0 pointer-events-none overflow-visible">
+              <span
+                className="absolute text-xs animate-vault-sparkle select-none"
+                style={{ top: '10%', left: '15%', animationDelay: '0s' }}
+              >
+                ✨
+              </span>
+              <span
+                className="absolute text-[10px] animate-vault-sparkle select-none text-emerald-300"
+                style={{ top: '60%', right: '10%', animationDelay: '1.2s' }}
+              >
+                ✦
+              </span>
+              <span
+                className="absolute text-[11px] animate-vault-sparkle select-none text-amber-300"
+                style={{ bottom: '15%', left: '25%', animationDelay: '2.1s' }}
+              >
+                ★
+              </span>
+            </div>
+          )}
+
+          {/* O COFRE ISOLADO (Proporções Canónicas 538x407 — 100% Preservadas e Sem Cortes) */}
           <div
             className={cn(
-              'relative transition-transform duration-300',
+              'relative transition-transform duration-300 aspect-[538/407]',
               variant === 'home'
-                ? 'w-24 h-[72px] sm:w-32 sm:h-[97px] md:w-36 md:h-[109px]'
-                : 'w-48 h-[145px] sm:w-64 sm:h-[194px] md:w-72 md:h-[218px]',
+                ? 'w-24 sm:w-28 md:w-32 lg:w-36'
+                : 'w-48 sm:w-60 md:w-72',
               !reducedMotion && 'animate-vault-breathing'
             )}
             style={{
@@ -520,8 +584,8 @@ export function InteractiveDailyVault({
               alt="Cofre Diário Secreto"
               fill
               priority
-              className="object-contain drop-shadow-[0_12px_20px_rgba(0,0,0,0.85)] filter group-hover:brightness-110 transition-all"
-              sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 144px"
+              className="object-contain drop-shadow-[0_12px_22px_rgba(0,0,0,0.85)] filter group-hover:brightness-110 transition-all"
+              sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, (max-width: 1024px) 128px, 144px"
             />
 
             {/* Reflexo Metálico Dinâmico no Metal (Sheen) */}

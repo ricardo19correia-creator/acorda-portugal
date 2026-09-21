@@ -152,6 +152,11 @@ function getCachedInitialProfile(uid: string, fallbackName: string, fallbackEmai
         arena: savedArena,
       },
       consumables: { help5050: 0, freezeTime: 0, publicVote: 0, hints: 0 },
+      lastVaultOpenedAt: (() => {
+        const raw = localStorage.getItem('user_last_vault_opened_at')
+        return raw && !isNaN(Number(raw)) ? Number(raw) : null
+      })(),
+      dailyVault: null,
     }
   } catch {
     return null
@@ -563,6 +568,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 publicVote: invData.utilities.publicVote,
                 hints: invData.utilities.hints,
               },
+              lastVaultOpenedAt:
+                typeof data.lastVaultOpenedAt === 'number'
+                  ? data.lastVaultOpenedAt
+                  : (typeof data.dailyVault?.lastOpenedAt === 'number'
+                      ? data.dailyVault.lastOpenedAt
+                      : null),
+              dailyVault: data.dailyVault || null,
             }
 
             setProfile(loadedProfile)
@@ -579,6 +591,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem('user_xp', String(xpVal))
                 localStorage.setItem('user_level', String(levelVal))
                 localStorage.setItem('user_display_name', nameVal)
+                if (loadedProfile.lastVaultOpenedAt) {
+                  localStorage.setItem('user_last_vault_opened_at', String(loadedProfile.lastVaultOpenedAt))
+                }
                 if (districtVal) {
                   localStorage.setItem('user_district', districtVal)
                   localStorage.setItem('user_represented_district', districtVal)

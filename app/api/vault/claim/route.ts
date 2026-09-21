@@ -140,7 +140,10 @@ export async function POST(req: NextRequest) {
       const userData = userSnap.data() || {}
       const vaultData = userData.dailyVault || {}
 
-      const lastOpenedAt = typeof vaultData.lastOpenedAt === 'number' ? vaultData.lastOpenedAt : null
+      const lastOpenedAt =
+        typeof vaultData.lastOpenedAt === 'number'
+          ? vaultData.lastOpenedAt
+          : (typeof userData.lastVaultOpenedAt === 'number' ? userData.lastVaultOpenedAt : null)
       const currentStreak = typeof vaultData.currentStreak === 'number' ? vaultData.currentStreak : 0
       const bestStreak = typeof vaultData.bestStreak === 'number' ? vaultData.bestStreak : currentStreak
 
@@ -168,6 +171,7 @@ export async function POST(req: NextRequest) {
       // F. Preparação das atualizações no utilizador
       const userUpdatePayload: Record<string, any> = {
         'dailyVault.lastOpenedAt': nowMs,
+        lastVaultOpenedAt: nowMs,
         'dailyVault.currentStreak': newStreak,
         'dailyVault.bestStreak': newBestStreak,
         'dailyVault.totalOpened': FieldValue.increment(1),

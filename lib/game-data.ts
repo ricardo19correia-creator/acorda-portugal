@@ -295,6 +295,8 @@ export type UserProfile = {
   }
   inventory?: any
   equipped?: EquippedCosmetics
+  lastVaultOpenedAt?: number | null
+  dailyVault?: Record<string, any>
   createdAt?: unknown
   lastActiveAt?: unknown
   updatedAt?: unknown
