@@ -92,6 +92,7 @@ export const ARENA_DIMENSIONS: Record<string, ArenaDimensions> = {
   '/arenas/Vigia da Tormenta.jfif': { width: 2816, height: 1536, aspectRatio: 1.8333 },
   '/arenas/Vigília de Camões.jpg': { width: 1376, height: 768, aspectRatio: 1.7917 },
   '/arenas/Vértice Cósmico.jpg': { width: 1376, height: 768, aspectRatio: 1.7917 },
+  '/arenas/porto-lisboa-arena.jpg': { width: 571, height: 1024, aspectRatio: 571 / 1024 },
 }
 
 export function getArenaDimensions(assetPathOrId?: string | null): ArenaDimensions {
@@ -172,6 +173,34 @@ export const MASTER_ARENA_CATALOG: CanonicalArena[] = CANONICAL_ARENAS
 export const VIP_ARENAS: CanonicalArena[] = CANONICAL_ARENAS.filter(a => a.category === 'escalao_5')
 export const STANDARD_ARENAS: CanonicalArena[] = CANONICAL_ARENAS.filter(a => a.category !== 'escalao_5')
 
+/**
+ * Arena Oficial e Exclusiva do Grande Duelo Porto × Lisboa
+ * Utilizada como cenário de fundo exclusivo durante as partidas do evento oficial.
+ */
+export const PORTO_LISBOA_OFFICIAL_ARENA: CanonicalArena = {
+  id: 'arena_porto_lisboa',
+  slug: 'porto-lisboa',
+  name: 'Porto × Lisboa — O Grande Duelo',
+  subtitle: 'Arena Suprema do Duelo das Duas Capitais',
+  rarity: 'Lendária',
+  category: 'escalao_5',
+  description: 'Arena oficial exclusiva do grande embate entre a Invicta e a Capital.',
+  quote: '«Dois territórios. Dois gigantes. Um desafio.»',
+  assetPath: '/arenas/porto-lisboa-arena.jpg',
+  thumbnail: '/arenas/porto-lisboa-arena.jpg',
+  background: '/arenas/porto-lisboa-arena.jpg',
+  effects: 'none',
+  unlockRule: 'unlocked_by_default',
+  priceCoins: 0,
+  purchaseRule: 'Exclusiva do Evento Oficial Porto × Lisboa',
+  gameplayAvailability: true,
+  visualType: 'jpg_raster',
+  aliases: ['porto-lisboa', 'porto_lisboa', 'porto-vs-lisboa', 'arena_porto_lisboa', 'porto-lisboa-arena'],
+  width: 571,
+  height: 1024,
+  aspectRatio: 571 / 1024,
+}
+
 export function getAllArenas(): CanonicalArena[] {
   return CANONICAL_ARENAS
 }
@@ -181,6 +210,10 @@ export function getVipArenas(): CanonicalArena[] {
 }
 
 export function getDefaultArenaForCategory(categorySlug?: string | null): CanonicalArena {
+  const cat = (categorySlug || '').toLowerCase().trim()
+  if (cat === 'porto-vs-lisboa' || cat === 'porto-lisboa' || cat === 'porto_lisboa') {
+    return PORTO_LISBOA_OFFICIAL_ARENA
+  }
   return CANONICAL_ARENAS[0]
 }
 
@@ -188,6 +221,17 @@ export function resolveArena(arenaIdOrSlug?: string | null): CanonicalArena | un
   if (!arenaIdOrSlug) return CANONICAL_ARENAS[0]
   const q = String(arenaIdOrSlug).toLowerCase().trim()
   
+  if (
+    q === 'arena_porto_lisboa' ||
+    q === 'porto-lisboa' ||
+    q === 'porto_lisboa' ||
+    q === 'porto-vs-lisboa' ||
+    q === 'porto-lisboa-arena' ||
+    q === '/arenas/porto-lisboa-arena.jpg'
+  ) {
+    return PORTO_LISBOA_OFFICIAL_ARENA
+  }
+
   const direct = CANONICAL_ARENAS.find(a => a.id.toLowerCase() === q || a.slug.toLowerCase() === q)
   if (direct) return direct
   
@@ -211,7 +255,20 @@ export function resolveArenaForGame(params: {
   warning?: string
   error?: string
 } {
-  const { arenaId, equippedArenaId } = params
+  const { arenaId, categorySlug, equippedArenaId } = params
+
+  const cat = (categorySlug || '').toLowerCase().trim()
+  const isPortoLisboaEvent =
+    cat === 'porto-vs-lisboa' ||
+    cat === 'porto-lisboa' ||
+    cat === 'porto_lisboa' ||
+    arenaId === 'arena_porto_lisboa' ||
+    arenaId === 'porto-lisboa' ||
+    arenaId === 'porto-lisboa-arena'
+
+  if (isPortoLisboaEvent) {
+    return { arena: PORTO_LISBOA_OFFICIAL_ARENA, isExplicit: true, isFallback: false }
+  }
 
   if (arenaId) {
     const resolved = resolveArena(arenaId)

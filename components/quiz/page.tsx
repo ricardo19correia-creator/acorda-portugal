@@ -87,12 +87,12 @@ function QuizPageContent(props: QuizPageProps) {
   // 1. Determinar gameType com estrito rigor:
   // Uma partida SÓ é evento se gameType === 'event' E tiver eventId real.
   const rawGameType = props.gameType || searchParams.get('gameType') || searchParams.get('type')
-  const rawEventId = props.eventId || searchParams.get('eventId') || searchParams.get('event_id')
-  const isEventMatch = rawGameType === 'event' && Boolean(rawEventId)
+  const rawEventId = props.eventId || searchParams.get('eventId') || searchParams.get('event_id') || searchParams.get('event')
+  const isEventMatch = (rawGameType === 'event' && Boolean(rawEventId)) || Boolean(rawEventId)
   const gameType: 'normal' | 'event' = isEventMatch ? 'event' : 'normal'
   const eventId = isEventMatch ? rawEventId : null
   const eventSlug = isEventMatch
-    ? props.eventSlug || searchParams.get('eventSlug') || searchParams.get('event_slug') || 'primeiro-desafio-nacional-portugal-em-jogo'
+    ? props.eventSlug || searchParams.get('eventSlug') || searchParams.get('event_slug') || (rawEventId === 'porto-lisboa-duelo' ? 'porto-lisboa-o-grande-duelo' : 'primeiro-desafio-nacional-portugal-em-jogo')
     : null
 
   // 2. Extrair parâmetros de categoria
@@ -125,7 +125,7 @@ function QuizPageContent(props: QuizPageProps) {
 
   // Entrada direta no jogo: se for evento oficial, determina a categoria oficial do evento
   const defaultEventCategory =
-    eventId === 'porto-lisboa-duelo' || rawEventId === 'porto-lisboa-duelo'
+    eventId === 'porto-lisboa-duelo' || rawEventId === 'porto-lisboa-duelo' || rawCategorySlug === 'porto-vs-lisboa'
       ? 'porto-vs-lisboa'
       : 'portugal-em-jogo'
 

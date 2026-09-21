@@ -15,6 +15,27 @@ import { db } from './firebase'
 
 export type EventStatus = 'upcoming' | 'active' | 'ended'
 
+export type EventTeamId = 'porto' | 'lisboa'
+
+export interface EventTeamStats {
+  id: EventTeamId
+  name: string
+  shortName: string
+  city: string
+  club: string
+  color: 'blue' | 'red'
+  points: number
+  playerCount: number
+  matchesPlayed: number
+  description: string
+  motto: string
+}
+
+export interface OfficialEventTeams {
+  porto: EventTeamStats
+  lisboa: EventTeamStats
+}
+
 export interface OfficialEventReward {
   position: number
   title: string
@@ -41,6 +62,7 @@ export interface OfficialEventConfig {
   active?: boolean
   enabled?: boolean
   rewards: OfficialEventReward[]
+  teams?: OfficialEventTeams
   rules: {
     maxDailyMatches: number
     pointDivisor: number
@@ -63,6 +85,8 @@ export interface EventParticipant {
   avatar?: string | null
   district?: string
   distrito?: string
+  team?: EventTeamId | null
+  teamSelectedAt?: any
   eventPoints: number
   points?: number
   countedMatches?: number
@@ -114,6 +138,34 @@ export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
   active: true,
   enabled: true,
   dailyMatchLimit: 10,
+  teams: {
+    porto: {
+      id: 'porto',
+      name: 'Equipa Porto',
+      shortName: 'Porto',
+      city: 'Porto',
+      club: 'FC Porto',
+      color: 'blue',
+      points: 0,
+      playerCount: 0,
+      matchesPlayed: 0,
+      description: 'Porto + FC Porto • A força, o pulsar cívico e a glória europeia da Invicta.',
+      motto: 'Representa o Norte. Entra no duelo.',
+    },
+    lisboa: {
+      id: 'lisboa',
+      name: 'Equipa Lisboa',
+      shortName: 'Lisboa',
+      city: 'Lisboa',
+      club: 'SL Benfica',
+      color: 'red',
+      points: 0,
+      playerCount: 0,
+      matchesPlayed: 0,
+      description: 'Lisboa + SL Benfica • O património milenar, a história pombalina e a tradição da Capital.',
+      motto: 'Representa a Capital. Entra no duelo.',
+    },
+  },
   scoring: {
     pointDivisor: 10,
     maxEventPointsPerMatch: 150,
@@ -405,6 +457,7 @@ export function subscribePublishedEvents(
               },
               dailyMatchLimit: Number(data.dailyMatchLimit || data.rules?.maxDailyMatches || 10),
               rewardsDistributed: Boolean(data.rewardsDistributed),
+              teams: data.teams || (docSnap.id === OFFICIAL_PORTO_LISBOA_ID ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams : undefined),
             })
           }
         })
@@ -480,6 +533,8 @@ export function subscribeEventRanking(
         avatar: data.avatar || data.photoURL || null,
         district: data.district || data.distrito || 'Portugal',
         distrito: data.distrito || data.district || 'Portugal',
+        team: data.team || null,
+        teamSelectedAt: data.teamSelectedAt || null,
         eventPoints: ep,
         points: ep,
         countedMatches: cm,
@@ -586,6 +641,8 @@ export function subscribeUserEventProgress(
           avatar: data.avatar || data.photoURL || null,
           district: data.district || data.distrito || 'Portugal',
           distrito: data.distrito || data.district || 'Portugal',
+          team: data.team || null,
+          teamSelectedAt: data.teamSelectedAt || null,
           eventPoints: ep,
           points: ep,
           countedMatches: cm,
@@ -618,6 +675,61 @@ export function subscribeUserEventProgress(
   } catch (err) {
     console.error('[EVENTS] Falha na subscrição de progresso pessoal:', err)
     if (callback) callback(null)
+    return () => {}
+  }
+}
+
+/**
+ * Subscrição em tempo real a um evento oficial específico (incluindo dados e pontos das equipas)
+ */
+export function subscribeOfficialEvent(
+  eventId: string = OFFICIAL_PORTO_LISBOA_ID,
+  callback: (event: OfficialEventConfig | null) => void
+): Unsubscribe {
+  if (!db || !eventId) {
+    callback(
+      eventId === OFFICIAL_PORTO_LISBOA_ID
+        ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+        : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+    )
+    return () => {}
+  }
+
+  try {
+    const eventDocRef = doc(db, 'events', eventId)
+    return onSnapshot(
+      eventDocRef,
+      (docSnap) => {
+        const base =
+          eventId === OFFICIAL_PORTO_LISBOA_ID
+            ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+            : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+
+        if (!docSnap.exists()) {
+          callback(base)
+          return
+        }
+
+        const d = docSnap.data() || {}
+        callback({
+          ...base,
+          ...d,
+          id: docSnap.id,
+          teams: d.teams || base.teams,
+        } as OfficialEventConfig)
+      },
+      (err) => {
+        console.warn('[EVENTS] Erro na subscrição do evento oficial:', err)
+        callback(
+          eventId === OFFICIAL_PORTO_LISBOA_ID
+            ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+            : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+        )
+      }
+    )
+  } catch (err) {
+    console.error('[EVENTS] Falha ao subscrever evento oficial:', err)
+    callback(null)
     return () => {}
   }
 }

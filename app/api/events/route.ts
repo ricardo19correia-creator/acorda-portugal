@@ -71,6 +71,7 @@ export async function GET(request: NextRequest) {
         active: Boolean(d.active ?? true),
         enabled: Boolean(d.enabled ?? true),
         rewards: Array.isArray(d.rewards) ? d.rewards : baseDefaultConfig.rewards,
+        teams: d.teams || (requestedEventId === OFFICIAL_PORTO_LISBOA_ID ? baseDefaultConfig.teams : undefined),
         rules: {
           maxDailyMatches: Number(d.rules?.maxDailyMatches || baseDefaultConfig.rules.maxDailyMatches),
           pointDivisor: Number(d.rules?.pointDivisor || baseDefaultConfig.rules.pointDivisor),
@@ -128,6 +129,8 @@ export async function GET(request: NextRequest) {
           avatar: data.avatar || data.photoURL || null,
           district: data.district || data.distrito || 'Portugal',
           distrito: data.distrito || data.district || 'Portugal',
+          team: data.team || null,
+          teamSelectedAt: data.teamSelectedAt || null,
           eventPoints: ep,
           points: ep,
           countedMatches: cm,
@@ -191,6 +194,8 @@ export async function GET(request: NextRequest) {
               avatar: uData.avatar || uData.photoURL || null,
               district: uData.district || uData.distrito || 'Portugal',
               distrito: uData.distrito || uData.district || 'Portugal',
+              team: uData.team || null,
+              teamSelectedAt: uData.teamSelectedAt || null,
               eventPoints: ep,
               points: ep,
               countedMatches: cm,
@@ -228,6 +233,34 @@ export async function GET(request: NextRequest) {
                 .catch(() => null)
               userRankPosition = higherSnap ? higherSnap.data().count + 1 : ranking.length + 1
             }
+          } else {
+            // Se ainda não tiver documento de participante mas já tiver escolhido equipa no documento de utilizador
+            const userProfileSnap = await db.collection('users').doc(decoded.uid).get().catch(() => null)
+            if (userProfileSnap && userProfileSnap.exists) {
+              const uProf = userProfileSnap.data() || {}
+              const chosenTeam = uProf.events?.[requestedEventId]?.team || null
+              if (chosenTeam) {
+                userProgress = {
+                  userId: decoded.uid,
+                  displayName: uProf.displayName || uProf.username || 'Jogador',
+                  photoURL: uProf.photoURL || uProf.avatar || null,
+                  avatar: uProf.avatar || uProf.photoURL || null,
+                  district: uProf.district || uProf.distrito || 'Portugal',
+                  distrito: uProf.distrito || uProf.district || 'Portugal',
+                  team: chosenTeam,
+                  eventPoints: 0,
+                  points: 0,
+                  countedMatches: 0,
+                  totalMatches: 0,
+                  dailyMatches: {},
+                  bestScore: 0,
+                  totalScore: 0,
+                  correctAnswers: 0,
+                  incorrectAnswers: 0,
+                  questionsAnswered: 0,
+                }
+              }
+            }
           }
         }
       } catch (err) {
@@ -239,6 +272,7 @@ export async function GET(request: NextRequest) {
       {
         success: true,
         event: eventData,
+        teams: eventData.teams,
         status,
         statusLabel,
         serverTime: now.toISOString(),

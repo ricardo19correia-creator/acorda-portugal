@@ -175,6 +175,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // 2.1 Validação de Equipa Obrigatória para o Grande Duelo (Porto vs Lisboa)
+    let userTeam: string | null = null
+    if (isPortoLisboa) {
+      const participantDoc = await eventDocRef.collection('participants').doc(userId).get().catch(() => null)
+      if (participantDoc && participantDoc.exists) {
+        userTeam = participantDoc.data()?.team || null
+      }
+      if (!userTeam) {
+        const userDoc = await db.collection('users').doc(userId).get().catch(() => null)
+        if (userDoc && userDoc.exists) {
+          userTeam = userDoc.data()?.events?.[targetEventId]?.team || null
+        }
+      }
+
+      if (!userTeam) {
+        return NextResponse.json(
+          {
+            error: 'Precisas de escolher o teu lado (Porto 🔵 ou Lisboa 🔴) antes de entrar na primeira partida do Grande Duelo.',
+            code: 'TEAM_REQUIRED',
+            requireTeamSelection: true,
+          },
+          { status: 400 }
+        )
+      }
+    }
+
     // 3. Verificar se a partida já existe na subcoleção matches do evento (idempotência de início)
     const matchDocRef = eventDocRef.collection('matches').doc(matchId)
     const existingMatchSnap = await matchDocRef.get().catch(() => null)
@@ -333,6 +359,7 @@ export async function POST(request: NextRequest) {
         eventId: targetEventId,
         eventSlug,
         userId,
+        team: userTeam || null,
         status: 'in_progress',
         questionIds: finalQuestionIds,
         date: lisbonDateStr,
@@ -356,6 +383,7 @@ export async function POST(request: NextRequest) {
       matchId,
       eventId: targetEventId,
       eventSlug,
+      team: userTeam || null,
       isResumed: false,
       questions: finalQuestions,
     })

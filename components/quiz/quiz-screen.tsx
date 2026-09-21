@@ -24,7 +24,7 @@ import {
 import { QuestionReportModal } from '@/components/question-report-modal'
 import type { UserProfile } from '@/components/player-card'
 import { PlayerAvatar } from '@/components/player-avatar'
-import { resolveArenaForGame, CANONICAL_ARENAS } from '@/src/data/arenaCatalog'
+import { resolveArenaForGame, CANONICAL_ARENAS, PORTO_LISBOA_OFFICIAL_ARENA } from '@/src/data/arenaCatalog'
 import { ArenaRenderer } from '@/components/ArenaRenderer'
 import { ArenaCinematicIntro } from '@/components/ArenaCinematicIntro'
 import { setGlobalArenaMatchActive } from '@/lib/game-active-state'
@@ -702,9 +702,20 @@ export function QuizScreen({
     }
   }, [])
 
-  // Resolução Autoritativa da Arena (Prioridade: URL -> LocalStorage -> Perfil -> Padrão SSOT)
+  // Resolução Autoritativa da Arena (Prioridade: Evento Oficial -> URL -> LocalStorage -> Perfil -> Padrão SSOT)
   const arenaResolution = useMemo(() => {
     try {
+      const isPortoLisboaEvent =
+        categorySlug === 'porto-vs-lisboa' ||
+        categorySlug === 'porto-lisboa' ||
+        eventId === 'porto-lisboa-duelo' ||
+        arenaParam === 'arena_porto_lisboa' ||
+        arenaParam === 'porto-lisboa'
+
+      if (isPortoLisboaEvent) {
+        return { arena: PORTO_LISBOA_OFFICIAL_ARENA, isExplicit: true, isFallback: false }
+      }
+
       const effectiveEquipped =
         equippedArenaId ||
         (accountProfile as any)?.equippedArena ||
@@ -722,7 +733,7 @@ export function QuizScreen({
       console.warn('[QuizScreen] Erro na resolução da arena:', err)
       return { arena: CANONICAL_ARENAS[0], isExplicit: false, isFallback: true }
     }
-  }, [arenaParam, categorySlug, equippedArenaId, accountProfile, profile])
+  }, [arenaParam, categorySlug, eventId, equippedArenaId, accountProfile, profile])
 
   const activeArena = arenaResolution?.arena || CANONICAL_ARENAS[0]
 

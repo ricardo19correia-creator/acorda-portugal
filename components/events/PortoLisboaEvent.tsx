@@ -30,10 +30,12 @@ import {
 } from 'lucide-react'
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useAuth } from '@/components/auth-provider'
+import { PortoLisboaTeamSelectModal } from './PortoLisboaTeamSelectModal'
 import {
   subscribePublishedEvents,
   subscribeEventRanking,
   subscribeUserEventProgress,
+  subscribeOfficialEvent,
   getEventStatus,
   getEventStatusLabel,
   getEventCountdown,
@@ -46,6 +48,7 @@ import {
   type OfficialEventConfig,
   type EventParticipant,
   type CountdownDetails,
+  type EventTeamId,
 } from '@/lib/events-service'
 import { cn, safeRandomUUID } from '@/lib/utils'
 
@@ -61,6 +64,10 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
   const [userProgress, setUserProgress] = useState<EventParticipant | null>(null)
   const [loading, setLoading] = useState(true)
   const [rankingLoading, setRankingLoading] = useState(true)
+
+  // Escolha de equipa e filtros de ranking
+  const [showTeamSelectModal, setShowTeamSelectModal] = useState(false)
+  const [rankingFilter, setRankingFilter] = useState<'all' | 'porto' | 'lisboa'>('all')
 
   // Relógio do servidor e compensação de tempo (skew)
   const [serverClockSkewMs, setServerClockSkewMs] = useState<number>(0)
@@ -176,6 +183,20 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     return () => unsubscribe()
   }, [user?.uid])
 
+  // 6. Subscrição em tempo real e dedicada aos dados do evento oficial (equipa, pontos e jogadores)
+  useEffect(() => {
+    const unsubscribe = subscribeOfficialEvent(OFFICIAL_PORTO_LISBOA_ID, (updatedEvent) => {
+      if (updatedEvent) {
+        setEventConfig((prev) => ({
+          ...prev,
+          ...updatedEvent,
+          teams: updatedEvent.teams || prev.teams || OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams,
+        }))
+      }
+    })
+    return () => unsubscribe()
+  }, [])
+
   // Estado e Contagem Decrescente
   const dynamicStatus = useMemo(() => {
     return getEventStatus(eventConfig, nowDate) || 'active'
@@ -189,6 +210,28 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     return getEventCountdown(eventConfig, nowDate)
   }, [eventConfig, nowDate])
 
+  // Identidade da Equipa do Utilizador e Estatísticas do Duelo
+  const userTeam: EventTeamId | null = (userProgress?.team as EventTeamId) || null
+
+  const portoTeamStats =
+    eventConfig.teams?.porto || OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams!.porto
+  const lisboaTeamStats =
+    eventConfig.teams?.lisboa || OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams!.lisboa
+
+  const totalTeamPoints = (portoTeamStats.points || 0) + (lisboaTeamStats.points || 0)
+  const portoPercentage =
+    totalTeamPoints > 0
+      ? Math.round(((portoTeamStats.points || 0) / totalTeamPoints) * 100)
+      : 50
+  const lisboaPercentage = 100 - portoPercentage
+
+  const winningTeam: 'porto' | 'lisboa' | 'draw' =
+    portoTeamStats.points > lisboaTeamStats.points
+      ? 'porto'
+      : lisboaTeamStats.points > portoTeamStats.points
+      ? 'lisboa'
+      : 'draw'
+
   // Ranking unificado e posição autoritativa
   const effectiveRanking = useMemo(() => {
     if (!userProgress || !userProgress.userId) return ranking
@@ -201,6 +244,24 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     }
     return ranking
   }, [ranking, userProgress])
+
+  // Filtragem do ranking por equipa
+  const portoParticipants = useMemo(() => {
+    return effectiveRanking.filter((p) => p.team === 'porto')
+  }, [effectiveRanking])
+
+  const lisboaParticipants = useMemo(() => {
+    return effectiveRanking.filter((p) => p.team === 'lisboa')
+  }, [effectiveRanking])
+
+  const filteredRanking = useMemo(() => {
+    if (rankingFilter === 'porto') return portoParticipants
+    if (rankingFilter === 'lisboa') return lisboaParticipants
+    return effectiveRanking
+  }, [rankingFilter, portoParticipants, lisboaParticipants, effectiveRanking])
+
+  const portoLeader = portoParticipants[0] || null
+  const lisboaLeader = lisboaParticipants[0] || null
 
   const userRankIndex = useMemo(() => {
     if (!user?.uid || effectiveRanking.length === 0) return -1
@@ -216,6 +277,14 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     }
     return null
   }, [userRankIndex, userProgress, effectiveRanking.length])
+
+  // Posição do jogador dentro da sua própria equipa
+  const userTeamRankPosition = useMemo(() => {
+    if (!user?.uid || !userTeam) return null
+    const list = userTeam === 'porto' ? portoParticipants : lisboaParticipants
+    const idx = list.findIndex((p) => p.userId === user.uid)
+    return idx >= 0 ? idx + 1 : null
+  }, [user?.uid, userTeam, portoParticipants, lisboaParticipants])
 
   // Partidas do dia no fuso Europe/Lisbon
   const lisbonToday = useMemo(() => getLisbonDateString(nowDate), [nowDate])
@@ -249,17 +318,47 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     }
   }, [userProgress])
 
-  // Início oficial da partida do Grande Duelo
+  // Início oficial da partida do Grande Duelo (com verificação de equipa)
   const handleStartMatch = useCallback(() => {
     if (!user) {
-      router.push('/entrar?redirect=/eventos')
+      router.push('/entrar?redirect=/eventos/porto-vs-lisboa')
+      return
+    }
+    // Se o utilizador ainda não tiver escolhido equipa, abrir modal de escolha
+    if (!userTeam) {
+      setShowTeamSelectModal(true)
       return
     }
     const matchId = safeRandomUUID()
     router.push(
       `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
     )
-  }, [user, router])
+  }, [user, userTeam, router])
+
+  // Callback acionado após confirmar escolha de equipa com sucesso no backend
+  const handleTeamSelected = useCallback(
+    (chosenTeam: EventTeamId) => {
+      setShowTeamSelectModal(false)
+      setUserProgress((prev) =>
+        prev
+          ? { ...prev, team: chosenTeam }
+          : ({
+              userId: user?.uid || '',
+              displayName: user?.displayName || 'Jogador',
+              team: chosenTeam,
+              eventPoints: 0,
+              totalMatches: 0,
+              countedMatches: 0,
+            } as any)
+      )
+      // Entrar diretamente na primeira partida do Grande Duelo
+      const matchId = safeRandomUUID()
+      router.push(
+        `/jogar?cat=porto-vs-lisboa&gameType=event&event=${OFFICIAL_PORTO_LISBOA_ID}&eventId=${OFFICIAL_PORTO_LISBOA_ID}&eventSlug=${OFFICIAL_PORTO_LISBOA_SLUG}&game=${matchId}`
+      )
+    },
+    [user, router]
+  )
 
   // Reivindicação de Recompensa
   const canClaimReward =
@@ -394,61 +493,6 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             <p className="text-sm sm:text-base font-bold text-slate-200 tracking-wider">
               &ldquo;Dois territórios. Dois gigantes. Um desafio.&rdquo;
             </p>
-          </div>
-
-          {/* ===================================================================== */}
-          {/* APRESENTAÇÃO DA ARENA OFICIAL (ASSET EXCLUSIVO DO EVENTO)              */}
-          {/* ===================================================================== */}
-          <div className="relative mx-auto w-full max-w-3xl rounded-3xl p-1 bg-gradient-to-b from-blue-500/40 via-amber-400/50 to-rose-500/40 shadow-[0_0_40px_rgba(0,0,0,0.9)]">
-            <div className="relative w-full rounded-[22px] overflow-hidden bg-slate-950">
-              {/* Elementos HUD Superiores */}
-              <div className="absolute top-2 inset-x-3 z-20 flex items-center justify-between text-[9px] sm:text-[10px] font-mono font-bold tracking-wider text-slate-300 pointer-events-none">
-                <span className="px-2 py-0.5 rounded-md bg-blue-950/80 border border-blue-500/40 text-blue-300 backdrop-blur-md">
-                  🔵 SECTOR PORTO // INVÍCTA
-                </span>
-                <span className="hidden sm:inline-block px-2 py-0.5 rounded-md bg-slate-950/80 border border-amber-500/40 text-amber-300 backdrop-blur-md">
-                  ARENA SUPREMA
-                </span>
-                <span className="px-2 py-0.5 rounded-md bg-rose-950/80 border border-rose-500/40 text-rose-300 backdrop-blur-md">
-                  🔴 SECTOR LISBOA // CAPITAL
-                </span>
-              </div>
-
-              {/* Imagem Oficial da Arena (571x1024 vertical composition) */}
-              <div className="relative w-full flex items-center justify-center bg-[#02050f] overflow-hidden">
-                <div className="relative w-full max-w-[480px] aspect-[571/1024] max-h-[520px] sm:max-h-[640px] mx-auto">
-                  <Image
-                    src="/arenas/porto-lisboa-arena.jpg"
-                    alt="Arena Oficial Porto × Lisboa — O Grande Duelo"
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 500px, 600px"
-                    className="object-contain sm:object-cover object-center transition-transform duration-700 hover:scale-105"
-                    priority
-                  />
-
-                  {/* Vinhetas e Gradientes de Fusão de Luz */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 pointer-events-none" />
-                  <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] pointer-events-none" />
-
-                  {/* Reflexo Lateral Néon */}
-                  <div className="absolute left-0 inset-y-0 w-16 bg-gradient-to-r from-blue-600/20 to-transparent pointer-events-none" />
-                  <div className="absolute right-0 inset-y-0 w-16 bg-gradient-to-l from-rose-600/20 to-transparent pointer-events-none" />
-                </div>
-              </div>
-
-              {/* Elementos HUD Inferiores */}
-              <div className="absolute bottom-2 inset-x-3 z-20 flex items-center justify-between text-[9px] sm:text-[10px] font-mono font-bold tracking-wider pointer-events-none">
-                <span className="text-blue-300 bg-slate-950/85 px-2 py-0.5 rounded-md border border-white/10 backdrop-blur-md">
-                  Ponte D. Luís • Ribeira
-                </span>
-                <span className="text-amber-300 bg-slate-950/85 px-2.5 py-0.5 rounded-md border border-amber-500/40 backdrop-blur-md">
-                  VÓRTICE CÓSMICO
-                </span>
-                <span className="text-rose-300 bg-slate-950/85 px-2 py-0.5 rounded-md border border-white/10 backdrop-blur-md">
-                  Ponte 25 de Abril • Alfama
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* CTA Principal de Entrada no Duelo */}

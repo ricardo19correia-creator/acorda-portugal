@@ -176,6 +176,12 @@ export async function POST(request: NextRequest) {
       const pData = pSnap.exists ? pSnap.data() : {}
       const uData = uSnap.exists ? uSnap.data() : {}
 
+      // Identificar equipa do utilizador
+      const userTeam: 'porto' | 'lisboa' | null =
+        pData.team ||
+        uData.events?.[targetEventId]?.team ||
+        null
+
       const dailyMatches = pData.dailyMatches || {}
       const todayCount = Number(dailyMatches[todayDateStr] ?? pData.matchesToday ?? 0)
 
@@ -301,6 +307,7 @@ export async function POST(request: NextRequest) {
             eventId: targetEventId,
             eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
             userId,
+            team: userTeam || null,
             score,
             correctAnswers,
             totalQuestions,
@@ -327,6 +334,7 @@ export async function POST(request: NextRequest) {
             avatar: photoURL,
             district,
             distrito: district,
+            team: userTeam || null,
             totalMatches: FieldValue.increment(1),
             correctAnswers: FieldValue.increment(correctAnswers),
             incorrectAnswers: FieldValue.increment(Math.max(0, totalQuestions - correctAnswers)),
@@ -343,6 +351,9 @@ export async function POST(request: NextRequest) {
         return {
           alreadyProcessed: false,
           eventPointsAdded: 0,
+          team: userTeam || null,
+          teamName: userTeam === 'porto' ? 'Equipa Porto' : userTeam === 'lisboa' ? 'Equipa Lisboa' : null,
+          teamPointsAdded: 0,
           dailyLimitReached: true,
           dailyMatchesToday: todayCount,
           matchesToday: todayCount,
@@ -375,6 +386,7 @@ export async function POST(request: NextRequest) {
           eventId: targetEventId,
           eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
           userId,
+          team: userTeam || null,
           score,
           correctAnswers,
           totalQuestions,
@@ -407,6 +419,19 @@ export async function POST(request: NextRequest) {
         { merge: true }
       )
 
+      // Se for o Grande Duelo e o utilizador tiver equipa, somar pontos da equipa atomicamente
+      if (targetEventId === OFFICIAL_PORTO_LISBOA_ID && userTeam && potentialEventPoints > 0) {
+        transaction.set(
+          eventDocRef,
+          {
+            [`teams.${userTeam}.points`]: FieldValue.increment(potentialEventPoints),
+            [`teams.${userTeam}.matchesPlayed`]: FieldValue.increment(1),
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
+      }
+
       transaction.set(
         participantRef,
         {
@@ -416,6 +441,7 @@ export async function POST(request: NextRequest) {
           avatar: photoURL,
           district,
           distrito: district,
+          team: userTeam || null,
           eventPoints: newEventPoints,
           points: newEventPoints,
           countedMatches,
@@ -438,7 +464,7 @@ export async function POST(request: NextRequest) {
       )
 
       console.log(`[GAME_COMPLETE]\nuid=${userId}\nmatchId=${matchId}\nxpBefore=${currentXp}\nxpEarned=${earnedXp}\nxpAfter=${newTotalXp}\npersisted=true`)
-      console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}, xpAdded=${earnedXp}, coinsAdded=${totalAwardedCoins}`)
+      console.log(`[EVENT] resultado gravado: matchId=${matchId}, eventPointsAdded=${potentialEventPoints}, team=${userTeam}, xpAdded=${earnedXp}, coinsAdded=${totalAwardedCoins}`)
       console.log(`[EVENT] participante atualizado: userId=${userId}, newPoints=${newEventPoints}, matches=${countedMatches}`)
       console.log(`[EVENT] ranking e conta global atualizados`)
 
@@ -448,6 +474,9 @@ export async function POST(request: NextRequest) {
         newEventPoints,
         points: newEventPoints,
         eventPoints: newEventPoints,
+        team: userTeam || null,
+        teamName: userTeam === 'porto' ? 'Equipa Porto' : userTeam === 'lisboa' ? 'Equipa Lisboa' : null,
+        teamPointsAdded: potentialEventPoints,
         dailyMatchesToday: newDailyCount,
         matchesToday: newDailyCount,
         countedMatches,
@@ -463,7 +492,9 @@ export async function POST(request: NextRequest) {
         leveledUp,
         xpReward: earnedXp,
         coinReward: totalAwardedCoins,
-        message: `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (+${earnedXp} XP, +${totalAwardedCoins} Moedas)`,
+        message: userTeam
+          ? `+${potentialEventPoints} Pontos para ti e para a tua Equipa ${userTeam === 'porto' ? 'Porto 🔵' : 'Lisboa 🔴'}! (+${earnedXp} XP, +${totalAwardedCoins} Moedas)`
+          : `+${potentialEventPoints} Pontos de Evento creditados com sucesso! (+${earnedXp} XP, +${totalAwardedCoins} Moedas)`,
       }
     })
 

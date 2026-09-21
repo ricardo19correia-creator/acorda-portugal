@@ -75,6 +75,9 @@ export function ResultScreen({
     maxDailyMatches?: number
     dailyLimitReached?: boolean
     message?: string
+    team?: 'porto' | 'lisboa' | null
+    teamName?: string
+    teamPointsAdded?: number
   } | null
 }) {
   const accuracy = Math.round((result.correct / result.total) * 100)
@@ -294,26 +297,93 @@ export function ResultScreen({
         {/* BANNER DO PRIMEIRO EVENTO OFICIAL REAL (EXCLUSIVO EVENTO) */}
         {/* ========================================================= */}
         {gameType === 'event' && eventOutcome && typeof eventOutcome.eventPointsAdded === 'number' && eventOutcome.eventPointsAdded > 0 && (
-          <div className="relative mt-3 overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-slate-900/85 to-slate-900/95 p-3.5 text-left shadow-lg backdrop-blur-md">
+          <div
+            className={cn(
+              'relative mt-3 overflow-hidden rounded-2xl p-3.5 text-left shadow-lg backdrop-blur-md border transition-all',
+              eventOutcome.team === 'porto'
+                ? 'border-blue-500/50 bg-gradient-to-r from-blue-950/90 via-slate-900/90 to-blue-900/40 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
+                : eventOutcome.team === 'lisboa'
+                ? 'border-rose-500/50 bg-gradient-to-r from-rose-950/90 via-slate-900/90 to-rose-900/40 shadow-[0_0_20px_rgba(244,63,94,0.3)]'
+                : 'border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-slate-900/85 to-slate-900/95'
+            )}
+          >
             <div className="flex items-center justify-between gap-2.5">
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/30 text-lg shadow-sm">
-                  🏆
+                <div
+                  className={cn(
+                    'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border text-xl shadow-sm',
+                    eventOutcome.team === 'porto'
+                      ? 'bg-blue-500/20 text-blue-300 border-blue-400/40'
+                      : eventOutcome.team === 'lisboa'
+                      ? 'bg-rose-500/20 text-rose-300 border-rose-400/40'
+                      : 'bg-amber-400/20 text-amber-300 border-amber-400/30'
+                  )}
+                >
+                  {eventOutcome.team === 'porto' ? '🔵' : eventOutcome.team === 'lisboa' ? '🔴' : '🏆'}
                 </div>
                 <div className="min-w-0">
-                  <p className="font-display text-xs font-black uppercase tracking-wider text-amber-300 truncate">
-                    Portugal em Jogo — Evento Oficial
-                  </p>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <p
+                      className={cn(
+                        'font-display text-xs font-black uppercase tracking-wider truncate',
+                        eventOutcome.team === 'porto'
+                          ? 'text-blue-300'
+                          : eventOutcome.team === 'lisboa'
+                          ? 'text-rose-300'
+                          : 'text-amber-300'
+                      )}
+                    >
+                      {eventOutcome.team === 'porto'
+                        ? 'Equipa Porto — O Grande Duelo'
+                        : eventOutcome.team === 'lisboa'
+                        ? 'Equipa Lisboa — O Grande Duelo'
+                        : 'Portugal em Jogo — Evento Oficial'}
+                    </p>
+                    {eventOutcome.team && (
+                      <span
+                        className={cn(
+                          'px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider',
+                          eventOutcome.team === 'porto'
+                            ? 'bg-blue-500/30 text-blue-200 border border-blue-400/40'
+                            : 'bg-rose-500/30 text-rose-200 border border-rose-400/40'
+                        )}
+                      >
+                        {eventOutcome.team === 'porto' ? 'Invicta & Dragões' : 'Capital & Águias'}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-[11px] text-slate-300 font-medium truncate mt-0.5">
                     {eventOutcome.dailyMatchesToday
-                      ? `Partida contabilizada (${eventOutcome.dailyMatchesToday}/10 hoje)`
+                      ? `Partida contabilizada (${eventOutcome.dailyMatchesToday}/${eventOutcome.maxDailyMatches || 10} hoje)`
                       : 'Partida contabilizada com sucesso no ranking!'}
                   </p>
                 </div>
               </div>
-              <span className="shrink-0 inline-flex items-center font-display text-xs sm:text-sm font-black text-amber-300 bg-amber-400/20 border border-amber-400/40 px-3 py-1.5 rounded-xl shadow-[0_0_12px_rgba(245,158,11,0.3)]">
-                +{eventOutcome.eventPointsAdded} Pts
-              </span>
+
+              <div className="flex flex-col items-end shrink-0">
+                <span
+                  className={cn(
+                    'inline-flex items-center font-display text-xs sm:text-sm font-black px-3 py-1 rounded-xl shadow-sm border',
+                    eventOutcome.team === 'porto'
+                      ? 'text-blue-300 bg-blue-500/20 border-blue-400/40'
+                      : eventOutcome.team === 'lisboa'
+                      ? 'text-rose-300 bg-rose-500/20 border-rose-400/40'
+                      : 'text-amber-300 bg-amber-400/20 border-amber-400/40'
+                  )}
+                >
+                  +{eventOutcome.eventPointsAdded} Pts
+                </span>
+                {eventOutcome.team && (
+                  <span
+                    className={cn(
+                      'text-[9px] font-bold mt-1 tracking-tight',
+                      eventOutcome.team === 'porto' ? 'text-blue-400' : 'text-rose-400'
+                    )}
+                  >
+                    +{eventOutcome.teamPointsAdded ?? eventOutcome.eventPointsAdded} Pts Equipa {eventOutcome.team === 'porto' ? '🔵' : '🔴'}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         )}

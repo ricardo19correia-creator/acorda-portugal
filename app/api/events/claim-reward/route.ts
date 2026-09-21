@@ -88,6 +88,7 @@ export async function POST(request: NextRequest) {
         displayName: data.displayName || 'Jogador',
         photoURL: data.photoURL || null,
         district: data.district || 'Portugal',
+        team: data.team || null,
         eventPoints: typeof data.eventPoints === 'number' ? data.eventPoints : 0,
         countedMatches: typeof data.countedMatches === 'number' ? data.countedMatches : 0,
         totalMatches: typeof data.totalMatches === 'number' ? data.totalMatches : 0,
@@ -108,9 +109,17 @@ export async function POST(request: NextRequest) {
     }
 
     const position = userRankIndex + 1
-    const userMatches = list[userRankIndex]?.countedMatches || list[userRankIndex]?.totalMatches || 0
+    const userParticipant = sortedRankings[userRankIndex]
+    const userMatches = userParticipant?.countedMatches || userParticipant?.totalMatches || 0
+    const userTeam = userParticipant?.team || null
 
-    // Determinação de recompensa oficial (Top 3 ou Desafiante de Participação)
+    // Determinar se o participante é o Campeão da sua Equipa (Top 1 da fação Porto ou Lisboa)
+    const portoLeader = sortedRankings.find((p) => p.team === 'porto')
+    const lisboaLeader = sortedRankings.find((p) => p.team === 'lisboa')
+    const isPortoLeader = Boolean(portoLeader && portoLeader.userId === userId && (portoLeader.eventPoints || 0) > 0)
+    const isLisboaLeader = Boolean(lisboaLeader && lisboaLeader.userId === userId && (lisboaLeader.eventPoints || 0) > 0)
+
+    // Determinação de recompensa oficial (Top 3 ou Desafiante de Participação ou Campeão de Equipa)
     let matchedReward = (eventData.rewards || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.rewards).find(
       (r) => r.position === position
     )
@@ -126,17 +135,28 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Se o utilizador for Campeão da sua Equipa mas não tiver alcançado prémio do Top 3
+    if (!matchedReward && targetEventId === OFFICIAL_PORTO_LISBOA_ID && (isPortoLeader || isLisboaLeader)) {
+      matchedReward = {
+        position,
+        title: isPortoLeader ? 'Campeão da Equipa Porto' : 'Campeão da Equipa Lisboa',
+        acordas: 3000,
+        medal: '🏆',
+        label: isPortoLeader ? 'Troféu + Título de Campeão da Equipa Porto + 3.000 Acordas' : 'Troféu + Título de Campeão da Equipa Lisboa + 3.000 Acordas',
+      }
+    }
+
     if (!matchedReward) {
       return NextResponse.json(
         {
-          error: `A tua posição final foi #${position} (${userMatches} partidas). As recompensas do Grande Duelo são exclusivas para o Top 3 nacional ou desafiantes com pelo menos 5 partidas concluídas.`,
+          error: `A tua posição final foi #${position} (${userMatches} partidas). As recompensas do Grande Duelo são exclusivas para o Top 3 nacional, líderes de equipa ou desafiantes com pelo menos 5 partidas concluídas.`,
           position,
         },
         { status: 400 }
       )
     }
 
-    const rewardAmount = matchedReward.acordas
+    let rewardAmount = matchedReward.acordas
 
     // Determinar Título, Badge, Troféu e XP exclusivos para o Grande Duelo
     let titleId: string | null = null
@@ -161,6 +181,18 @@ export async function POST(request: NextRequest) {
         titleId = 'title_top3_grande_duelo'
         titleName = 'Top 3 — Grande Duelo'
         badgeId = 'badge_top3_grande_duelo'
+        xpAmount = 2000
+      } else if (isPortoLeader) {
+        titleId = 'title_campeao_equipa_porto'
+        titleName = 'Campeão da Equipa Porto'
+        badgeId = 'badge_campeao_equipa_porto'
+        trophyId = 'trophy_campeao_equipa_porto'
+        xpAmount = 2000
+      } else if (isLisboaLeader) {
+        titleId = 'title_campeao_equipa_lisboa'
+        titleName = 'Campeão da Equipa Lisboa'
+        badgeId = 'badge_campeao_equipa_lisboa'
+        trophyId = 'trophy_campeao_equipa_lisboa'
         xpAmount = 2000
       } else if (userMatches >= 5) {
         titleId = 'title_desafiante_grande_duelo'

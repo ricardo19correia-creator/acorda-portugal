@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { QuizPage } from '@/components/quiz/page'
 import { JogarHub } from '@/components/jogar/JogarHub'
-import { resolveArenaForGame } from '@/src/data/arenaCatalog'
+import { resolveArenaForGame, PORTO_LISBOA_OFFICIAL_ARENA } from '@/src/data/arenaCatalog'
 import { AppBackground } from '@/components/AppBackground'
 import { useAuth } from '@/components/auth-provider'
 import { AuthWallView } from '@/components/auth-wall-modal'
@@ -130,12 +130,12 @@ function JogarContainer() {
   // 🔒 DETERMINAÇÃO ESTRITA DO TIPO DE PARTIDA (CANÓNICO)
   // Uma partida SÓ é evento se gameType === 'event' E tiver eventId real.
   const rawGameType = searchParams?.get('gameType') || searchParams?.get('type')
-  const rawEventId = searchParams?.get('eventId') || searchParams?.get('event_id')
-  const isEventMatch = rawGameType === 'event' && Boolean(rawEventId)
+  const rawEventId = searchParams?.get('eventId') || searchParams?.get('event_id') || searchParams?.get('event')
+  const isEventMatch = (rawGameType === 'event' && Boolean(rawEventId)) || Boolean(rawEventId)
   const gameType: 'normal' | 'event' = isEventMatch ? 'event' : 'normal'
   const eventId = isEventMatch ? rawEventId : null
   const eventSlug = isEventMatch
-    ? searchParams?.get('eventSlug') || searchParams?.get('event_slug') || 'primeiro-desafio-nacional-portugal-em-jogo'
+    ? searchParams?.get('eventSlug') || searchParams?.get('event_slug') || (rawEventId === 'porto-lisboa-duelo' ? 'porto-lisboa-o-grande-duelo' : 'primeiro-desafio-nacional-portugal-em-jogo')
     : null
 
   const rawCategoryParam =
@@ -188,9 +188,14 @@ function JogarContainer() {
       ? 'conquista-do-distrito'
       : rawCategoryParam
 
+  const defaultEventCategory =
+    eventId === 'porto-lisboa-duelo' || rawEventId === 'porto-lisboa-duelo' || rawCategoryParam === 'porto-vs-lisboa'
+      ? 'porto-vs-lisboa'
+      : 'portugal-em-jogo'
+
   const effectiveCategory =
     normalizedRawCat ||
-    (isEventMatch ? 'portugal-em-jogo' : null) ||
+    (isEventMatch ? defaultEventCategory : null) ||
     (districtParam ? 'conquista-do-distrito' : null) ||
     (cityParam ? 'desafio-cidade' : null) ||
     (gameParam ? 'desafio-nacional' : null) ||
@@ -233,6 +238,16 @@ function JogarContainer() {
   // Resolução da arena com fallback seguro
   const activeArena = useMemo(() => {
     try {
+      const isPortoLisboaEvent =
+        effectiveCategory === 'porto-vs-lisboa' ||
+        rawCategoryParam === 'porto-vs-lisboa' ||
+        eventId === 'porto-lisboa-duelo' ||
+        rawEventId === 'porto-lisboa-duelo'
+
+      if (isPortoLisboaEvent) {
+        return PORTO_LISBOA_OFFICIAL_ARENA
+      }
+
       const effectiveEquipped =
         equippedArena ||
         (profile as any)?.equippedArena ||
@@ -249,7 +264,7 @@ function JogarContainer() {
       console.warn('[JogarContainer] Aviso ao resolver arena:', e)
       return null
     }
-  }, [arenaParam, effectiveCategory, equippedArena, profile])
+  }, [arenaParam, effectiveCategory, equippedArena, profile, rawCategoryParam, eventId, rawEventId])
 
   if (!authResolved && !user) {
     return null
