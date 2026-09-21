@@ -115,6 +115,7 @@ export async function POST(request: NextRequest) {
         participantRef,
         {
           userId,
+          eventId,
           displayName,
           photoURL,
           avatar: photoURL,
@@ -122,10 +123,13 @@ export async function POST(request: NextRequest) {
           distrito: district,
           team: chosenTeam,
           teamSelectedAt: FieldValue.serverTimestamp(),
+          totalPoints: existingPoints,
           eventPoints: existingPoints,
           points: existingPoints,
-          totalMatches: typeof pData.totalMatches === 'number' ? pData.totalMatches : 0,
+          gamesPlayed: typeof pData.gamesPlayed === 'number' ? pData.gamesPlayed : (typeof pData.totalMatches === 'number' ? pData.totalMatches : 0),
+          totalMatches: typeof pData.totalMatches === 'number' ? pData.totalMatches : (typeof pData.gamesPlayed === 'number' ? pData.gamesPlayed : 0),
           countedMatches: typeof pData.countedMatches === 'number' ? pData.countedMatches : 0,
+          createdAt: pData.createdAt || FieldValue.serverTimestamp(),
           updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
@@ -134,6 +138,7 @@ export async function POST(request: NextRequest) {
       // Atualizar contadores atómicos da equipa no documento principal do evento
       const eventTeamUpdate: Record<string, any> = {
         [`teams.${chosenTeam}.playerCount`]: FieldValue.increment(1),
+        totalParticipants: FieldValue.increment(1),
         updatedAt: FieldValue.serverTimestamp(),
       }
 
@@ -141,7 +146,7 @@ export async function POST(request: NextRequest) {
         eventTeamUpdate[`teams.${chosenTeam}.points`] = FieldValue.increment(existingPoints)
       }
 
-      transaction.set(eventRef, eventTeamUpdate, { merge: true })
+      transaction.update(eventRef, eventTeamUpdate)
 
       // Sincronizar equipa no documento de utilizador para persistência e portabilidade
       transaction.set(

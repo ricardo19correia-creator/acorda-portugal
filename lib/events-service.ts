@@ -80,6 +80,7 @@ export interface OfficialEventConfig {
 
 export interface EventParticipant {
   userId: string
+  eventId?: string
   displayName: string
   photoURL?: string | null
   avatar?: string | null
@@ -87,8 +88,10 @@ export interface EventParticipant {
   distrito?: string
   team?: EventTeamId | null
   teamSelectedAt?: any
+  totalPoints?: number
   eventPoints: number
   points?: number
+  gamesPlayed?: number
   countedMatches?: number
   totalMatches: number
   matchesToday?: number
@@ -100,6 +103,7 @@ export interface EventParticipant {
   questionsAnswered?: number
   lastPlayedDate?: string
   lastPlayedAt?: any
+  createdAt?: any
   updatedAt?: any
   pos?: number
 }
@@ -167,13 +171,13 @@ export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
     },
   },
   scoring: {
-    pointDivisor: 10,
-    maxEventPointsPerMatch: 150,
+    pointDivisor: 1,
+    maxEventPointsPerMatch: 3000,
   },
   rules: {
     maxDailyMatches: 10,
-    pointDivisor: 10,
-    maxEventPointsPerMatch: 150,
+    pointDivisor: 1,
+    maxEventPointsPerMatch: 3000,
   },
   rewards: [
     { position: 1, title: 'Campeão do Grande Duelo', acordas: 15000, medal: '🏆', label: 'Troféu + Título Mítico + Badge + 15.000 Acordas + 5.000 XP' },
@@ -376,8 +380,8 @@ export function getDailyMatchesCount(
 export function sortEventParticipants(list: EventParticipant[]): EventParticipant[] {
   return [...list]
     .sort((a, b) => {
-      const ptsA = Number(a.eventPoints ?? a.points ?? 0)
-      const ptsB = Number(b.eventPoints ?? b.points ?? 0)
+      const ptsA = Number(a.totalPoints ?? a.eventPoints ?? a.points ?? 0)
+      const ptsB = Number(b.totalPoints ?? b.eventPoints ?? b.points ?? 0)
       if (ptsB !== ptsA) return ptsB - ptsA
 
       const totA = Number(a.totalScore || 0)
@@ -388,8 +392,8 @@ export function sortEventParticipants(list: EventParticipant[]): EventParticipan
       const bestB = Number(b.bestScore || 0)
       if (bestB !== bestA) return bestB - bestA
 
-      const matchesA = Number(a.countedMatches ?? a.totalMatches ?? 0)
-      const matchesB = Number(b.countedMatches ?? b.totalMatches ?? 0)
+      const matchesA = Number(a.gamesPlayed ?? a.countedMatches ?? a.totalMatches ?? 0)
+      const matchesB = Number(b.gamesPlayed ?? b.countedMatches ?? b.totalMatches ?? 0)
       if (matchesA !== matchesB) return matchesA - matchesB
 
       const correctA = Number(a.correctAnswers || 0)
@@ -514,20 +518,24 @@ export function subscribeEventRanking(
     const mapDocToParticipant = (docSnap: any): EventParticipant => {
       const data = docSnap.data() || {}
       const ep =
-        typeof data.eventPoints === 'number'
+        typeof data.totalPoints === 'number'
+          ? data.totalPoints
+          : typeof data.eventPoints === 'number'
           ? data.eventPoints
           : typeof data.points === 'number'
           ? data.points
           : 0
-      const cm =
-        typeof data.countedMatches === 'number'
-          ? data.countedMatches
+      const gp =
+        typeof data.gamesPlayed === 'number'
+          ? data.gamesPlayed
           : typeof data.totalMatches === 'number'
           ? data.totalMatches
+          : typeof data.countedMatches === 'number'
+          ? data.countedMatches
           : 0
-      const tm = typeof data.totalMatches === 'number' ? data.totalMatches : cm
       return {
         userId: docSnap.id,
+        eventId: data.eventId || eventId,
         displayName: data.displayName || 'Jogador',
         photoURL: data.photoURL || data.avatar || null,
         avatar: data.avatar || data.photoURL || null,
@@ -535,10 +543,12 @@ export function subscribeEventRanking(
         distrito: data.distrito || data.district || 'Portugal',
         team: data.team || null,
         teamSelectedAt: data.teamSelectedAt || null,
+        totalPoints: ep,
         eventPoints: ep,
         points: ep,
-        countedMatches: cm,
-        totalMatches: tm,
+        gamesPlayed: gp,
+        countedMatches: gp,
+        totalMatches: gp,
         matchesToday:
           typeof data.matchesToday === 'number'
             ? data.matchesToday
@@ -556,6 +566,7 @@ export function subscribeEventRanking(
             : 0,
         lastPlayedDate: data.lastPlayedDate,
         lastPlayedAt: data.lastPlayedAt,
+        createdAt: data.createdAt,
         updatedAt: data.updatedAt,
       }
     }
@@ -621,21 +632,25 @@ export function subscribeUserEventProgress(
         }
         const data = docSnap.data() || {}
         const ep =
-          typeof data.eventPoints === 'number'
+          typeof data.totalPoints === 'number'
+            ? data.totalPoints
+            : typeof data.eventPoints === 'number'
             ? data.eventPoints
             : typeof data.points === 'number'
             ? data.points
             : 0
-        const cm =
-          typeof data.countedMatches === 'number'
-            ? data.countedMatches
+        const gp =
+          typeof data.gamesPlayed === 'number'
+            ? data.gamesPlayed
             : typeof data.totalMatches === 'number'
             ? data.totalMatches
+            : typeof data.countedMatches === 'number'
+            ? data.countedMatches
             : 0
-        const tm = typeof data.totalMatches === 'number' ? data.totalMatches : cm
 
         callback({
           userId: docSnap.id,
+          eventId: data.eventId || eventId,
           displayName: data.displayName || 'Jogador',
           photoURL: data.photoURL || data.avatar || null,
           avatar: data.avatar || data.photoURL || null,
@@ -643,10 +658,12 @@ export function subscribeUserEventProgress(
           distrito: data.distrito || data.district || 'Portugal',
           team: data.team || null,
           teamSelectedAt: data.teamSelectedAt || null,
+          totalPoints: ep,
           eventPoints: ep,
           points: ep,
-          countedMatches: cm,
-          totalMatches: tm,
+          gamesPlayed: gp,
+          countedMatches: gp,
+          totalMatches: gp,
           matchesToday:
             typeof data.matchesToday === 'number'
               ? data.matchesToday
@@ -664,6 +681,7 @@ export function subscribeUserEventProgress(
               : 0,
           lastPlayedDate: data.lastPlayedDate,
           lastPlayedAt: data.lastPlayedAt,
+          createdAt: data.createdAt,
           updatedAt: data.updatedAt,
         })
       },
@@ -711,11 +729,30 @@ export function subscribeOfficialEvent(
         }
 
         const d = docSnap.data() || {}
+        let teamsData = d.teams || base.teams
+        if (teamsData && base.teams) {
+          teamsData = {
+            porto: {
+              ...base.teams.porto,
+              ...(teamsData.porto || {}),
+              points: Number(teamsData.porto?.points ?? 0),
+              playerCount: Number(teamsData.porto?.playerCount ?? 0),
+              matchesPlayed: Number(teamsData.porto?.matchesPlayed ?? 0),
+            },
+            lisboa: {
+              ...base.teams.lisboa,
+              ...(teamsData.lisboa || {}),
+              points: Number(teamsData.lisboa?.points ?? 0),
+              playerCount: Number(teamsData.lisboa?.playerCount ?? 0),
+              matchesPlayed: Number(teamsData.lisboa?.matchesPlayed ?? 0),
+            },
+          }
+        }
         callback({
           ...base,
           ...d,
           id: docSnap.id,
-          teams: d.teams || base.teams,
+          teams: teamsData,
         } as OfficialEventConfig)
       },
       (err) => {

@@ -31,7 +31,6 @@ import { PlayerAvatar } from '@/components/player-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { PortoLisboaTeamSelectModal } from './PortoLisboaTeamSelectModal'
 import {
-  subscribePublishedEvents,
   subscribeEventRanking,
   subscribeUserEventProgress,
   subscribeOfficialEvent,
@@ -140,21 +139,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     return () => clearInterval(timer)
   }, [serverClockSkewMs])
 
-  // 3. Subscrição em tempo real aos eventos publicados
-  useEffect(() => {
-    const unsubscribe = subscribePublishedEvents((events) => {
-      if (events && events.length > 0) {
-        const found =
-          events.find((e) => e.id === OFFICIAL_PORTO_LISBOA_ID) ||
-          OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
-        setEventConfig(found)
-      }
-      setLoading(false)
-    })
-    return () => unsubscribe()
-  }, [])
-
-  // 4. Subscrição em tempo real ao Ranking oficial
+  // 3. Subscrição em tempo real ao Ranking oficial
   useEffect(() => {
     setRankingLoading(true)
     const unsubscribe = subscribeEventRanking(OFFICIAL_PORTO_LISBOA_ID, (participants) => {
@@ -164,7 +149,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     return () => unsubscribe()
   }, [])
 
-  // 5. Subscrição em tempo real ao progresso individual do utilizador
+  // 4. Subscrição em tempo real ao progresso individual do utilizador
   useEffect(() => {
     if (!user?.uid) {
       setUserProgress(null)
@@ -182,7 +167,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
     return () => unsubscribe()
   }, [user?.uid])
 
-  // 6. Subscrição em tempo real e dedicada aos dados do evento oficial (equipa, pontos e jogadores)
+  // 5. Subscrição em tempo real e dedicada aos dados do evento oficial (equipa, pontos e jogadores)
   useEffect(() => {
     const unsubscribe = subscribeOfficialEvent(OFFICIAL_PORTO_LISBOA_ID, (updatedEvent) => {
       if (updatedEvent) {
@@ -191,6 +176,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
           ...updatedEvent,
           teams: updatedEvent.teams || prev.teams || OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams,
         }))
+        setLoading(false)
       }
     })
     return () => unsubscribe()
@@ -235,10 +221,11 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
   const effectiveRanking = useMemo(() => {
     if (!userProgress || !userProgress.userId) return ranking
     const exists = ranking.some((p) => p.userId === userProgress.userId)
-    const hasPoints = (userProgress.eventPoints || 0) > 0 || (userProgress.points || 0) > 0
-    const hasMatches =
-      (userProgress.totalMatches || 0) > 0 || (userProgress.countedMatches || 0) > 0
-    if (!exists && (hasPoints || hasMatches)) {
+    const userPts =
+      userProgress.totalPoints ?? userProgress.eventPoints ?? userProgress.points ?? 0
+    const userMatches =
+      userProgress.gamesPlayed ?? userProgress.totalMatches ?? userProgress.countedMatches ?? 0
+    if (!exists && (userPts > 0 || userMatches > 0)) {
       return sortEventParticipants([...ranking, userProgress])
     }
     return ranking
@@ -269,8 +256,10 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
 
   const userRankPosition = useMemo(() => {
     if (userRankIndex >= 0) return userRankIndex + 1
-    const userPts = userProgress?.eventPoints ?? userProgress?.points ?? 0
-    const userMatches = userProgress?.totalMatches ?? userProgress?.countedMatches ?? 0
+    const userPts =
+      userProgress?.totalPoints ?? userProgress?.eventPoints ?? userProgress?.points ?? 0
+    const userMatches =
+      userProgress?.gamesPlayed ?? userProgress?.totalMatches ?? userProgress?.countedMatches ?? 0
     if (userPts > 0 || userMatches > 0) {
       return effectiveRanking.length > 0 ? effectiveRanking.length + 1 : 1
     }
@@ -296,8 +285,10 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
 
   // Estatísticas calculadas do utilizador
   const userStats = useMemo(() => {
-    const totalMatches = userProgress?.totalMatches || 0
-    const eventPoints = userProgress?.eventPoints || 0
+    const totalMatches =
+      userProgress?.gamesPlayed ?? userProgress?.totalMatches ?? 0
+    const eventPoints =
+      userProgress?.totalPoints ?? userProgress?.eventPoints ?? userProgress?.points ?? 0
     const correctAnswers = userProgress?.correctAnswers || 0
     const incorrectAnswers = userProgress?.incorrectAnswers || 0
     const totalAnswered =
@@ -351,7 +342,10 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
               userId: user?.uid || '',
               displayName: user?.displayName || 'Jogador',
               team: chosenTeam,
+              totalPoints: 0,
               eventPoints: 0,
+              points: 0,
+              gamesPlayed: 0,
               totalMatches: 0,
               countedMatches: 0,
             } as any)
@@ -554,7 +548,11 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                 <div className="text-right sm:ml-auto">
                   <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
                   <p className="font-display text-sm sm:text-base font-black text-blue-300">
-                    {(portoTeamStats.points || 0).toLocaleString('pt-PT')}
+                    {loading ? (
+                      <span className="inline-block h-4 w-12 bg-slate-800 animate-pulse rounded" />
+                    ) : (
+                      (portoTeamStats.points || 0).toLocaleString('pt-PT')
+                    )}
                   </p>
                 </div>
               </div>
@@ -577,7 +575,11 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                 <div className="text-right sm:ml-auto">
                   <p className="text-[10px] uppercase font-bold text-slate-400">Pontos</p>
                   <p className="font-display text-sm sm:text-base font-black text-rose-300">
-                    {(lisboaTeamStats.points || 0).toLocaleString('pt-PT')}
+                    {loading ? (
+                      <span className="inline-block h-4 w-12 bg-slate-800 animate-pulse rounded" />
+                    ) : (
+                      (lisboaTeamStats.points || 0).toLocaleString('pt-PT')
+                    )}
                   </p>
                 </div>
               </div>
@@ -624,7 +626,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                 Partidas Hoje: {dailyMatchesToday} / {maxDailyMatches}
               </span>
               <span className="text-slate-500">•</span>
-              <span className="text-sky-300 font-bold">Máx. 150 Pontos</span>
+              <span className="text-sky-300 font-bold">Pontos Reais da Partida</span>
             </div>
           </div>
 
@@ -742,7 +744,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                     {portoLeader.displayName || 'Jogador'}
                   </p>
                   <p className="text-xs font-mono text-blue-400 font-bold">
-                    {(portoLeader.eventPoints || 0).toLocaleString('pt-PT')} pts
+                    {(portoLeader.totalPoints ?? portoLeader.eventPoints ?? portoLeader.points ?? 0).toLocaleString('pt-PT')} pts
                   </p>
                 </div>
               </div>
@@ -763,7 +765,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                     {lisboaLeader.displayName || 'Jogador'}
                   </p>
                   <p className="text-xs font-mono text-rose-400 font-bold">
-                    {(lisboaLeader.eventPoints || 0).toLocaleString('pt-PT')} pts
+                    {(lisboaLeader.totalPoints ?? lisboaLeader.eventPoints ?? lisboaLeader.points ?? 0).toLocaleString('pt-PT')} pts
                   </p>
                 </div>
               </div>
@@ -854,20 +856,34 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
               <div className="rounded-xl bg-slate-900/80 border border-blue-500/20 p-3 text-left">
                 <p className="text-[10px] font-bold uppercase text-slate-400">Pontos da Equipa</p>
                 <p className="font-display text-2xl sm:text-3xl font-black text-blue-400 mt-0.5">
-                  {(portoTeamStats.points || 0).toLocaleString('pt-PT')}
+                  {loading ? (
+                    <span className="inline-block h-7 w-20 bg-slate-800 animate-pulse rounded" />
+                  ) : (
+                    (portoTeamStats.points || 0).toLocaleString('pt-PT')
+                  )}
                 </p>
               </div>
               <div className="rounded-xl bg-slate-900/80 border border-blue-500/20 p-3 text-left">
                 <p className="text-[10px] font-bold uppercase text-slate-400">Jogadores Alistados</p>
                 <p className="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">
-                  {(portoTeamStats.playerCount || 0).toLocaleString('pt-PT')}
+                  {loading ? (
+                    <span className="inline-block h-7 w-12 bg-slate-800 animate-pulse rounded" />
+                  ) : (
+                    (portoTeamStats.playerCount || 0).toLocaleString('pt-PT')
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="flex items-center justify-between text-xs font-bold pt-1 border-t border-white/10">
               <span className="text-slate-400">Partidas Disputadas:</span>
-              <span className="text-white font-mono">{portoTeamStats.matchesPlayed || 0}</span>
+              <span className="text-white font-mono">
+                {loading ? (
+                  <span className="inline-block h-4 w-8 bg-slate-800 animate-pulse rounded" />
+                ) : (
+                  portoTeamStats.matchesPlayed || 0
+                )}
+              </span>
             </div>
           </div>
 
@@ -910,20 +926,34 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
               <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 text-left">
                 <p className="text-[10px] font-bold uppercase text-slate-400">Pontos da Equipa</p>
                 <p className="font-display text-2xl sm:text-3xl font-black text-rose-400 mt-0.5">
-                  {(lisboaTeamStats.points || 0).toLocaleString('pt-PT')}
+                  {loading ? (
+                    <span className="inline-block h-7 w-20 bg-slate-800 animate-pulse rounded" />
+                  ) : (
+                    (lisboaTeamStats.points || 0).toLocaleString('pt-PT')
+                  )}
                 </p>
               </div>
               <div className="rounded-xl bg-slate-900/80 border border-rose-500/20 p-3 text-left">
                 <p className="text-[10px] font-bold uppercase text-slate-400">Jogadores Alistados</p>
                 <p className="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">
-                  {(lisboaTeamStats.playerCount || 0).toLocaleString('pt-PT')}
+                  {loading ? (
+                    <span className="inline-block h-7 w-12 bg-slate-800 animate-pulse rounded" />
+                  ) : (
+                    (lisboaTeamStats.playerCount || 0).toLocaleString('pt-PT')
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="flex items-center justify-between text-xs font-bold pt-1 border-t border-white/10">
               <span className="text-slate-400">Partidas Disputadas:</span>
-              <span className="text-white font-mono">{lisboaTeamStats.matchesPlayed || 0}</span>
+              <span className="text-white font-mono">
+                {loading ? (
+                  <span className="inline-block h-4 w-8 bg-slate-800 animate-pulse rounded" />
+                ) : (
+                  lisboaTeamStats.matchesPlayed || 0
+                )}
+              </span>
             </div>
           </div>
         </div>
@@ -1517,7 +1547,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                       )}
                     </div>
                     <p className="text-[11px] font-black text-slate-300 font-display">
-                      {(filteredRanking[1].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[1].totalPoints ?? filteredRanking[1].eventPoints ?? filteredRanking[1].points ?? 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
@@ -1549,7 +1579,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                       )}
                     </div>
                     <p className="text-xs font-black text-amber-400 font-display">
-                      {(filteredRanking[0].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[0].totalPoints ?? filteredRanking[0].eventPoints ?? filteredRanking[0].points ?? 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
@@ -1577,7 +1607,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                       )}
                     </div>
                     <p className="text-[11px] font-black text-amber-500 font-display">
-                      {(filteredRanking[2].eventPoints || 0).toLocaleString('pt-PT')} pts
+                      {(filteredRanking[2].totalPoints ?? filteredRanking[2].eventPoints ?? filteredRanking[2].points ?? 0).toLocaleString('pt-PT')} pts
                     </p>
                   </div>
                 )}
@@ -1680,7 +1710,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
 
                         {/* Partidas */}
                         <td className="py-3.5 px-3 text-center text-slate-300">
-                          {p.countedMatches || p.totalMatches || 0}
+                          {p.gamesPlayed ?? p.countedMatches ?? p.totalMatches ?? 0}
                         </td>
 
                         {/* Acertos */}
@@ -1696,7 +1726,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
                         {/* Pontos de Evento */}
                         <td className="py-3.5 px-3 text-right">
                           <span className="font-display text-sm font-black text-amber-400">
-                            {(p.eventPoints || p.points || 0).toLocaleString('pt-PT')}
+                            {(p.totalPoints ?? p.eventPoints ?? p.points ?? 0).toLocaleString('pt-PT')}
                           </span>
                         </td>
                       </tr>

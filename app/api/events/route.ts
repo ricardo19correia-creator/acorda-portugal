@@ -109,21 +109,25 @@ export async function GET(request: NextRequest) {
       participantsSnap.forEach((docSnap) => {
         const data = docSnap.data() || {}
         const ep =
-          typeof data.eventPoints === 'number'
+          typeof data.totalPoints === 'number'
+            ? data.totalPoints
+            : typeof data.eventPoints === 'number'
             ? data.eventPoints
             : typeof data.points === 'number'
             ? data.points
             : 0
-        const cm =
-          typeof data.countedMatches === 'number'
-            ? data.countedMatches
+        const gp =
+          typeof data.gamesPlayed === 'number'
+            ? data.gamesPlayed
             : typeof data.totalMatches === 'number'
             ? data.totalMatches
+            : typeof data.countedMatches === 'number'
+            ? data.countedMatches
             : 0
-        const tm = typeof data.totalMatches === 'number' ? data.totalMatches : cm
 
         rawRanking.push({
           userId: docSnap.id,
+          eventId: data.eventId || requestedEventId,
           displayName: data.displayName || 'Jogador',
           photoURL: data.photoURL || data.avatar || null,
           avatar: data.avatar || data.photoURL || null,
@@ -131,10 +135,12 @@ export async function GET(request: NextRequest) {
           distrito: data.distrito || data.district || 'Portugal',
           team: data.team || null,
           teamSelectedAt: data.teamSelectedAt || null,
+          totalPoints: ep,
           eventPoints: ep,
           points: ep,
-          countedMatches: cm,
-          totalMatches: tm,
+          gamesPlayed: gp,
+          countedMatches: gp,
+          totalMatches: gp,
           matchesToday:
             typeof data.matchesToday === 'number'
               ? data.matchesToday
@@ -174,21 +180,25 @@ export async function GET(request: NextRequest) {
           if (userDocSnap && userDocSnap.exists) {
             const uData = userDocSnap.data() || {}
             const ep =
-              typeof uData.eventPoints === 'number'
+              typeof uData.totalPoints === 'number'
+                ? uData.totalPoints
+                : typeof uData.eventPoints === 'number'
                 ? uData.eventPoints
                 : typeof uData.points === 'number'
                 ? uData.points
                 : 0
-            const cm =
-              typeof uData.countedMatches === 'number'
-                ? uData.countedMatches
+            const gp =
+              typeof uData.gamesPlayed === 'number'
+                ? uData.gamesPlayed
                 : typeof uData.totalMatches === 'number'
                 ? uData.totalMatches
+                : typeof uData.countedMatches === 'number'
+                ? uData.countedMatches
                 : 0
-            const tm = typeof uData.totalMatches === 'number' ? uData.totalMatches : cm
 
             userProgress = {
               userId: userDocSnap.id,
+              eventId: uData.eventId || requestedEventId,
               displayName: uData.displayName || 'Jogador',
               photoURL: uData.photoURL || uData.avatar || null,
               avatar: uData.avatar || uData.photoURL || null,
@@ -196,10 +206,12 @@ export async function GET(request: NextRequest) {
               distrito: uData.distrito || uData.district || 'Portugal',
               team: uData.team || null,
               teamSelectedAt: uData.teamSelectedAt || null,
+              totalPoints: ep,
               eventPoints: ep,
               points: ep,
-              countedMatches: cm,
-              totalMatches: tm,
+              gamesPlayed: gp,
+              countedMatches: gp,
+              totalMatches: gp,
               matchesToday:
                 typeof uData.matchesToday === 'number'
                   ? uData.matchesToday

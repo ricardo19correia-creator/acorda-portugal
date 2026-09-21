@@ -53,6 +53,8 @@ export function ResultScreen({
   onExit,
   eventOutcome,
   gameType = 'normal',
+  eventId,
+  eventSlug,
 }: {
   result: QuizResult
   gameId: string
@@ -68,6 +70,8 @@ export function ResultScreen({
   answers?: any
   onExit?: () => void
   gameType?: 'normal' | 'event' | '1v1' | 'multiplayer'
+  eventId?: string | null
+  eventSlug?: string | null
   eventOutcome?: {
     success?: boolean
     eventPointsAdded?: number
@@ -501,13 +505,33 @@ export function ResultScreen({
           </button>
 
           <div className="grid grid-cols-2 gap-2.5">
-            <Link
-              href={gameType === 'event' && eventOutcome ? '/eventos' : '/#ranking'}
-              className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 py-2.5 px-3 text-xs font-bold text-foreground transition-all hover:bg-white/10 hover:border-white/20"
-            >
-              <Trophy className="h-4 w-4 text-gold" />
-              <span>{gameType === 'event' && eventOutcome ? 'Ranking do Evento' : 'Ver Ranking'}</span>
-            </Link>
+            {(() => {
+              const isPortoLisboa =
+                eventId === 'porto-lisboa-duelo' ||
+                eventSlug?.includes('porto-lisboa') ||
+                eventOutcome?.team === 'porto' ||
+                eventOutcome?.team === 'lisboa' ||
+                (typeof window !== 'undefined' &&
+                  (window.location.search.includes('porto-vs-lisboa') ||
+                    window.location.search.includes('porto-lisboa')))
+
+              const rankingHref =
+                gameType === 'event' && eventOutcome
+                  ? isPortoLisboa
+                    ? '/eventos/porto-vs-lisboa'
+                    : '/eventos'
+                  : '/#ranking'
+
+              return (
+                <Link
+                  href={rankingHref}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 py-2.5 px-3 text-xs font-bold text-foreground transition-all hover:bg-white/10 hover:border-white/20"
+                >
+                  <Trophy className="h-4 w-4 text-gold" />
+                  <span>{gameType === 'event' && eventOutcome ? 'Ranking do Evento' : 'Ver Ranking'}</span>
+                </Link>
+              )
+            })()}
 
             <Link
               href="/jogar"

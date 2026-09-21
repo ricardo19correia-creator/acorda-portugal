@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
 
     const userId = decodedToken.uid
     const body = await request.json().catch(() => ({}))
+    const matchId = body.matchId || body.gameId
     const {
-      matchId,
       score = 0,
       correctAnswers = 0,
       totalQuestions = 0,
@@ -126,19 +126,31 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    const maxDailyMatches = Number(activeEvent.rules?.maxDailyMatches || 10)
-    const pointDivisor = Number(activeEvent.rules?.pointDivisor || 10)
-    const maxPointsPerMatch = Number(activeEvent.rules?.maxEventPointsPerMatch || 100)
+    const isPortoLisboa = targetEventId === OFFICIAL_PORTO_LISBOA_ID
+    const pointDivisor = Number(activeEvent.rules?.pointDivisor || (isPortoLisboa ? 1 : 10))
+    const maxPointsPerMatch = Number(activeEvent.rules?.maxEventPointsPerMatch || (isPortoLisboa ? 3000 : 100))
+    const maxDailyMatches = Number(activeEvent.rules?.maxDailyMatches || activeEvent.dailyMatchLimit || 10)
 
     // Data de hoje calculada de forma autoritativa no fuso de Lisboa
     const todayDateStr = getLisbonDateString()
 
-    // Cálculo determinístico e normalizado: máx 100 pontos de evento por partida
-    const potentialEventPoints = calculateEventPoints(score, pointDivisor, maxPointsPerMatch)
+    // Validação estrita anti-fraude da pontuação:
+    let safeScore = typeof score === 'number' && !isNaN(score) ? Math.max(0, Math.round(score)) : 0
+    if (correctAnswers === 0) {
+      safeScore = 0
+    } else if (safeScore > (totalQuestions || 10) * 350) {
+      safeScore = (totalQuestions || 10) * 350
+    }
 
-    console.log(`[EVENT] partida terminada: matchId=${matchId}, userId=${userId}, score=${score}`)
+    // Cálculo dos pontos do evento:
+    // No Porto vs Lisboa são os pontos reais da partida (ex: 800, 600)
+    const potentialEventPoints = isPortoLisboa
+      ? safeScore
+      : calculateEventPoints(safeScore, pointDivisor, maxPointsPerMatch)
+
+    console.log(`[EVENT] partida terminada: matchId=${matchId}, userId=${userId}, score=${safeScore}`)
     console.log(`[EVENT] evento identificado: eventId=${targetEventId}`)
-    console.log(`[EVENT] resultado calculado: score=${score}, potentialEventPoints=${potentialEventPoints}`)
+    console.log(`[EVENT] resultado calculado: score=${safeScore}, potentialEventPoints=${potentialEventPoints}`)
 
     const matchRef = eventDocRef.collection('matches').doc(matchId)
     const participantRef = eventDocRef.collection('participants').doc(userId)
@@ -384,14 +396,15 @@ export async function POST(request: NextRequest) {
           matchId,
           gameType: 'event',
           eventId: targetEventId,
-          eventSlug: eventSlug || 'primeiro-desafio-nacional-portugal-em-jogo',
+          eventSlug: eventSlug || (targetEventId === OFFICIAL_PORTO_LISBOA_ID ? 'porto-lisboa-o-grande-duelo' : 'primeiro-desafio-nacional-portugal-em-jogo'),
           userId,
           team: userTeam || null,
           score,
+          points: potentialEventPoints,
+          eventPoints: potentialEventPoints,
+          totalPoints: potentialEventPoints,
           correctAnswers,
           totalQuestions,
-          eventPoints: potentialEventPoints,
-          points: potentialEventPoints,
           date: todayDateStr,
           dailyCapReached: false,
           dailyMatchesToday: newDailyCount,
@@ -420,15 +433,16 @@ export async function POST(request: NextRequest) {
       )
 
       // Se for o Grande Duelo e o utilizador tiver equipa, somar pontos da equipa atomicamente
-      if (targetEventId === OFFICIAL_PORTO_LISBOA_ID && userTeam && potentialEventPoints > 0) {
-        transaction.set(
+      if (targetEventId === OFFICIAL_PORTO_LISBOA_ID && userTeam) {
+        transaction.update(
           eventDocRef,
           {
             [`teams.${userTeam}.points`]: FieldValue.increment(potentialEventPoints),
             [`teams.${userTeam}.matchesPlayed`]: FieldValue.increment(1),
+            totalMatches: FieldValue.increment(1),
+            totalPoints: FieldValue.increment(potentialEventPoints),
             updatedAt: FieldValue.serverTimestamp(),
-          },
-          { merge: true }
+          }
         )
       }
 
@@ -436,14 +450,17 @@ export async function POST(request: NextRequest) {
         participantRef,
         {
           userId,
+          eventId: targetEventId,
           displayName,
           photoURL,
           avatar: photoURL,
           district,
           distrito: district,
           team: userTeam || null,
+          totalPoints: newEventPoints,
           eventPoints: newEventPoints,
           points: newEventPoints,
+          gamesPlayed: countedMatches,
           countedMatches,
           totalMatches,
           matchesToday: newDailyCount,
@@ -458,6 +475,7 @@ export async function POST(request: NextRequest) {
           },
           lastPlayedDate: todayDateStr,
           lastPlayedAt: FieldValue.serverTimestamp(),
+          createdAt: pData.createdAt || FieldValue.serverTimestamp(),
           updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
@@ -474,6 +492,8 @@ export async function POST(request: NextRequest) {
         newEventPoints,
         points: newEventPoints,
         eventPoints: newEventPoints,
+        totalPoints: newEventPoints,
+        gamesPlayed: countedMatches,
         team: userTeam || null,
         teamName: userTeam === 'porto' ? 'Equipa Porto' : userTeam === 'lisboa' ? 'Equipa Lisboa' : null,
         teamPointsAdded: potentialEventPoints,

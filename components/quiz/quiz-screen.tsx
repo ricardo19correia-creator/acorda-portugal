@@ -1513,6 +1513,8 @@ export function QuizScreen({
             answers={recordedAnswersRef.current}
             onExit={handleAbandonSolo}
             gameType={gameType}
+            eventId={eventId}
+            eventSlug={eventSlug}
             eventOutcome={gameType === 'event' ? eventMatchOutcome : null}
           />
         </div>
