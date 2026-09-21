@@ -159,6 +159,39 @@ export const PROGRESSION_TITLES: TitleItem[] = PROGRESSION_LEVELS.map((lvl) => {
  */
 export const EVENT_EXCLUSIVE_TITLES: TitleItem[] = [
   {
+    id: 'title_rei_da_rivalidade',
+    name: 'REI DA RIVALIDADE',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: '1.º Lugar Oficial no Grande Duelo: Porto × Lisboa 2026',
+    rarity: 'Mítico',
+    badgeColor: getTitleRarityBadge('Mítico'),
+  },
+  {
+    id: 'title_senhor_da_rivalidade',
+    name: 'SENHOR DA RIVALIDADE',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: '2.º Lugar Oficial no Grande Duelo: Porto × Lisboa 2026',
+    rarity: 'Lendário',
+    badgeColor: getTitleRarityBadge('Lendário'),
+  },
+  {
+    id: 'title_guerreiro_da_rivalidade',
+    name: 'GUERREIRO DA RIVALIDADE',
+    categoryKey: 'exclusivo',
+    categoryTitle: 'Eventos Oficiais',
+    group: 'exclusivo',
+    price: null,
+    requirement: '3.º Lugar Oficial no Grande Duelo: Porto × Lisboa 2026',
+    rarity: 'Épico',
+    badgeColor: getTitleRarityBadge('Épico'),
+  },
+  {
     id: 'title_campeao_grande_duelo',
     name: 'Campeão do Grande Duelo',
     categoryKey: 'exclusivo',
@@ -284,6 +317,9 @@ const TITLE_ALIASES: Record<string, string> = {
   'top 3 — grande duelo': 'title_top3_grande_duelo',
   'top 3 - grande duelo': 'title_top3_grande_duelo',
   'desafiante do grande duelo': 'title_desafiante_grande_duelo',
+  'rei da rivalidade': 'title_rei_da_rivalidade',
+  'senhor da rivalidade': 'title_senhor_da_rivalidade',
+  'guerreiro da rivalidade': 'title_guerreiro_da_rivalidade',
 }
 
 /**

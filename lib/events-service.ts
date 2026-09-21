@@ -13,7 +13,13 @@ import {
 } from 'firebase/firestore'
 import { db } from './firebase'
 
-export type EventStatus = 'upcoming' | 'active' | 'ended'
+export type EventStatus =
+  | 'upcoming'
+  | 'active'
+  | 'closing'
+  | 'processing'
+  | 'ended'
+  | 'error_pending'
 
 export type EventTeamId = 'porto' | 'lisboa'
 
@@ -39,9 +45,54 @@ export interface OfficialEventTeams {
 export interface OfficialEventReward {
   position: number
   title: string
+  trophyName?: string
   acordas: number
   medal: string
   label: string
+}
+
+export interface EventTop3Winner {
+  placement: 1 | 2 | 3
+  userId: string
+  displayName: string
+  photoURL?: string | null
+  avatar?: string | null
+  team: EventTeamId | null
+  eventPoints: number
+  totalScore?: number
+  countedMatches: number
+  rewardAcordas: number
+  title: string
+  trophyName: string
+  rewardId: string
+  awardedAt?: string
+}
+
+export interface EventClosureSnapshot {
+  eventId: string
+  eventName: string
+  eventVersion: string
+  startedAt: string
+  endedAt: string
+  closedAt: string
+  totalPlayers: number
+  totalMatches: number
+  winningTeam: 'porto' | 'lisboa' | 'draw'
+  teamStats?: {
+    porto: EventTeamStats
+    lisboa: EventTeamStats
+  }
+  rankingFinal: EventParticipant[]
+  top3: EventTop3Winner[]
+  status: 'frozen' | 'closed'
+  rewardDistributionStatus: 'pending' | 'in_progress' | 'completed' | 'error_pending'
+  distributionErrors?: Array<{
+    userId: string
+    rewardId: string
+    error: string
+    timestamp: string
+  }>
+  closedBy?: string
 }
 
 export interface OfficialEventConfig {
@@ -74,6 +125,10 @@ export interface OfficialEventConfig {
   }
   dailyMatchLimit?: number
   rewardsDistributed?: boolean
+  status?: EventStatus
+  closedAt?: any
+  finalSnapshot?: EventClosureSnapshot
+  closureSnapshot?: EventClosureSnapshot
   createdAt?: any
   updatedAt?: any
 }
@@ -120,8 +175,30 @@ export interface CountdownDetails {
 
 export const OFFICIAL_PORTUGAL_EM_JOGO_ID = 'portugal-em-jogo-2026'
 export const OFFICIAL_PORTO_LISBOA_ID = 'porto-lisboa-duelo'
+export const OFFICIAL_PORTO_LISBOA_2026_ALIAS = 'porto-lisboa-2026'
 export const OFFICIAL_PORTO_LISBOA_SLUG = 'porto-lisboa-o-grande-duelo'
 export const DEFAULT_OFFICIAL_EVENT_ID = OFFICIAL_PORTO_LISBOA_ID
+
+/**
+ * Normaliza qualquer ID ou alias do evento para o ID canónico no Firestore
+ */
+export function canonicalizeEventId(id?: string | null): string {
+  if (!id) return OFFICIAL_PORTO_LISBOA_ID
+  const clean = String(id).trim().toLowerCase()
+  if (
+    clean === 'porto-lisboa-2026' ||
+    clean === 'porto-lisboa' ||
+    clean === 'porto-vs-lisboa' ||
+    clean === OFFICIAL_PORTO_LISBOA_ID ||
+    clean === OFFICIAL_PORTO_LISBOA_SLUG
+  ) {
+    return OFFICIAL_PORTO_LISBOA_ID
+  }
+  if (clean === 'portugal-em-jogo' || clean === OFFICIAL_PORTUGAL_EM_JOGO_ID) {
+    return OFFICIAL_PORTUGAL_EM_JOGO_ID
+  }
+  return id
+}
 
 export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
   id: OFFICIAL_PORTO_LISBOA_ID,
@@ -180,9 +257,30 @@ export const OFFICIAL_EVENT_CONFIG_PORTO_LISBOA: OfficialEventConfig = {
     maxEventPointsPerMatch: 3000,
   },
   rewards: [
-    { position: 1, title: 'Campeão do Grande Duelo', acordas: 15000, medal: '🏆', label: 'Troféu + Título Mítico + Badge + 15.000 Acordas + 5.000 XP' },
-    { position: 2, title: 'Vice-Campeão do Grande Duelo', acordas: 10000, medal: '🥈', label: 'Título Lendário + Badge + 10.000 Acordas + 3.000 XP' },
-    { position: 3, title: 'Top 3 — Grande Duelo', acordas: 7500, medal: '🥉', label: 'Título Épico + Badge + 7.500 Acordas + 2.000 XP' },
+    {
+      position: 1,
+      title: 'REI DA RIVALIDADE',
+      trophyName: 'TROFÉU SUPREMO — PORTO × LISBOA 2026',
+      acordas: 50000,
+      medal: '🥇',
+      label: 'TROFÉU SUPREMO — PORTO × LISBOA 2026 + Título «REI DA RIVALIDADE» + 50.000 Acordas + 10.000 XP',
+    },
+    {
+      position: 2,
+      title: 'SENHOR DA RIVALIDADE',
+      trophyName: 'MEDALHA DE PRATA — PORTO × LISBOA 2026',
+      acordas: 30000,
+      medal: '🥈',
+      label: 'MEDALHA DE PRATA — PORTO × LISBOA 2026 + Título «SENHOR DA RIVALIDADE» + 30.000 Acordas + 6.000 XP',
+    },
+    {
+      position: 3,
+      title: 'GUERREIRO DA RIVALIDADE',
+      trophyName: 'MEDALHA DE BRONZE — PORTO × LISBOA 2026',
+      acordas: 20000,
+      medal: '🥉',
+      label: 'MEDALHA DE BRONZE — PORTO × LISBOA 2026 + Título «GUERREIRO DA RIVALIDADE» + 20.000 Acordas + 4.000 XP',
+    },
     { position: 4, title: 'Top 10 Nacional', acordas: 2500, medal: '🎖️', label: '2.500 Acordas + 1.000 XP' },
     { position: 5, title: 'Desafiante do Grande Duelo (Mín. 5 partidas)', acordas: 500, medal: '⚔️', label: 'Título Raro + Badge + 500 Acordas + 500 XP' },
   ],
@@ -246,13 +344,24 @@ export function getLisbonDateString(date: Date = new Date()): string {
 }
 
 /**
- * Calcula o estado dinâmico de um evento ("upcoming", "active", "ended") com base nas datas reais
+ * Calcula o estado dinâmico de um evento ("upcoming", "active", "closing", "processing", "ended", "error_pending")
+ * com prioridade autoritativa para o estado persistido no backend Firestore.
  */
 export function getEventStatus(
   event?: OfficialEventConfig | null,
   now: Date = new Date()
 ): EventStatus | null {
   if (!event) return null
+
+  // 1. Estados explícitos persistidos no Firestore têm precedência
+  if (event.status === 'ended' || event.rewardsDistributed === true || event.active === false) {
+    return 'ended'
+  }
+  if (event.status === 'processing') return 'processing'
+  if (event.status === 'closing') return 'closing'
+  if (event.status === 'error_pending') return 'error_pending'
+
+  // 2. Cálculo temporal no fuso horário Europe/Lisbon
   const startStr = event.startDate || event.startAt
   const endStr = event.endDate || event.endAt
   if (!startStr || !endStr) return null
@@ -262,7 +371,7 @@ export function getEventStatus(
   const curMs = now.getTime()
 
   if (curMs < startMs) return 'upcoming'
-  if (curMs > endMs) return 'ended'
+  if (curMs >= endMs) return 'ended'
   return 'active'
 }
 
@@ -275,8 +384,14 @@ export function getEventStatusLabel(status: EventStatus | null): string {
       return 'Em breve'
     case 'active':
       return 'A decorrer'
+    case 'closing':
+      return 'A Encerrar'
+    case 'processing':
+      return 'Resultados a Processar'
     case 'ended':
-      return 'Terminado'
+      return 'Encerrado'
+    case 'error_pending':
+      return 'Processamento Pendente'
     default:
       return 'Inativo'
   }
@@ -461,6 +576,9 @@ export function subscribePublishedEvents(
               },
               dailyMatchLimit: Number(data.dailyMatchLimit || data.rules?.maxDailyMatches || 10),
               rewardsDistributed: Boolean(data.rewardsDistributed),
+              status: data.status,
+              closedAt: data.closedAt,
+              finalSnapshot: data.finalSnapshot || data.closureSnapshot,
               teams: data.teams || (docSnap.id === OFFICIAL_PORTO_LISBOA_ID ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA.teams : undefined),
             })
           }

@@ -76,6 +76,7 @@ import {
   getUserCategoryStats,
   getCategoryMasteryTitle,
 } from '@/lib/user-stats'
+import { PortoLisboaHistoricalCollection } from '@/components/events/PortoLisboaHistoricalCollection'
 
 interface InventoryItem {
   id: string
@@ -2624,6 +2625,9 @@ function PerfilContent() {
         {/* ========================================================= */}
         {activeTab === 'conquistas' && (
           <div className="space-y-6">
+            {/* COLEÇÃO HISTÓRICA OFICIAL: TROFÉUS & TÍTULOS DE GRANDES EVENTOS */}
+            <PortoLisboaHistoricalCollection profile={profile} />
+
             {/* Header da Aba Conquistas com Progresso Global */}
             <div className="p-5 sm:p-6 rounded-3xl bg-slate-900/90 border border-amber-500/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />

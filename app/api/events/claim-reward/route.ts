@@ -162,44 +162,70 @@ export async function POST(request: NextRequest) {
     let titleId: string | null = null
     let titleName: string | null = null
     let badgeId: string | null = null
-    let trophyId: string | null = null
+    let trophyName: string | null = null
     let xpAmount = 0
 
     if (targetEventId === OFFICIAL_PORTO_LISBOA_ID) {
       if (position === 1) {
-        titleId = 'title_campeao_grande_duelo'
-        titleName = 'Campeão do Grande Duelo'
-        badgeId = 'badge_campeao_grande_duelo'
-        trophyId = 'trophy_campeao_grande_duelo'
-        xpAmount = 5000
+        titleId = 'title_rei_da_rivalidade'
+        titleName = 'REI DA RIVALIDADE'
+        badgeId = 'badge_rei_da_rivalidade'
+        trophyId = 'trophy_supremo_porto_lisboa_2026'
+        trophyName = 'TROFÉU SUPREMO — PORTO × LISBOA 2026'
+        rewardAmount = 50000
+        xpAmount = 10000
       } else if (position === 2) {
-        titleId = 'title_vice_campeao_grande_duelo'
-        titleName = 'Vice-Campeão do Grande Duelo'
-        badgeId = 'badge_vice_campeao_grande_duelo'
-        xpAmount = 3000
+        titleId = 'title_senhor_da_rivalidade'
+        titleName = 'SENHOR DA RIVALIDADE'
+        badgeId = 'badge_senhor_da_rivalidade'
+        trophyId = 'medalha_prata_porto_lisboa_2026'
+        trophyName = 'MEDALHA DE PRATA — PORTO × LISBOA 2026'
+        rewardAmount = 30000
+        xpAmount = 6000
       } else if (position === 3) {
-        titleId = 'title_top3_grande_duelo'
-        titleName = 'Top 3 — Grande Duelo'
-        badgeId = 'badge_top3_grande_duelo'
-        xpAmount = 2000
+        titleId = 'title_guerreiro_da_rivalidade'
+        titleName = 'GUERREIRO DA RIVALIDADE'
+        badgeId = 'badge_guerreiro_da_rivalidade'
+        trophyId = 'medalha_bronze_porto_lisboa_2026'
+        trophyName = 'MEDALHA DE BRONZE — PORTO × LISBOA 2026'
+        rewardAmount = 20000
+        xpAmount = 4000
       } else if (isPortoLeader) {
         titleId = 'title_campeao_equipa_porto'
         titleName = 'Campeão da Equipa Porto'
         badgeId = 'badge_campeao_equipa_porto'
         trophyId = 'trophy_campeao_equipa_porto'
+        trophyName = 'Troféu de Campeão da Equipa Porto'
+        rewardAmount = 3000
         xpAmount = 2000
       } else if (isLisboaLeader) {
         titleId = 'title_campeao_equipa_lisboa'
         titleName = 'Campeão da Equipa Lisboa'
         badgeId = 'badge_campeao_equipa_lisboa'
         trophyId = 'trophy_campeao_equipa_lisboa'
+        trophyName = 'Troféu de Campeão da Equipa Lisboa'
+        rewardAmount = 3000
         xpAmount = 2000
       } else if (userMatches >= 5) {
         titleId = 'title_desafiante_grande_duelo'
         titleName = 'Desafiante do Grande Duelo'
         badgeId = 'badge_desafiante_grande_duelo'
+        trophyName = 'Medalha de Participação'
+        rewardAmount = 500
         xpAmount = 500
       }
+    }
+
+    const historicalConquest = {
+      eventId: targetEventId,
+      eventName: 'PORTO × LISBOA 2026',
+      eventYear: 2026,
+      placement: position,
+      team: userTeam || 'porto',
+      rewardName: trophyName || (matchedReward as any)?.trophyName || matchedReward.title,
+      title: titleName,
+      acordas: rewardAmount,
+      conqueredAt: new Date().toISOString(),
     }
 
     await db.runTransaction(async (transaction: any) => {
@@ -224,6 +250,8 @@ export async function POST(request: NextRequest) {
           title: titleName,
           badge: badgeId,
           trophy: trophyId,
+          trophyName,
+          team: userTeam,
           claimedAt: FieldValue.serverTimestamp(),
           status: 'awarded',
         },
@@ -233,8 +261,11 @@ export async function POST(request: NextRequest) {
           badge: badgeId,
           title: titleName,
           trophy: trophyId,
+          trophyName,
+          team: userTeam,
           claimedAt: FieldValue.serverTimestamp(),
         },
+        historical_conquests: FieldValue.arrayUnion(historicalConquest),
         updatedAt: FieldValue.serverTimestamp(),
       }
 

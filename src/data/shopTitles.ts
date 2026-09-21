@@ -299,6 +299,9 @@ export const TITLE_SHOP_CATALOG: TitleItem[] = [
   { id: 'tit_excl_campeao_nac', name: 'Campeão Nacional', categoryKey: 'exclusivo', categoryTitle: 'Rankings', group: 'exclusivo', price: null, requirement: 'Vencedor do Ranking da Temporada', rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
 
   // Eventos
+  { id: 'title_rei_da_rivalidade', name: 'REI DA RIVALIDADE', categoryKey: 'exclusivo', categoryTitle: 'Eventos Oficiais', group: 'exclusivo', price: null, requirement: '1.º Lugar Oficial — PORTO × LISBOA 2026', rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
+  { id: 'title_senhor_da_rivalidade', name: 'SENHOR DA RIVALIDADE', categoryKey: 'exclusivo', categoryTitle: 'Eventos Oficiais', group: 'exclusivo', price: null, requirement: '2.º Lugar Oficial — PORTO × LISBOA 2026', rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
+  { id: 'title_guerreiro_da_rivalidade', name: 'GUERREIRO DA RIVALIDADE', categoryKey: 'exclusivo', categoryTitle: 'Eventos Oficiais', group: 'exclusivo', price: null, requirement: '3.º Lugar Oficial — PORTO × LISBOA 2026', rarity: 'Épico', badgeColor: getTitleRarityBadge('Épico') },
   { id: 'tit_excl_evt_camp', name: 'Campeão do Evento', categoryKey: 'exclusivo', categoryTitle: 'Eventos', group: 'exclusivo', price: null, requirement: 'Vencedor de Evento Especial Oficial', rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },
   { id: 'tit_excl_evt_temp', name: 'Vencedor da Temporada', categoryKey: 'exclusivo', categoryTitle: 'Eventos', group: 'exclusivo', price: null, requirement: 'Vencedor da Temporada de Competição', rarity: 'Mítico', badgeColor: getTitleRarityBadge('Mítico') },
   { id: 'tit_excl_evt_rei', name: 'Rei do Desafio', categoryKey: 'exclusivo', categoryTitle: 'Eventos', group: 'exclusivo', price: null, requirement: 'Conclusão de Todos os Desafios de Temporada', rarity: 'Lendário', badgeColor: getTitleRarityBadge('Lendário') },

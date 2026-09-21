@@ -30,6 +30,7 @@ import {
 import { PlayerAvatar } from '@/components/player-avatar'
 import { useAuth } from '@/components/auth-provider'
 import { PortoLisboaTeamSelectModal } from './PortoLisboaTeamSelectModal'
+import { PortoLisboaShowcase } from './PortoLisboaShowcase'
 import {
   subscribeEventRanking,
   subscribeUserEventProgress,
@@ -692,7 +693,13 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
       </section>
 
       {/* ========================================================================= */}
-      {/* 1.5 ECRÃ DE VITÓRIA / CONSAGRAÇÃO OFICIAL (QUANDO O EVENTO TERMINA)       */}
+      {/* 🏆 O QUE PODES CONQUISTAR — VITRINE OFICIAL DE PRÉMIOS EM 3D               */}
+      {/* ========================================================================= */}
+      <PortoLisboaShowcase
+        userTeam={userTeam}
+        userRankPosition={userRankPosition}
+        eventStatus={dynamicStatus}
+      />
       {/* ========================================================================= */}
       {dynamicStatus === 'ended' && (
         <section
@@ -1215,72 +1222,84 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
 
         {/* Grelha de Prémios Oficiais */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* 1.º Lugar: Campeão do Grande Duelo */}
-          <div className="rounded-3xl border-2 border-amber-400/60 bg-gradient-to-b from-amber-500/20 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden shadow-[0_0_30px_rgba(245,158,11,0.25)]">
+          {/* 1.º Lugar: REI DA RIVALIDADE */}
+          <div className="rounded-3xl border-2 border-amber-400/70 bg-gradient-to-b from-amber-500/20 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden shadow-[0_0_30px_rgba(245,158,11,0.25)]">
             <div className="absolute top-0 right-0 px-3 py-1 bg-amber-400 text-slate-950 font-black text-[9px] uppercase tracking-wider rounded-bl-xl shadow">
               1.º LUGAR
             </div>
-            <div className="text-4xl pt-2">🏆</div>
+            <div className="pt-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 font-display text-xs font-black uppercase">
+                TROFÉU SUPREMO
+              </span>
+            </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-amber-400">
-                TÍTULO MÍTICO
+                TÍTULO MÍTICO EXCLUSIVO
               </p>
               <h3 className="font-display text-base font-black uppercase text-white mt-0.5">
-                CAMPEÃO DO GRANDE DUELO
+                REI DA RIVALIDADE
               </h3>
             </div>
             <div className="rounded-2xl bg-slate-900/90 border border-white/10 p-3 space-y-1 text-xs">
-              <p className="font-display text-lg font-black text-amber-400">
-                15.000 Acordas
+              <p className="font-display text-xl font-black text-amber-400">
+                50.000 Acordas
               </p>
-              <p className="text-slate-300 font-bold">+ 5.000 XP</p>
-              <p className="text-[10px] text-slate-400">Troféu + Badge + Título de Perfil</p>
+              <p className="text-slate-300 font-bold">+ 10.000 XP</p>
+              <p className="text-[10px] text-slate-400">Troféu Supremo 3D + Título Permanente</p>
             </div>
           </div>
 
-          {/* 2.º Lugar: Vice-Campeão do Grande Duelo */}
-          <div className="rounded-3xl border border-slate-300/40 bg-gradient-to-b from-slate-400/15 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden">
+          {/* 2.º Lugar: SENHOR DA RIVALIDADE */}
+          <div className="rounded-3xl border border-slate-300/50 bg-gradient-to-b from-slate-400/15 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden">
             <div className="absolute top-0 right-0 px-3 py-1 bg-slate-300 text-slate-950 font-black text-[9px] uppercase tracking-wider rounded-bl-xl">
               2.º LUGAR
             </div>
-            <div className="text-4xl pt-2">🥈</div>
+            <div className="pt-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-slate-400/20 border border-slate-300/40 text-slate-200 font-display text-xs font-black uppercase">
+                MEDALHA DE PRATA
+              </span>
+            </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-300">
-                TÍTULO LENDÁRIO
+                TÍTULO LENDÁRIO EXCLUSIVO
               </p>
               <h3 className="font-display text-base font-black uppercase text-white mt-0.5">
-                VICE-CAMPEÃO DO GRANDE DUELO
+                SENHOR DA RIVALIDADE
               </h3>
             </div>
             <div className="rounded-2xl bg-slate-900/90 border border-white/10 p-3 space-y-1 text-xs">
-              <p className="font-display text-lg font-black text-slate-200">
-                10.000 Acordas
+              <p className="font-display text-xl font-black text-slate-200">
+                30.000 Acordas
               </p>
-              <p className="text-slate-300 font-bold">+ 3.000 XP</p>
-              <p className="text-[10px] text-slate-400">Badge + Título de Perfil</p>
+              <p className="text-slate-300 font-bold">+ 6.000 XP</p>
+              <p className="text-[10px] text-slate-400">Medalha de Prata 3D + Título Permanente</p>
             </div>
           </div>
 
-          {/* 3.º Lugar: Top 3 — Grande Duelo */}
-          <div className="rounded-3xl border border-amber-700/40 bg-gradient-to-b from-amber-800/15 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden">
+          {/* 3.º Lugar: GUERREIRO DA RIVALIDADE */}
+          <div className="rounded-3xl border border-amber-700/50 bg-gradient-to-b from-amber-800/15 via-slate-950/90 to-slate-950 p-5 text-center space-y-3 relative overflow-hidden">
             <div className="absolute top-0 right-0 px-3 py-1 bg-amber-700 text-white font-black text-[9px] uppercase tracking-wider rounded-bl-xl">
               3.º LUGAR
             </div>
-            <div className="text-4xl pt-2">🥉</div>
+            <div className="pt-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-amber-700/20 border border-amber-700/40 text-amber-400 font-display text-xs font-black uppercase">
+                MEDALHA DE BRONZE
+              </span>
+            </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-amber-500">
-                TÍTULO ÉPICO
+                TÍTULO ÉPICO EXCLUSIVO
               </p>
               <h3 className="font-display text-base font-black uppercase text-white mt-0.5">
-                TOP 3 — GRANDE DUELO
+                GUERREIRO DA RIVALIDADE
               </h3>
             </div>
             <div className="rounded-2xl bg-slate-900/90 border border-white/10 p-3 space-y-1 text-xs">
-              <p className="font-display text-lg font-black text-amber-400">
-                7.500 Acordas
+              <p className="font-display text-xl font-black text-amber-400">
+                20.000 Acordas
               </p>
-              <p className="text-slate-300 font-bold">+ 2.000 XP</p>
-              <p className="text-[10px] text-slate-400">Badge + Título de Perfil</p>
+              <p className="text-slate-300 font-bold">+ 4.000 XP</p>
+              <p className="text-[10px] text-slate-400">Medalha de Bronze 3D + Título Permanente</p>
             </div>
           </div>
 
@@ -1289,7 +1308,11 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
             <div className="absolute top-0 right-0 px-3 py-1 bg-slate-800 text-slate-300 font-black text-[9px] uppercase tracking-wider rounded-bl-xl">
               MÍN. 5 JOGOS
             </div>
-            <div className="text-4xl pt-2">⚔️</div>
+            <div className="pt-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 font-display text-xs font-black uppercase">
+                PARTICIPAÇÃO
+              </span>
+            </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-blue-400">
                 TÍTULO RARO
@@ -1299,7 +1322,7 @@ export function PortoLisboaEvent({ embedded = false }: { embedded?: boolean } = 
               </h3>
             </div>
             <div className="rounded-2xl bg-slate-900/90 border border-white/10 p-3 space-y-1 text-xs">
-              <p className="font-display text-lg font-black text-white">
+              <p className="font-display text-xl font-black text-white">
                 500 Acordas
               </p>
               <p className="text-slate-300 font-bold">+ 500 XP</p>

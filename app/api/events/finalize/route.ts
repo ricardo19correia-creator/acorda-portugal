@@ -6,6 +6,8 @@ import {
   sortEventParticipants,
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  OFFICIAL_PORTO_LISBOA_ID,
+  OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   type EventParticipant,
   type OfficialEventConfig,
 } from '@/lib/events-service'
@@ -35,16 +37,21 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => ({}))
     const targetEventId = body.eventId || OFFICIAL_PORTUGAL_EM_JOGO_ID
 
+    const baseEvent =
+      targetEventId === OFFICIAL_PORTO_LISBOA_ID
+        ? OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
+        : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+
     const db = getAdminFirestore()
     const eventDocRef = db.collection('events').doc(targetEventId)
     const eventSnap = await eventDocRef.get()
 
     let eventData: OfficialEventConfig = eventSnap.exists
       ? (eventSnap.data() as OfficialEventConfig)
-      : OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
+      : baseEvent
 
     const now = Date.now()
-    const endStr = eventData.endDate || eventData.endAt || OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO.endDate
+    const endStr = eventData.endDate || eventData.endAt || baseEvent.endDate
     const endMs = new Date(endStr).getTime()
 
     // O evento só encerra se o tempo oficial já tiver passado (ou se forçadamente invocado por admin para testes)
@@ -92,6 +99,50 @@ export async function POST(request: NextRequest) {
       if (!rewardConfig) continue
 
       const rewardAmount = rewardConfig.acordas
+      let titleId: string | null = null
+      let titleName: string | null = rewardConfig.title
+      let badgeId: string | null = null
+      let trophyId: string | null = null
+      let trophyName: string | null = null
+      let xpAmount = 0
+
+      if (targetEventId === OFFICIAL_PORTO_LISBOA_ID) {
+        if (placement === 1) {
+          titleId = 'title_rei_da_rivalidade'
+          titleName = 'REI DA RIVALIDADE'
+          badgeId = 'badge_rei_da_rivalidade'
+          trophyId = 'trophy_supremo_porto_lisboa_2026'
+          trophyName = 'TROFÉU SUPREMO — PORTO × LISBOA 2026'
+          xpAmount = 10000
+        } else if (placement === 2) {
+          titleId = 'title_senhor_da_rivalidade'
+          titleName = 'SENHOR DA RIVALIDADE'
+          badgeId = 'badge_senhor_da_rivalidade'
+          trophyId = 'medalha_prata_porto_lisboa_2026'
+          trophyName = 'MEDALHA DE PRATA — PORTO × LISBOA 2026'
+          xpAmount = 6000
+        } else if (placement === 3) {
+          titleId = 'title_guerreiro_da_rivalidade'
+          titleName = 'GUERREIRO DA RIVALIDADE'
+          badgeId = 'badge_guerreiro_da_rivalidade'
+          trophyId = 'medalha_bronze_porto_lisboa_2026'
+          trophyName = 'MEDALHA DE BRONZE — PORTO × LISBOA 2026'
+          xpAmount = 4000
+        }
+      }
+
+      const historicalConquest = {
+        eventId: targetEventId,
+        eventName: targetEventId === OFFICIAL_PORTO_LISBOA_ID ? 'PORTO × LISBOA 2026' : eventData.name,
+        eventYear: 2026,
+        placement,
+        team: participant.team || 'porto',
+        rewardName: trophyName || (rewardConfig as any)?.trophyName || rewardConfig.title,
+        title: titleName,
+        acordas: rewardAmount,
+        conqueredAt: new Date().toISOString(),
+      }
+
       const awardRef = eventDocRef.collection('rewards_awarded').doc(participant.userId)
       const userRef = db.collection('users').doc(participant.userId)
 
@@ -109,17 +160,52 @@ export async function POST(request: NextRequest) {
 
         const uSnap = await transaction.get(userRef)
         if (uSnap.exists) {
-          transaction.update(userRef, {
+          const userUpdate: any = {
             coins: FieldValue.increment(rewardAmount),
             euros: FieldValue.increment(rewardAmount),
             [`event_rewards.${targetEventId}`]: {
               position: placement,
               amount: rewardAmount,
+              xp: xpAmount,
+              title: titleName,
+              badge: badgeId,
+              trophy: trophyId,
+              trophyName,
+              team: participant.team || null,
               claimedAt: FieldValue.serverTimestamp(),
               status: 'awarded',
             },
+            [`events.${targetEventId}`]: {
+              completed: true,
+              position: placement,
+              badge: badgeId,
+              title: titleName,
+              trophy: trophyId,
+              trophyName,
+              team: participant.team || null,
+              claimedAt: FieldValue.serverTimestamp(),
+            },
+            historical_conquests: FieldValue.arrayUnion(historicalConquest),
             updatedAt: FieldValue.serverTimestamp(),
-          })
+          }
+
+          if (xpAmount > 0) {
+            userUpdate.xp = FieldValue.increment(xpAmount)
+          }
+
+          if (titleId) {
+            userUpdate['inventory.titles'] = FieldValue.arrayUnion(titleId)
+          }
+
+          if (badgeId) {
+            userUpdate.badges = FieldValue.arrayUnion(badgeId)
+          }
+
+          if (trophyId) {
+            userUpdate.trophies = FieldValue.arrayUnion(trophyId)
+          }
+
+          transaction.update(userRef, userUpdate)
 
           const txRef = userRef.collection('transactions').doc()
           transaction.set(txRef, {
@@ -127,7 +213,11 @@ export async function POST(request: NextRequest) {
             userId: participant.userId,
             type: 'event_reward',
             amount: rewardAmount,
-            reason: `Recompensa Oficial de Evento: ${rewardConfig.title} no ${eventData.name || 'Primeiro Desafio Nacional'}`,
+            xp: xpAmount,
+            title: titleName,
+            badge: badgeId,
+            trophy: trophyId,
+            reason: `Recompensa Oficial de Evento: ${titleName || rewardConfig.title} no ${eventData.name || 'PORTO × LISBOA 2026'}`,
             eventId: targetEventId,
             placement,
             createdAt: FieldValue.serverTimestamp(),
@@ -139,6 +229,11 @@ export async function POST(request: NextRequest) {
           userId: participant.userId,
           placement,
           reward: rewardAmount,
+          xp: xpAmount,
+          title: titleName,
+          badge: badgeId,
+          trophy: trophyId,
+          trophyName,
           awardedAt: FieldValue.serverTimestamp(),
           status: 'awarded',
         }

@@ -8,6 +8,7 @@ import {
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   OFFICIAL_PORTO_LISBOA_ID,
   OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
+  canonicalizeEventId,
   getLisbonDateString,
   type OfficialEventConfig,
 } from '@/lib/events-service'
@@ -101,7 +102,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => ({}))
     const {
       eventId: requestedEventId,
-      eventSlug = 'primeiro-desafio-nacional-portugal-em-jogo',
+      eventSlug = 'porto-lisboa-o-grande-duelo',
       matchId,
       gameType,
     } = body
@@ -125,7 +126,7 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getAdminFirestore()
-    const targetEventId = requestedEventId
+    const targetEventId = canonicalizeEventId(requestedEventId)
 
     const isPortoLisboa =
       targetEventId === OFFICIAL_PORTO_LISBOA_ID ||
@@ -148,7 +149,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 2. Validação Temporal: Europe/Lisbon
+    // 2. Validação Temporal e Estado do Evento (Europe/Lisbon)
     const nowMs = Date.now()
     const startStr = eventConfig.startDate || eventConfig.startAt || baseEventConfig.startDate
     const endStr = eventConfig.endDate || eventConfig.endAt || baseEventConfig.endDate
@@ -165,11 +166,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (nowMs > endMs) {
+    const isClosedOrClosing =
+      eventConfig.status === 'closing' ||
+      eventConfig.status === 'processing' ||
+      eventConfig.status === 'ended' ||
+      eventConfig.status === 'error_pending' ||
+      eventConfig.active === false ||
+      eventConfig.rewardsDistributed === true ||
+      nowMs >= endMs
+
+    if (isClosedOrClosing) {
       return NextResponse.json(
         {
-          error: `O evento já terminou em ${endStr}. Não são aceites novas partidas.`,
+          error: `O evento está encerrado ou em processo de encerramento oficial (${endStr}). Não é permitido iniciar novas partidas.`,
           status: 'ended',
+          eventEnded: true,
         },
         { status: 403 }
       )
@@ -363,6 +374,8 @@ export async function POST(request: NextRequest) {
         status: 'in_progress',
         questionIds: finalQuestionIds,
         date: lisbonDateStr,
+        startedAtMs: nowMs,
+        createdAtMs: nowMs,
         createdAt: FieldValue.serverTimestamp(),
         updatedAt: FieldValue.serverTimestamp(),
       },
