@@ -8,6 +8,7 @@ import {
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   OFFICIAL_PORTO_LISBOA_ID,
   OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
+  canonicalizeEventId,
   type OfficialEventConfig,
 } from '@/lib/events-service'
 import { calculateLevelProgress } from '@/lib/progression'
@@ -73,7 +74,7 @@ export async function POST(request: NextRequest) {
     }
 
     const db = getAdminFirestore()
-    const targetEventId = requestedEventId
+    const targetEventId = canonicalizeEventId(requestedEventId)
 
     // Obter documento do evento oficial no Firestore
     const eventDocRef = db.collection('events').doc(targetEventId)
@@ -102,7 +103,7 @@ export async function POST(request: NextRequest) {
       activeEvent = eventSnap.data() as OfficialEventConfig
     }
 
-    // Verificar datas oficiais de vigência (Europe/Lisbon)
+    // Verificar datas oficiais de vigência (Europe/Lisbon) e estado de encerramento
     const now = Date.now()
     const startStr = activeEvent.startDate || activeEvent.startAt || baseDefaultEvent.startDate
     const endStr = activeEvent.endDate || activeEvent.endAt || baseDefaultEvent.endDate
@@ -117,13 +118,53 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    if (now > endMs) {
+    // Regra Canónica de Encerramento e Partidas em Curso:
+    // Se o ranking já foi congelado definitivamente:
+    const isFrozenOrEnded =
+      activeEvent.status === 'processing' ||
+      activeEvent.status === 'ended' ||
+      activeEvent.active === false ||
+      activeEvent.rewardsDistributed === true
+
+    if (isFrozenOrEnded) {
       return NextResponse.json({
         success: false,
-        message: `O evento já terminou em ${endStr}. Novas partidas não pontuam.`,
+        message: `O evento está oficialmente encerrado e os resultados definitivos já foram congelados.`,
         eventPointsAdded: 0,
         eventEnded: true,
       })
+    }
+
+    // Se o evento ultrapassou o horário oficial de fim ou está na fase "closing":
+    const isPastEnd = now > endMs || activeEvent.status === 'closing'
+    if (isPastEnd) {
+      // Verificar se a partida já estava legitimamente iniciada ANTES do encerramento oficial
+      const preCheckMatchSnap = await eventDocRef.collection('matches').doc(matchId).get().catch(() => null)
+      if (!preCheckMatchSnap || !preCheckMatchSnap.exists) {
+        return NextResponse.json({
+          success: false,
+          message: `O evento já terminou em ${endStr}. Novas partidas não são aceites.`,
+          eventPointsAdded: 0,
+          eventEnded: true,
+        })
+      }
+
+      const matchData = preCheckMatchSnap.data() || {}
+      const startedAt = Number(
+        matchData.startedAtMs ||
+        matchData.createdAtMs ||
+        (matchData.createdAt?.toMillis ? matchData.createdAt.toMillis() : 0)
+      )
+
+      if (startedAt && startedAt > endMs) {
+        return NextResponse.json({
+          success: false,
+          message: `Esta partida foi iniciada após o horário oficial de encerramento (${endStr}) e não pontua no evento.`,
+          eventPointsAdded: 0,
+          eventEnded: true,
+        })
+      }
+      console.log(`[EVENT_CUTOFF] Partida ${matchId} permitida a terminar pois foi iniciada legitimamente antes do encerramento.`)
     }
 
     const isPortoLisboa = targetEventId === OFFICIAL_PORTO_LISBOA_ID

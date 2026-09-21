@@ -6,6 +6,7 @@ import {
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
   OFFICIAL_PORTO_LISBOA_ID,
   OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
+  canonicalizeEventId,
   getEventStatus,
   getEventStatusLabel,
   getEventCountdown,
@@ -19,8 +20,8 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const requestedEventId =
-      searchParams.get('eventId') || searchParams.get('id') || OFFICIAL_PORTO_LISBOA_ID
+    const rawRequestedId = searchParams.get('eventId') || searchParams.get('id') || OFFICIAL_PORTO_LISBOA_ID
+    const requestedEventId = canonicalizeEventId(rawRequestedId)
 
     const baseDefaultConfig =
       requestedEventId === OFFICIAL_PORTUGAL_EM_JOGO_ID
@@ -69,9 +70,16 @@ export async function GET(request: NextRequest) {
         timezone: d.timezone || baseDefaultConfig.timezone,
         published: Boolean(d.published ?? true),
         active: Boolean(d.active ?? true),
-        enabled: Boolean(d.enabled ?? true),
-        rewards: Array.isArray(d.rewards) ? d.rewards : baseDefaultConfig.rewards,
+        rewards:
+          requestedEventId === OFFICIAL_PORTO_LISBOA_ID
+            ? baseDefaultConfig.rewards
+            : Array.isArray(d.rewards)
+            ? d.rewards
+            : baseDefaultConfig.rewards,
         teams: d.teams || (requestedEventId === OFFICIAL_PORTO_LISBOA_ID ? baseDefaultConfig.teams : undefined),
+        status: d.status,
+        closedAt: d.closedAt,
+        finalSnapshot: d.finalSnapshot || d.closureSnapshot,
         rules: {
           maxDailyMatches: Number(d.rules?.maxDailyMatches || baseDefaultConfig.rules.maxDailyMatches),
           pointDivisor: Number(d.rules?.pointDivisor || baseDefaultConfig.rules.pointDivisor),
@@ -88,6 +96,13 @@ export async function GET(request: NextRequest) {
         dailyMatchLimit: Number(d.dailyMatchLimit || d.rules?.maxDailyMatches || baseDefaultConfig.rules.maxDailyMatches),
         rewardsDistributed: Boolean(d.rewardsDistributed),
       }
+
+      if (
+        requestedEventId === OFFICIAL_PORTO_LISBOA_ID &&
+        (!Array.isArray(d.rewards) || d.rewards[0]?.acordas !== 50000)
+      ) {
+        eventRef.update({ rewards: baseDefaultConfig.rewards, updatedAt: FieldValue.serverTimestamp() }).catch(() => {})
+      }
     }
 
     // Autoridade temporal única: data e hora do servidor
@@ -95,6 +110,12 @@ export async function GET(request: NextRequest) {
     const status = getEventStatus(eventData, now) || 'active'
     const statusLabel = getEventStatusLabel(status)
     const countdown = getEventCountdown(eventData, now)
+
+    // Verificar se existe snapshot congelado imutável
+    const snapshotDocSnap = await eventRef.collection('closure_snapshot').doc('final').get().catch(() => null)
+    const finalSnapshot = snapshotDocSnap?.exists
+      ? snapshotDocSnap.data()
+      : eventData.finalSnapshot || null
 
     // Obter ranking real diretamente do Firestore Admin
     const participantsRef = eventRef.collection('participants')
@@ -280,19 +301,28 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    const effectiveRanking =
+      finalSnapshot && Array.isArray(finalSnapshot.rankingFinal) && finalSnapshot.rankingFinal.length > 0
+        ? finalSnapshot.rankingFinal
+        : ranking
+
     return NextResponse.json(
       {
         success: true,
         event: eventData,
-        teams: eventData.teams,
+        teams: finalSnapshot?.teamStats || eventData.teams,
         status,
         statusLabel,
+        isEnded: status === 'ended',
+        finalSnapshot,
+        top3: finalSnapshot?.top3 || null,
+        winningTeam: finalSnapshot?.winningTeam || null,
         serverTime: now.toISOString(),
         serverTimestampMs: now.getTime(),
         countdown,
         rewards: eventData.rewards,
         rules: eventData.rules,
-        ranking,
+        ranking: effectiveRanking,
         userProgress,
         userRankPosition,
       },

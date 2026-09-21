@@ -7,12 +7,14 @@ import {
   OFFICIAL_EVENT_CONFIG_PORTO_LISBOA,
   OFFICIAL_PORTUGAL_EM_JOGO_ID,
   OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO,
+  canonicalizeEventId,
   getEventStatus,
   getEventStatusLabel,
   sortEventParticipants,
   type OfficialEventConfig,
   type EventParticipant,
 } from '@/lib/events-service'
+import { POST as finalizePost } from '@/app/api/events/finalize/route'
 import { QuestionRegistry } from '@/lib/question-system/registry'
 import { PORTO_LISBOA_QUESTIONS } from '@/lib/data/porto-lisboa-questions'
 
@@ -74,11 +76,12 @@ export async function GET(req: NextRequest) {
     }
 
     // 2. Obter detalhes do evento selecionado
-    const targetDocRef = eventsRef.doc(eventId)
+    const canonicalId = canonicalizeEventId(eventId)
+    const targetDocRef = eventsRef.doc(canonicalId)
     const targetSnap = await targetDocRef.get().catch(() => null)
 
     const baseEvent =
-      eventId === OFFICIAL_PORTUGAL_EM_JOGO_ID
+      canonicalId === OFFICIAL_PORTUGAL_EM_JOGO_ID
         ? OFFICIAL_EVENT_CONFIG_PORTUGAL_EM_JOGO
         : OFFICIAL_EVENT_CONFIG_PORTO_LISBOA
 
@@ -105,6 +108,7 @@ export async function GET(req: NextRequest) {
           avatar: d.avatar || d.photoURL || null,
           district: d.district || d.distrito || 'Portugal',
           distrito: d.distrito || d.district || 'Portugal',
+          team: d.team || null,
           eventPoints: Number(d.eventPoints ?? d.points ?? 0),
           points: Number(d.eventPoints ?? d.points ?? 0),
           countedMatches: Number(d.countedMatches ?? d.totalMatches ?? 0),
@@ -125,23 +129,70 @@ export async function GET(req: NextRequest) {
 
     // 4. Se o modo for 'questions' ou detalhado, devolver a pool de perguntas do evento
     let eventQuestions: any[] = []
-    if (eventId === OFFICIAL_PORTO_LISBOA_ID) {
+    if (canonicalId === OFFICIAL_PORTO_LISBOA_ID) {
       eventQuestions = PORTO_LISBOA_QUESTIONS.map((q) => ({
         ...q,
         active: q.active !== false,
       }))
     }
 
+    // 5. Obter snapshot congelado de encerramento se existir
+    const snapshotDocSnap = await targetDocRef.collection('closure_snapshot').doc('final').get().catch(() => null)
+    const finalSnapshot = snapshotDocSnap?.exists
+      ? snapshotDocSnap.data()
+      : currentEvent.finalSnapshot || null
+
+    // 6. Contagem de prémios atribuídos
+    const awardsSnap = await targetDocRef.collection('rewards_awarded').get().catch(() => null)
+    const awardedCount = awardsSnap ? awardsSnap.size : 0
+    let totalAcordasAwarded = 0
+    if (awardsSnap && !awardsSnap.empty) {
+      awardsSnap.forEach((docSnap) => {
+        const d = docSnap.data() || {}
+        totalAcordasAwarded += Number(d.reward || d.rewardAcordas || d.amount || 0)
+      })
+    }
+
+    const closureStatus = currentEvent.status || getEventStatus(currentEvent)
+    const closureMetrics = {
+      status: closureStatus,
+      statusLabel: getEventStatusLabel(closureStatus),
+      totalPlayers: rawParticipants.length,
+      totalMatches:
+        (currentEvent.teams?.porto?.matchesPlayed || 0) +
+        (currentEvent.teams?.lisboa?.matchesPlayed || 0),
+      isRankingFrozen: Boolean(
+        (finalSnapshot && (finalSnapshot.status === 'frozen' || finalSnapshot.status === 'closed')) ||
+        currentEvent.status === 'ended' ||
+        currentEvent.rewardsDistributed === true
+      ),
+      top3Calculated: Boolean(finalSnapshot?.top3 && finalSnapshot.top3.length > 0),
+      rewardsDistributed: Boolean(
+        currentEvent.rewardsDistributed || finalSnapshot?.rewardDistributionStatus === 'completed'
+      ),
+      rewardsPending: Math.max(0, 3 - awardedCount),
+      awardedCount,
+      totalAcordasAwarded,
+      errorsCount:
+        finalSnapshot?.distributionErrors?.length ||
+        (Array.isArray((currentEvent as any).lastError) ? (currentEvent as any).lastError.length : 0),
+      errors: finalSnapshot?.distributionErrors || (currentEvent as any).lastError || [],
+      closedAt: currentEvent.closedAt || finalSnapshot?.closedAt || null,
+      lastExecution: currentEvent.updatedAt || currentEvent.closedAt || null,
+    }
+
     return NextResponse.json({
       success: true,
       events: eventsList,
       currentEvent,
-      status: getEventStatus(currentEvent),
-      statusLabel: getEventStatusLabel(getEventStatus(currentEvent)),
+      status: closureStatus,
+      statusLabel: getEventStatusLabel(closureStatus),
       participantsCount: rawParticipants.length,
-      ranking: sortedRanking.slice(0, 50),
+      ranking: finalSnapshot?.rankingFinal?.slice(0, 50) || sortedRanking.slice(0, 50),
       questionsCount: eventQuestions.length,
       questions: mode === 'questions' ? eventQuestions : eventQuestions.slice(0, 20),
+      finalSnapshot,
+      closureMetrics,
     })
   } catch (error: any) {
     console.error('[API ADMIN EVENTS GET ERROR]:', error)
@@ -241,6 +292,50 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         success: true,
         message: `Evento "${eventId}" sincronizado e registado com sucesso no Firestore.`,
+      })
+    }
+
+    if (action === 'trigger_closure' || action === 'retry_rewards') {
+      const targetId = canonicalizeEventId(eventId)
+      const finalizeUrl = new URL('/api/events/finalize', req.url)
+      const finalizeReq = new NextRequest(finalizeUrl, {
+        method: 'POST',
+        headers: req.headers,
+        body: JSON.stringify({
+          eventId: targetId,
+          force: true,
+          forceRetry: action === 'retry_rewards',
+        }),
+      })
+
+      const finalizeResponse = await finalizePost(finalizeReq)
+      const finalizeData = await finalizeResponse.json().catch(() => ({}))
+
+      if (!finalizeResponse.ok) {
+        return NextResponse.json(
+          { error: finalizeData.error || 'Erro ao executar encerramento do evento.', details: finalizeData },
+          { status: finalizeResponse.status }
+        )
+      }
+
+      await recordAdminAuditLog({
+        adminUid: authResult.adminUser.uid,
+        adminEmail: authResult.adminUser.email,
+        action: action === 'retry_rewards' ? 'EVENT_REWARDS_RETRIED' : 'EVENT_CLOSURE_TRIGGERED',
+        entity: 'EVENT',
+        entityId: targetId,
+        details: `Executou ${action} para o evento ${targetId}`,
+        newValue: finalizeData,
+        status: 'SUCCESS',
+      })
+
+      return NextResponse.json({
+        success: true,
+        message:
+          action === 'retry_rewards'
+            ? `Prémios do evento "${targetId}" reprocessados com sucesso.`
+            : `Evento "${targetId}" encerrado oficialmente com sucesso e ranking congelado.`,
+        data: finalizeData,
       })
     }
 
