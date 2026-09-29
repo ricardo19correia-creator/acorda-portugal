@@ -9,6 +9,7 @@ import {
   type MatchAnswerPayload,
 } from '@/lib/category-registry'
 import { extractUserXp } from '@/lib/economy-helpers'
+import { getLisbonDateString } from '@/lib/events-service'
 
 
 export interface AwardMatchRewardParams {
@@ -63,6 +64,7 @@ export interface MatchRewardOutcome {
   unlockedAchievements: UnlockedAchievementInfo[]
   completedMissions: CompletedMissionInfo[]
   categoryStats?: Record<string, any>
+  dailyMissions?: any
 }
 
 // In-memory cache de matchIds processados no cliente para resposta e retry instantâneos
@@ -296,8 +298,8 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       const totalAwardedCoins = calculatedCoins + levelUpBonusCoins
       const nextTotalCoins = currentCoins + totalAwardedCoins
 
-      // D. Cálculo de Sequência Diária (Streak em dias consecutivos)
-      const todayStr = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+      // D. Cálculo de Sequência Diária (Streak em dias consecutivos no fuso de Portugal Continental)
+      const todayStr = getLisbonDateString()
       const lastDate = typeof (userData as any).lastPlayedDate === 'string' ? (userData as any).lastPlayedDate : ''
       const currentStreak = typeof userData.streak === 'number' ? userData.streak : 0
       let nextStreak = currentStreak
@@ -305,9 +307,9 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
       if (lastDate === todayStr) {
         nextStreak = currentStreak > 0 ? currentStreak : 1
       } else {
-        const yesterday = new Date()
-        yesterday.setDate(yesterday.getDate() - 1)
-        const yesterdayStr = yesterday.toISOString().slice(0, 10)
+        const lisbonNow = new Date()
+        lisbonNow.setDate(lisbonNow.getDate() - 1)
+        const yesterdayStr = getLisbonDateString(lisbonNow)
         if (lastDate === yesterdayStr) {
           nextStreak = currentStreak + 1
         } else {
@@ -398,13 +400,38 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         newlyUnlocked.push({ id: 'ach_sequencia_ouro', title: 'Fidelidade de Ouro', icon: '🔥', description: '7 dias consecutivos de jogo!' })
       }
 
-      // G. Verificação de Missões Diárias concluídas
-      const completedMissions: CompletedMissionInfo[] = []
-      if (totalGamesAfter >= 1) {
-        completedMissions.push({ id: 'daily_match_1', title: 'Participação Diária', reward: '+€50' })
+      // G. Sincronização e Verificação de Missões Diárias Reais (Fuso de Portugal Continental)
+      const rawDailyMissions = (userData as any).dailyMissions
+      const isSameLisbonDay = rawDailyMissions?.date === todayStr
+      const prevDailyQuestions = isSameLisbonDay ? (Number(rawDailyMissions?.questionsAnswered) || 0) : 0
+      const prevDailyCorrect = isSameLisbonDay ? (Number(rawDailyMissions?.correctAnswers) || 0) : 0
+      const prevDailyMatches = isSameLisbonDay ? (Number(rawDailyMissions?.matchesPlayed) || 0) : 0
+      const prevDailyStreak = isSameLisbonDay ? (Number(rawDailyMissions?.bestStreak) || 0) : 0
+      const prevDailyClaimed: Record<string, boolean> = isSameLisbonDay && rawDailyMissions?.claimed ? rawDailyMissions.claimed : {}
+
+      const nextDailyQuestions = prevDailyQuestions + totalQuestions
+      const nextDailyCorrect = prevDailyCorrect + correctAnswers
+      const nextDailyMatches = prevDailyMatches + 1
+      const nextDailyStreak = Math.max(prevDailyStreak, bestStreak || 0)
+
+      const updatedDailyMissions = {
+        date: todayStr,
+        questionsAnswered: nextDailyQuestions,
+        correctAnswers: nextDailyCorrect,
+        matchesPlayed: nextDailyMatches,
+        bestStreak: nextDailyStreak,
+        claimed: prevDailyClaimed,
       }
-      if (correctAnswers >= 5) {
-        completedMissions.push({ id: 'daily_correct_5', title: 'Precisão Lusa', reward: '+€100' })
+
+      const completedMissions: CompletedMissionInfo[] = []
+      if (nextDailyQuestions >= 10 && prevDailyQuestions < 10) {
+        completedMissions.push({ id: 'daily_questions_10', title: 'Responder a 10 Perguntas', reward: '+100 XP • +50 Acordas' })
+      }
+      if (nextDailyStreak >= 5 && prevDailyStreak < 5) {
+        completedMissions.push({ id: 'daily_streak_5', title: 'Acertar 5 Seguidas', reward: '+150 XP • +75 Acordas' })
+      }
+      if (nextDailyMatches >= 3 && prevDailyMatches < 3) {
+        completedMissions.push({ id: 'daily_matches_3', title: 'Jogar 3 Partidas', reward: '+200 XP • +100 Acordas' })
       }
 
       const effectiveGameType = gameType || (matchType === 'duel_1v1' ? '1v1' : 'normal')
@@ -471,6 +498,10 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         'stats.incorrectAnswers': increment(Math.max(0, totalQuestions - correctAnswers)),
         'stats.totalScore': increment(score),
         'stats.totalXp': increment(calculatedXp),
+        dailyMissions: {
+          ...updatedDailyMissions,
+          lastUpdated: serverTimestamp(),
+        },
         lastPlayedAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       }
@@ -615,6 +646,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
         unlockedAchievements: newlyUnlocked,
         completedMissions,
         categoryStats: updatedCategoryStatsMap,
+        dailyMissions: updatedDailyMissions,
       } as MatchRewardOutcome
     })
 
@@ -645,6 +677,7 @@ export async function awardMatchReward(params: AwardMatchRewardParams): Promise<
             questionsAnswered: totalQuestions,
             bestStreak,
             categoryStats: outcome.categoryStats,
+            dailyMissions: updatedDailyMissions,
           },
         })
       )

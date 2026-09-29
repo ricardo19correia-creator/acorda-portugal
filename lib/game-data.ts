@@ -303,6 +303,15 @@ export type UserProfile = {
   equipped?: EquippedCosmetics
   lastVaultOpenedAt?: number | null
   dailyVault?: Record<string, any>
+  dailyMissions?: {
+    date: string
+    questionsAnswered: number
+    correctAnswers: number
+    matchesPlayed: number
+    bestStreak: number
+    claimed: Record<string, boolean>
+    lastUpdated?: any
+  }
   activeSession?: { sessionId: string; startedAt?: any; platform?: string } | null
   currentSessionId?: string | null
   createdAt?: unknown

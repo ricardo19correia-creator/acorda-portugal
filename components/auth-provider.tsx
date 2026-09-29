@@ -331,6 +331,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           categoryStats: d.categoryStats
             ? { ...(prev.categoryStats || {}), ...d.categoryStats }
             : prev.categoryStats,
+          dailyMissions: d.dailyMissions ? d.dailyMissions : prev.dailyMissions,
         }
       })
     }
@@ -572,6 +573,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                       ? data.dailyVault.lastOpenedAt
                       : null),
               dailyVault: data.dailyVault || null,
+              dailyMissions: data.dailyMissions || null,
             }
 
             setProfile(loadedProfile)

@@ -309,6 +309,7 @@ function JogarContainer() {
   // 2. CENTRAL DE JOGO (LOBBY): Interface limpa, rápida e premium
   return (
     <div className="relative min-h-[100dvh] w-full isolate overflow-x-hidden bg-transparent text-white flex flex-col justify-between">
+      <AppBackground customImage={activeArena ? activeArena.assetPath : undefined} />
       <main className="relative z-10 w-full min-h-[100dvh] flex flex-col justify-start bg-transparent">
         <JogarHub
           onStartClassicMatch={(gameId) => {
