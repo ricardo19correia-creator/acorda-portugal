@@ -798,7 +798,7 @@ export default function AjudaPage() {
                     setReportModalOpen(true)
                     setReportStatus('idle')
                     setReportErrorMsg('')
-                    if (user?.email) setReportEmail(user.email)
+                    if (user?.email) setContactEmail(user.email)
                   }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-emerald-500 px-8 py-4 font-display text-xs sm:text-sm font-black uppercase tracking-wider text-slate-950 hover:scale-105 hover:brightness-110 shadow-xl shadow-emerald-500/25 transition cursor-pointer"
                 >

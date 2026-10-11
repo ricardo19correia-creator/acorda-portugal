@@ -60,9 +60,18 @@ export function setGlobalArenaMatchActive(active: boolean) {
  * Utilizado para garantir restauração instantânea do layout oficial ao voltar à Home.
  */
 export function resetGlobalArenaState() {
+  const hadClass = typeof document !== 'undefined' && document.documentElement.classList.contains('ap-arena-match')
+  const wasActive = imperativeMatchActive
+
+  if (!wasActive && !hadClass) {
+    return
+  }
+
   imperativeMatchActive = false
   if (typeof window !== 'undefined') {
-    document.documentElement.classList.remove('ap-arena-match')
+    if (hadClass) {
+      document.documentElement.classList.remove('ap-arena-match')
+    }
     listeners.forEach((listener) => listener())
     window.dispatchEvent(new CustomEvent('ap_match_state_change', { detail: { active: false } }))
   }

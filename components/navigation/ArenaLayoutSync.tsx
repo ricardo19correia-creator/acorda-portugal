@@ -36,13 +36,11 @@ export function ArenaLayoutSync() {
     window.addEventListener('popstate', syncLayoutState)
     window.addEventListener('hashchange', syncLayoutState)
     window.addEventListener('ap_route_change', syncLayoutState)
-    window.addEventListener('ap_match_state_change', syncLayoutState)
 
     return () => {
       window.removeEventListener('popstate', syncLayoutState)
       window.removeEventListener('hashchange', syncLayoutState)
       window.removeEventListener('ap_route_change', syncLayoutState)
-      window.removeEventListener('ap_match_state_change', syncLayoutState)
     }
   }, [pathname])
 

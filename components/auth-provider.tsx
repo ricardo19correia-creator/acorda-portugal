@@ -638,7 +638,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               console.log('[AUTH] Conta marcada como eliminada. Ignorando criação default e encerrando sessão.')
               setProfile(null)
               setUser(null)
-              setIsLoading(false)
+              setProfileLoading(false)
               try {
                 const { signOut } = await import('firebase/auth')
                 await signOut(auth)
@@ -666,7 +666,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 }
                 setProfile(null)
                 setUser(null)
-                setIsLoading(false)
+                setProfileLoading(false)
                 try {
                   const { signOut } = await import('firebase/auth')
                   await signOut(auth)
@@ -695,7 +695,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               console.warn('[AUTH] Conta antiga sem documento no Firestore. Abortando recriação fantasma e encerrando sessão.')
               setProfile(null)
               setUser(null)
-              setIsLoading(false)
+              setProfileLoading(false)
               try {
                 const { signOut } = await import('firebase/auth')
                 await signOut(auth)

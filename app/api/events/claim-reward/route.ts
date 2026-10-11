@@ -162,6 +162,7 @@ export async function POST(request: NextRequest) {
     let titleId: string | null = null
     let titleName: string | null = null
     let badgeId: string | null = null
+    let trophyId: string | null = null
     let trophyName: string | null = null
     let xpAmount = 0
 

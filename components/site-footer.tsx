@@ -78,9 +78,9 @@ export function SiteFooter() {
             <Link
               href="/beta"
               className="font-bold text-foreground hover:text-emerald-400 transition-colors underline decoration-emerald-500/30 underline-offset-4"
-              title="Acorda Portugal — Beta Público"
+              title="Acorda Portugal Studios"
             >
-              Riky Moreira
+              ACORDA PORTUGAL STUDIOS
             </Link>{' '}
             🇵🇹
           </p>

@@ -284,7 +284,10 @@ export function ComunidadeView({ getIdToken, adminUser }: ComunidadeViewProps) {
 
         <button
           type="button"
-          onClick={() => fetchData(true)}
+          onClick={() => {
+            setRefreshing(true)
+            setTimeout(() => setRefreshing(false), 600)
+          }}
           disabled={refreshing}
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer disabled:opacity-50 shrink-0 self-start sm:self-auto"
         >

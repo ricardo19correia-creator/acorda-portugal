@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { 
-  ArrowLeft, Trophy, Zap, Shield, Flame, Award, 
+  ArrowLeft, ArrowRight, Trophy, Zap, Shield, Flame, Award, 
   ShoppingBag, Swords, CheckCircle2, Lock, Sparkles, MapPin, Building2, Check, Plus, Globe, 
   User, UserRound, Edit3, LogOut, Trash2, AlertTriangle, X, MessageSquare, 
   ChevronRight, BarChart3, HelpCircle, Star, Crown, BookOpen, Gift, CheckCheck,
