@@ -81,21 +81,22 @@ export function SiteHeader() {
     pathname?.startsWith('/conquistas')
 
   const NAV = [
-    { label: 'Início', href: '/', icon: Home },
     { label: 'Missão', href: '/#missao', icon: ShieldCheck },
     { label: 'Notícias', href: '/#noticias', icon: Newspaper },
-    { label: 'Participar', href: '/#participar', icon: Send },
+    { label: 'Acontecimentos', href: '/#acontecimentos', icon: Send },
     { label: 'Diretos', href: '/#diretos', icon: Radio },
+    { label: 'Verificação', href: '/#verificacao', icon: ShieldCheck },
     { label: 'Radar', href: '/#radar', icon: Compass },
-    { label: 'Comunidade', href: '/comunidade', icon: Users },
+    { label: 'Desafio Nacional', href: '/desafio-nacional', icon: Trophy },
   ]
 
   const MOBILE_NAV = [
     { label: 'Início', href: '/', icon: Home },
     { label: 'Missão do Projeto', href: '/#missao', icon: ShieldCheck },
     { label: 'Notícias & Factos', href: '/#noticias', icon: Newspaper },
-    { label: 'Enviar Acontecimento', href: '/#participar', icon: Send },
-    { label: 'Diretos & Verificação', href: '/#diretos', icon: Radio },
+    { label: 'Enviar Acontecimento', href: '/#acontecimentos', icon: Send },
+    { label: 'Diretos ao Vivo', href: '/#diretos', icon: Radio },
+    { label: 'Verificação Factual', href: '/#verificacao', icon: ShieldCheck },
     { label: 'Radar Nacional', href: '/#radar', icon: Compass },
     { label: 'Comunidade Cívica', href: '/comunidade', icon: Users },
     { label: 'Desafio Nacional (Jogo)', href: '/desafio-nacional', icon: Trophy },
@@ -214,7 +215,7 @@ export function SiteHeader() {
           )}
 
           <Link
-            href="/#participar"
+            href="/#acontecimentos"
             className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
           >
             <Send className="h-3.5 w-3.5" />

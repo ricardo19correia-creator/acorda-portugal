@@ -1,21 +1,43 @@
+'use client'
+
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 export function BrandLogo({
   className,
   markOnly = false,
   size = 'md',
+  variant = 'auto',
+  subtitle,
 }: {
   className?: string
   markOnly?: boolean
   size?: 'sm' | 'md' | 'lg' | 'xl'
+  variant?: 'institutional' | 'game' | 'auto'
+  subtitle?: string
 }) {
+  const pathname = usePathname()
+  const isGameRoute =
+    variant === 'game' ||
+    (variant === 'auto' &&
+      pathname &&
+      (pathname.startsWith('/jogar') ||
+        pathname.startsWith('/loja') ||
+        pathname.startsWith('/cofre') ||
+        pathname.startsWith('/arenas') ||
+        pathname.startsWith('/conquistas') ||
+        pathname.startsWith('/desafio-nacional')))
+
+  const displaySubtitle =
+    subtitle || (isGameRoute ? 'DESAFIO NACIONAL' : 'INFORMAÇÃO & CIDADANIA')
+
   return (
     <div className={cn('flex items-center gap-2 group transition-transform duration-200 hover:scale-105 min-w-0 shrink', className)}>
       <div className="relative shrink-0 flex items-center justify-center">
         <Image
           src="/logo-oficial.png"
-          alt="Acorda Portugal — Desafio Nacional"
+          alt="Acorda Portugal"
           width={56}
           height={56}
           className={cn(
@@ -35,12 +57,18 @@ export function BrandLogo({
           <span className="font-display font-black text-xs sm:text-sm md:text-base tracking-wider text-white group-hover:text-emerald-400 transition-colors uppercase truncate">
             ACORDA PORTUGAL
           </span>
-          {/* Subtítulo oculto no telemóvel para evitar colisão com o saldo */}
-          <span className="hidden sm:inline text-[10px] md:text-[11px] font-bold tracking-tight md:tracking-widest uppercase text-amber-400 whitespace-nowrap">
-            DESAFIO NACIONAL
+          {/* Subtítulo dinâmico: Institucional vs Jogo */}
+          <span
+            className={cn(
+              'hidden sm:inline text-[9.5px] md:text-[10.5px] font-bold tracking-wider uppercase whitespace-nowrap',
+              isGameRoute ? 'text-amber-400' : 'text-emerald-400'
+            )}
+          >
+            {displaySubtitle}
           </span>
         </div>
       )}
     </div>
   )
 }
+

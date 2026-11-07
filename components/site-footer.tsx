@@ -77,13 +77,18 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href="/#participar" className="hover:text-emerald-400 transition-colors">
+                <a href="/#acontecimentos" className="hover:text-emerald-400 transition-colors">
                   Enviar Acontecimento
                 </a>
               </li>
               <li>
                 <a href="/#diretos" className="hover:text-emerald-400 transition-colors">
-                  Diretos & Verificação
+                  Diretos ao Vivo
+                </a>
+              </li>
+              <li>
+                <a href="/#verificacao" className="hover:text-emerald-400 transition-colors">
+                  Mesa de Verificação
                 </a>
               </li>
               <li>

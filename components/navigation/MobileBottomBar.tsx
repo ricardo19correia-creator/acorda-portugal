@@ -77,7 +77,7 @@ export function MobileBottomBar() {
     : [
         { label: 'Início', href: '/', icon: Home },
         { label: 'Notícias', href: '/#noticias', icon: Newspaper },
-        { label: 'Participar', href: '/#participar', icon: Send },
+        { label: 'Participar', href: '/#acontecimentos', icon: Send },
         { label: 'Radar', href: '/#radar', icon: Compass },
         { label: 'Comunidade', href: '/comunidade', icon: Users },
       ]

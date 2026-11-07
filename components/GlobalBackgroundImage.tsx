@@ -1,21 +1,33 @@
+'use client'
+
 import React from 'react'
+import { usePathname } from 'next/navigation'
 
 /**
- * 🇵🇹 ACORDA PORTUGAL — FUNDO GLOBAL OFICIAL
+ * 🇵🇹 ACORDA PORTUGAL — FUNDO GLOBAL DO JOGO (DESAFIO NACIONAL)
  * 
- * Imagem de fundo oficial do Desafio Nacional:
+ * Imagem de fundo oficial do jogo:
  * /images/desafio-nacional-background.jpg
  * 
- * Características:
- * - Ocupa todo o viewport (100vw, 100dvh)
- * - Camada inferior (z-index: 0)
- * - Fixo durante a navegação
- * - Responsivo: centraliza o estúdio e o escudo de Portugal em mobile/desktop
- * - Overlay subtil para contraste da interface
- * - Sem vídeo, sem timers, sem consumo de recursos em background
- * - Funciona no browser e dentro do APK (Capacitor)
+ * Importante:
+ * - A homepage institucional ('/') e páginas institucionais possuem o seu próprio fundo exclusivo.
+ * - Este fundo do jogo só é ativo nas áreas de jogo e rotas secundárias do Desafio Nacional.
  */
 export function GlobalBackgroundImage() {
+  const pathname = usePathname()
+
+  // Ocultar completamente na homepage institucional e páginas institucionais
+  if (
+    !pathname ||
+    pathname === '/' ||
+    pathname === '/termos' ||
+    pathname === '/privacidade' ||
+    pathname === '/ajuda' ||
+    pathname === '/conta-eliminada'
+  ) {
+    return null
+  }
+
   return (
     <div
       id="global-background-container"
@@ -32,14 +44,13 @@ export function GlobalBackgroundImage() {
       }}
       aria-hidden="true"
     >
-      {/* 0 → IMAGEM OFICIAL DE FUNDO DO DESAFIO NACIONAL */}
+      {/* IMAGEM DE FUNDO DO DESAFIO NACIONAL (APENAS NO JOGO) */}
       <img
         id="global-background-image"
         src="/images/desafio-nacional-background.jpg"
         alt=""
         aria-hidden="true"
-        loading="eager"
-        fetchPriority="high"
+        loading="lazy"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none block"
         style={{
@@ -55,7 +66,7 @@ export function GlobalBackgroundImage() {
         }}
       />
 
-      {/* 1 → OVERLAY SUBTIL PARA GARANTIR LEGIBILIDADE DA UI */}
+      {/* OVERLAY PARA CONTRASTE */}
       <div
         id="global-background-overlay"
         className="absolute inset-0 w-full h-full pointer-events-none select-none block"
@@ -73,3 +84,4 @@ export function GlobalBackgroundImage() {
 }
 
 export default GlobalBackgroundImage
+

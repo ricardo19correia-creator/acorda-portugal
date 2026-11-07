@@ -120,12 +120,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <link
-          rel="preload"
-          href="/images/desafio-nacional-background.jpg"
-          as="image"
-          type="image/jpeg"
-        />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
