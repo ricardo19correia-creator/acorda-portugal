@@ -5,26 +5,27 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { PortugueseBackground } from '@/components/institutional/PortugueseBackground'
 import { InstitutionalHero } from '@/components/institutional/InstitutionalHero'
-import { InstitutionalMission } from '@/components/institutional/InstitutionalMission'
 import { InstitutionalNews } from '@/components/institutional/InstitutionalNews'
-import { InstitutionalParticipation } from '@/components/institutional/InstitutionalParticipation'
-import { InstitutionalLiveVerification } from '@/components/institutional/InstitutionalLiveVerification'
+import { InstitutionalCitizens } from '@/components/institutional/InstitutionalCitizens'
+import { InstitutionalLive } from '@/components/institutional/InstitutionalLive'
+import { InstitutionalVerification } from '@/components/institutional/InstitutionalVerification'
 import { InstitutionalRadar } from '@/components/institutional/InstitutionalRadar'
-import { InstitutionalDesafioSecundario } from '@/components/institutional/InstitutionalDesafioSecundario'
+import { InstitutionalDesafio } from '@/components/institutional/InstitutionalDesafio'
 import { resetGlobalArenaState } from '@/lib/game-active-state'
 
 export default function HomePage() {
-  // Garantir que a Home institucional nunca retém resíduos visuais de arena
+  // Garantir que a Home institucional nunca retém resíduos de arena de jogo
   useEffect(() => {
     resetGlobalArenaState()
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#030712] text-foreground flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#040e08] text-foreground flex flex-col justify-between selection:bg-[#10B981] selection:text-black">
       {/* 
-        🇵🇹 ACORDA PORTUGAL — PLATAFORMA NACIONAL DE INFORMAÇÃO & CIDADANIA
-        Fundo Gráfico Exclusivo: Inspirado na herança cartográfica, náutica e geométrica de Portugal.
-        Design institucional, sofisticado, sóbrio e minimalista, sem qualquer estética gaming.
+        🇵🇹 ACORDA PORTUGAL — IDENTIDADE VISUAL NACIONAL DE RAIZ
+        Fundo cinematográfico inspirado no território de Portugal.
+        Paleta de cores estritamente nacional: verde, vermelho e branco com apontamentos de dourado.
+        Zero estética gaming. Zero azul escuro.
       */}
       <PortugueseBackground />
 
@@ -32,28 +33,37 @@ export default function HomePage() {
         {/* Cabeçalho Institucional Oficial */}
         <SiteHeader />
 
-        {/* Conteúdo Institucional Oficial */}
+        {/* 
+          Conteúdo Institucional Oficial — Organizado exclusivamente nestas 7 secções em ordem estrita:
+          1. ACORDA PORTUGAL
+          2. INFORMAÇÃO E NOTÍCIAS
+          3. A VOZ DOS CIDADÃOS
+          4. DIRETOS E ACONTECIMENTOS
+          5. VERIFICAÇÃO DE INFORMAÇÃO
+          6. RADAR NACIONAL
+          7. DESAFIO NACIONAL
+        */}
         <main className="flex-1 flex flex-col items-center w-full">
-          {/* 1. Apresentação: «Portugal precisa de acordar.» / «A informação começa nas pessoas.» */}
+          {/* 1. ACORDA PORTUGAL */}
           <InstitutionalHero />
 
-          {/* 2 & 3. Explicação Breve do Verdadeiro Projeto & Os Três Pilares da Missão */}
-          <InstitutionalMission />
-
-          {/* 4. Funcionalidades: Notícias */}
+          {/* 2. INFORMAÇÃO E NOTÍCIAS */}
           <InstitutionalNews />
 
-          {/* 4. Funcionalidades: Envio de Acontecimentos pelos Cidadãos */}
-          <InstitutionalParticipation />
+          {/* 3. A VOZ DOS CIDADÃOS */}
+          <InstitutionalCitizens />
 
-          {/* 4. Funcionalidades: Diretos ao Vivo & Mesa de Verificação Factual */}
-          <InstitutionalLiveVerification />
+          {/* 4. DIRETOS E ACONTECIMENTOS */}
+          <InstitutionalLive />
 
-          {/* 4. Funcionalidades: Radar Nacional */}
+          {/* 5. VERIFICAÇÃO DE INFORMAÇÃO */}
+          <InstitutionalVerification />
+
+          {/* 6. RADAR NACIONAL */}
           <InstitutionalRadar />
 
-          {/* 5. Secção Pequena & Independente: Acorda Portugal — Desafio Nacional */}
-          <InstitutionalDesafioSecundario />
+          {/* 7. DESAFIO NACIONAL */}
+          <InstitutionalDesafio />
         </main>
 
         {/* Rodapé Institucional Oficial */}

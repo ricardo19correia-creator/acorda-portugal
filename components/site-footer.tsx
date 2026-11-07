@@ -33,7 +33,7 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#060c18] backdrop-blur-xl mt-20 select-none text-slate-300">
+    <footer className="relative border-t border-[#D4AF37]/20 bg-[#030b06] backdrop-blur-xl mt-20 select-none text-slate-300">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         
         {/* Topo do Rodapé: Logo & Resumo */}
@@ -49,7 +49,7 @@ export function SiteFooter() {
               <BrandLogo size="md" />
             </Link>
             <p className="text-sm leading-relaxed text-slate-300">
-              Plataforma nacional e independente de informação, participação cívica e comunicação em tempo real. De norte a sul, nas ilhas e no mundo, a informação começa nas pessoas.
+              Plataforma nacional e independente de informação, participação cívica e comunicação em tempo real. De norte a sul e nas ilhas, a informação começa nas pessoas.
             </p>
             <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
               <span className="flex h-2 w-2 relative">
@@ -62,33 +62,33 @@ export function SiteFooter() {
 
           {/* Coluna 2: Plataforma Cívica */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white font-mono">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#E5C158] font-mono">
               Plataforma
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <a href="/#missao" className="hover:text-emerald-400 transition-colors">
-                  Missão do Projeto
+                <a href="/#acorda-portugal" className="hover:text-emerald-400 transition-colors">
+                  Acorda Portugal
                 </a>
               </li>
               <li>
                 <a href="/#noticias" className="hover:text-emerald-400 transition-colors">
-                  Notícias & Factos
+                  Informação e Notícias
                 </a>
               </li>
               <li>
-                <a href="/#acontecimentos" className="hover:text-emerald-400 transition-colors">
-                  Enviar Acontecimento
+                <a href="/#voz-cidadaos" className="hover:text-emerald-400 transition-colors">
+                  A Voz dos Cidadãos
                 </a>
               </li>
               <li>
                 <a href="/#diretos" className="hover:text-emerald-400 transition-colors">
-                  Diretos ao Vivo
+                  Diretos e Acontecimentos
                 </a>
               </li>
               <li>
                 <a href="/#verificacao" className="hover:text-emerald-400 transition-colors">
-                  Mesa de Verificação
+                  Verificação de Informação
                 </a>
               </li>
               <li>
@@ -97,8 +97,8 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <Link href="/comunidade" className="hover:text-emerald-400 transition-colors">
-                  Comunidade Cívica
+                <Link href="/jogar" className="hover:text-amber-400 transition-colors font-semibold">
+                  Desafio Nacional
                 </Link>
               </li>
             </ul>
