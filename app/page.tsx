@@ -1,97 +1,62 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 import { SiteHeader } from '@/components/site-header'
-import { useAuth } from '@/components/auth-provider'
-import { AuthWallModal } from '@/components/auth-wall-modal'
-import { logGameFlow } from '@/lib/game-session'
+import { SiteFooter } from '@/components/site-footer'
+import { InstitutionalHero } from '@/components/institutional/InstitutionalHero'
+import { InstitutionalMission } from '@/components/institutional/InstitutionalMission'
+import { InstitutionalNews } from '@/components/institutional/InstitutionalNews'
+import { InstitutionalParticipation } from '@/components/institutional/InstitutionalParticipation'
+import { InstitutionalLiveVerification } from '@/components/institutional/InstitutionalLiveVerification'
+import { InstitutionalRadar } from '@/components/institutional/InstitutionalRadar'
+import { InstitutionalDesafioSecundario } from '@/components/institutional/InstitutionalDesafioSecundario'
 import { resetGlobalArenaState } from '@/lib/game-active-state'
 
-// Módulos Oficiais do Menu Principal Vivo do Acorda Portugal
-import { HomeHero } from '@/components/home/HomeHero'
-import { PlayerStatusHud } from '@/components/home/PlayerStatusHud'
-import { LobbyVaultObject } from '@/components/vault/LobbyVaultObject'
-import { ThreeChallengePaths } from '@/components/home/ThreeChallengePaths'
-import { SiteFooter } from '@/components/site-footer'
-
 export default function HomePage() {
-  const router = useRouter()
-  const { user, profile } = useAuth()
-  const [authWallOpen, setAuthWallOpen] = useState(false)
-  const [authWallTarget, setAuthWallTarget] = useState('/jogar')
-
-  // Garantir que a Home nunca retém resíduos visuais de uma partida anterior
+  // Garantir que a Home institucional nunca retém resíduos visuais de arena
   useEffect(() => {
     resetGlobalArenaState()
   }, [])
 
-  const handleStartGame = (gameRoute: string) => {
-    logGameFlow('JOGAR_CLICK', {
-      from: 'HomePage_MainMenu',
-      route: gameRoute,
-      hasUser: Boolean(user),
-    })
-
-    // Se o jogador não estiver autenticado e a ação exigir conta (jogar partidas, 1v1 ou aceder a perfil)
-    if (!user && (gameRoute.startsWith('/jogar') || gameRoute.startsWith('/perfil'))) {
-      setAuthWallTarget(gameRoute)
-      setAuthWallOpen(true)
-      return
-    }
-
-    router.push(gameRoute)
-  }
-
-  const handleOpenAuth = () => {
-    setAuthWallTarget('/jogar')
-    setAuthWallOpen(true)
-  }
-
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden bg-transparent text-foreground flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
-      {/* Camada z-10 com transparência estrita para o GlobalBackgroundVideo (z:0) respirar */}
-      <div className="relative z-10 flex-1 flex flex-col justify-between bg-transparent">
-        {/* Barra Superior Global */}
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#070d19] text-foreground flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+      {/* 
+        🇵🇹 ACORDA PORTUGAL — PLATAFORMA NACIONAL DE INFORMAÇÃO & CIDADANIA
+        Identidade: Institucional, portuguesa, moderna e credível.
+        Cores: Azul escuro (#070d19), Verde Português, Branco e apontamentos discretos de Dourado.
+      */}
+      <div className="relative z-10 flex-1 flex flex-col justify-between">
+        
+        {/* 1. Cabeçalho com logótipo e navegação simples */}
         <SiteHeader />
 
-        {/* Menu Principal de Jogo — Hierarquia e Foco Absoluto */}
-        <main className="flex-1 flex flex-col items-center w-full bg-transparent px-4 py-4 sm:py-6">
-          <div className="w-full flex flex-col items-center">
-            {/* 1. HERO PRINCIPAL — "ACORDA PORTUGAL" / "Portugal está em jogo." / "JOGAR AGORA" */}
-            <HomeHero
-              onStartGame={handleStartGame}
-              isAuthenticated={Boolean(user)}
-            />
+        {/* Conteúdo Institucional Oficial */}
+        <main className="flex-1 flex flex-col items-center w-full">
+          {/* 2. Hero: "Portugal precisa de acordar." / "A informação começa nas pessoas." */}
+          <InstitutionalHero />
 
-            {/* 2. ESTADO DO JOGADOR — HUD Compacto ou Cartão Elegante de Entrada */}
-            <PlayerStatusHud
-              user={user}
-              profile={profile}
-              onOpenAuth={handleOpenAuth}
-            />
+          {/* 3. Apresentação da missão do projeto */}
+          <InstitutionalMission />
 
-            {/* 3. TRÊS CAMINHOS PRINCIPAIS — ⚔️ JOGAR · 🥊 1V1 · 🏆 RANKINGS */}
-            <ThreeChallengePaths onStartGame={handleStartGame} />
-          </div>
+          {/* 4. Secção de notícias e informação */}
+          <InstitutionalNews />
+
+          {/* 5. Participação dos cidadãos e envio de acontecimentos */}
+          <InstitutionalParticipation />
+
+          {/* 6. Diretos ao vivo e verificação de informação */}
+          <InstitutionalLiveVerification />
+
+          {/* 7. Radar Nacional */}
+          <InstitutionalRadar />
+
+          {/* 8. Apresentação secundária do Desafio Nacional */}
+          <InstitutionalDesafioSecundario />
         </main>
 
-        {/* 4. RODAPÉ DE NAVEGAÇÃO COMPLETO DA PÁGINA INICIAL */}
+        {/* 9. Rodapé institucional com contactos e informação legal */}
         <SiteFooter />
       </div>
-
-      {/* 🔐 COFRE DIÁRIO SECRETO PREMIUM (APENAS O COFRE, NO CANTO DA HOME) */}
-      <LobbyVaultObject
-        onOpenAuth={handleOpenAuth}
-        isAuthenticated={Boolean(user)}
-      />
-
-      {/* 🔒 Modal de Bloqueio de Convidado / Login Obrigatório */}
-      <AuthWallModal
-        isOpen={authWallOpen}
-        onClose={() => setAuthWallOpen(false)}
-        targetUrl={authWallTarget}
-      />
     </div>
   )
 }

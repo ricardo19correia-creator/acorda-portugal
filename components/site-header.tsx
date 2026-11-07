@@ -25,6 +25,11 @@ import {
   MessageSquarePlus,
   Users,
   Lock,
+  Home,
+  Newspaper,
+  Send,
+  Radio,
+  Compass,
 } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { PlayButton } from '@/components/play-button'
@@ -68,30 +73,33 @@ export function SiteHeader() {
     (profile as any)?.role === 'owner' ||
     (profile as any)?.role === 'admin'
 
+  const isGameRoute =
+    pathname?.startsWith('/jogar') ||
+    pathname?.startsWith('/loja') ||
+    pathname?.startsWith('/cofre') ||
+    pathname?.startsWith('/arenas') ||
+    pathname?.startsWith('/conquistas')
+
   const NAV = [
-    { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Cofre', href: '/cofre', icon: Lock },
-    { label: 'Rankings', href: '/rankings', icon: Trophy },
-    { label: 'Eventos', href: '/eventos', icon: Calendar },
-    { label: 'Loja', href: '/loja', icon: ShoppingBag },
+    { label: 'Início', href: '/', icon: Home },
+    { label: 'Missão', href: '/#missao', icon: ShieldCheck },
+    { label: 'Notícias', href: '/#noticias', icon: Newspaper },
+    { label: 'Participar', href: '/#participar', icon: Send },
+    { label: 'Diretos', href: '/#diretos', icon: Radio },
+    { label: 'Radar', href: '/#radar', icon: Compass },
     { label: 'Comunidade', href: '/comunidade', icon: Users },
-    { label: 'Beta', href: '/beta', icon: Sparkles },
-    { label: 'App', href: '/download', icon: Smartphone },
-    { label: 'Perfil', href: '/perfil', icon: User },
   ]
 
   const MOBILE_NAV = [
-    { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Cofre Diário', href: '/cofre', icon: Lock },
-    { label: 'Meu Distrito', href: '/meu-distrito', icon: Flag },
-    { label: 'Rankings', href: '/rankings', icon: Trophy },
-    { label: 'Eventos', href: '/eventos', icon: Calendar },
-    { label: 'Loja', href: '/loja', icon: ShoppingBag },
-    { label: 'Categorias', href: '/categorias', icon: LayoutGrid },
-    { label: 'Comunidade', href: '/comunidade', icon: Users },
-    { label: 'Beta', href: '/beta', icon: Sparkles },
-    { label: 'App', href: '/download', icon: Smartphone },
-    { label: 'Perfil', href: '/perfil', icon: User },
+    { label: 'Início', href: '/', icon: Home },
+    { label: 'Missão do Projeto', href: '/#missao', icon: ShieldCheck },
+    { label: 'Notícias & Factos', href: '/#noticias', icon: Newspaper },
+    { label: 'Enviar Acontecimento', href: '/#participar', icon: Send },
+    { label: 'Diretos & Verificação', href: '/#diretos', icon: Radio },
+    { label: 'Radar Nacional', href: '/#radar', icon: Compass },
+    { label: 'Comunidade Cívica', href: '/comunidade', icon: Users },
+    { label: 'Desafio Nacional (Jogo)', href: '/desafio-nacional', icon: Trophy },
+    { label: 'Aplicação Android', href: '/download', icon: Smartphone },
   ]
 
   const [scrolled, setScrolled] = useState(false)
@@ -157,62 +165,84 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop Controls (lg+): Online + Moedas discretas + Perfil/Login + Botão Jogar */}
+        {/* Desktop Controls (lg+): Online + Participar + Perfil/Login */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <HeaderOnlineBadge />
 
-          {/* Indicador Elegante e Discreto de Saldo */}
-          <Link
-            href="/loja"
-            title="O teu Saldo de € Acorda - Clica para abrir a Loja"
-            className={cn(
-              'flex items-center gap-1 rounded-xl border px-2.5 py-1 text-xs font-bold transition-all cursor-pointer select-none',
-              isBalancePulsing
-                ? 'border-emerald-400 bg-emerald-500/20 text-emerald-200'
-                : 'border-emerald-500/30 bg-emerald-950/50 text-emerald-400 hover:border-emerald-400 hover:bg-emerald-900/40',
-            )}
-          >
-            <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums font-mono">
-              {user && !isEconomyLoaded ? (
-                <span className="inline-block w-8 h-3.5 bg-emerald-500/20 rounded animate-pulse" />
-              ) : (
-                formattedCoins
+          {/* Indicador Elegante de Saldo apenas em páginas do jogo */}
+          {isGameRoute && (
+            <Link
+              href="/loja"
+              title="O teu Saldo de € Acorda - Clica para abrir a Loja"
+              className={cn(
+                'flex items-center gap-1 rounded-xl border px-2.5 py-1 text-xs font-bold transition-all cursor-pointer select-none',
+                isBalancePulsing
+                  ? 'border-emerald-400 bg-emerald-500/20 text-emerald-200'
+                  : 'border-emerald-500/30 bg-emerald-950/50 text-emerald-400 hover:border-emerald-400 hover:bg-emerald-900/40',
               )}
-            </span>
-          </Link>
+            >
+              <span className="font-extrabold text-emerald-400">€</span>
+              <span className="tabular-nums font-mono">
+                {user && !isEconomyLoaded ? (
+                  <span className="inline-block w-8 h-3.5 bg-emerald-500/20 rounded animate-pulse" />
+                ) : (
+                  formattedCoins
+                )}
+              </span>
+            </Link>
+          )}
 
-          {!user && (
+          {!user ? (
             <Link
               href="/entrar"
               className="text-xs font-bold text-slate-300 hover:text-emerald-400 transition-colors px-2 py-1"
             >
               Entrar
             </Link>
+          ) : (
+            <Link
+              href="/perfil"
+              className="flex items-center gap-2 text-xs font-bold text-slate-200 hover:text-white px-2 py-1"
+            >
+              <UserAvatar
+                avatarUrl={profile?.photoURL || DEFAULT_AVATAR.image}
+                isCurrentUser={true}
+                size="sm"
+              />
+              <span className="hidden xl:inline max-w-[100px] truncate">{user.displayName || 'Cidadão'}</span>
+            </Link>
           )}
 
-          <PlayButton href="/jogar" size="md" label="Jogar" />
+          <Link
+            href="/#participar"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
+          >
+            <Send className="h-3.5 w-3.5" />
+            <span>Participar</span>
+          </Link>
         </div>
 
-        {/* Mobile / Tablet Controls (< lg): Online + Moedas discretas + Botão Hambúrguer */}
+        {/* Mobile / Tablet Controls (< lg): Online + Moedas se jogo + Botão Hambúrguer */}
         <div className="flex items-center gap-2 shrink-0 lg:hidden">
           <HeaderOnlineBadge className="px-2 py-1 text-xs" />
 
-          {/* Indicador Discreto no Mobile */}
-          <Link
-            href="/loja"
-            title="O teu Saldo de € Acorda"
-            className="flex items-center gap-1 rounded-xl border border-emerald-500/30 bg-emerald-950/60 px-2 py-1 text-xs font-bold text-emerald-400"
-          >
-            <span className="font-extrabold text-emerald-400">€</span>
-            <span className="tabular-nums font-mono text-[11px]">
-              {user && !isEconomyLoaded ? (
-                <span className="inline-block w-6 h-3 bg-emerald-500/20 rounded animate-pulse" />
-              ) : (
-                formattedCoins
-              )}
-            </span>
-          </Link>
+          {/* Indicador no Mobile apenas em páginas de jogo */}
+          {isGameRoute && (
+            <Link
+              href="/loja"
+              title="O teu Saldo de € Acorda"
+              className="flex items-center gap-1 rounded-xl border border-emerald-500/30 bg-emerald-950/60 px-2 py-1 text-xs font-bold text-emerald-400"
+            >
+              <span className="font-extrabold text-emerald-400">€</span>
+              <span className="tabular-nums font-mono text-[11px]">
+                {user && !isEconomyLoaded ? (
+                  <span className="inline-block w-6 h-3 bg-emerald-500/20 rounded animate-pulse" />
+                ) : (
+                  formattedCoins
+                )}
+              </span>
+            </Link>
+          )}
 
           {/* Botão Hambúrguer (Mobile) */}
           <button
@@ -235,18 +265,20 @@ export function SiteHeader() {
       {/* Mobile menu */}
       {open && (
         <nav id="mobile-menu" className="border-t border-white/10 bg-background/95 px-4 py-4 md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto safe-area-bottom">
-          <div className="mb-3 flex flex-col gap-2">
-            <Link
-              href="/loja"
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-between rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-2.5 text-xs font-black text-emerald-300 transition-all hover:bg-emerald-500/25"
-            >
-              <span className="text-muted-foreground uppercase tracking-wider text-[11px]">O Teu Saldo Virtual:</span>
-              <span className="flex items-center gap-1 text-sm text-emerald-300 font-black">
-                <span className="text-emerald-400 font-extrabold">€</span> {formattedCoins}
-              </span>
-            </Link>
-          </div>
+          {isGameRoute && (
+            <div className="mb-3 flex flex-col gap-2">
+              <Link
+                href="/loja"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-2.5 text-xs font-black text-emerald-300 transition-all hover:bg-emerald-500/25"
+              >
+                <span className="text-muted-foreground uppercase tracking-wider text-[11px]">O Teu Saldo Virtual:</span>
+                <span className="flex items-center gap-1 text-sm text-emerald-300 font-black">
+                  <span className="text-emerald-400 font-extrabold">€</span> {formattedCoins}
+                </span>
+              </Link>
+            </div>
+          )}
 
           {!authResolved ? (
             <div className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-white/5 bg-white/[0.03] py-3 text-xs text-muted-foreground animate-pulse">
@@ -330,11 +362,14 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
-          <PlayButton
-            label="Jogar agora"
-            href="/jogar"
-            className="mt-3 w-full rounded-xl py-4 text-base"
-          />
+          <Link
+            href="/#participar"
+            onClick={() => setOpen(false)}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 transition-all shadow-md active:scale-98"
+          >
+            <Send className="h-4 w-4" />
+            <span>Enviar Acontecimento</span>
+          </Link>
         </nav>
       )}
     </header>

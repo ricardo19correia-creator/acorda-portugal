@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Gamepad2, Trophy, Calendar, MessageSquare } from 'lucide-react'
+import { Home, Gamepad2, Trophy, Calendar, MessageSquare, Newspaper, Send, Compass, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { isMatchActiveFromRoute } from '@/lib/game-active-state'
 
@@ -56,14 +56,31 @@ export function MobileBottomBar() {
     return null
   }
 
-  // Navegação Principal Móvel Oficial: Início → Jogar → Ranking → Eventos → Comunidade
-  const NAV_ITEMS = [
-    { label: 'Início', href: '/', icon: Home },
-    { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
-    { label: 'Ranking', href: '/rankings', icon: Trophy },
-    { label: 'Eventos', href: '/eventos', icon: Calendar },
-    { label: 'Comunidade', href: '/comunidade', icon: MessageSquare },
-  ]
+  const isGameRoute =
+    pathname?.startsWith('/jogar') ||
+    pathname?.startsWith('/rankings') ||
+    pathname?.startsWith('/eventos') ||
+    pathname?.startsWith('/desafio-nacional') ||
+    pathname?.startsWith('/loja') ||
+    pathname?.startsWith('/cofre') ||
+    pathname?.startsWith('/meu-distrito')
+
+  // Navegação Principal Móvel: Institucional na Home / Geral e Modo Jogo nas rotas de jogo
+  const NAV_ITEMS = isGameRoute
+    ? [
+        { label: 'Início', href: '/', icon: Home },
+        { label: 'Jogar', href: '/jogar', icon: Gamepad2 },
+        { label: 'Ranking', href: '/rankings', icon: Trophy },
+        { label: 'Eventos', href: '/eventos', icon: Calendar },
+        { label: 'Comunidade', href: '/comunidade', icon: MessageSquare },
+      ]
+    : [
+        { label: 'Início', href: '/', icon: Home },
+        { label: 'Notícias', href: '/#noticias', icon: Newspaper },
+        { label: 'Participar', href: '/#participar', icon: Send },
+        { label: 'Radar', href: '/#radar', icon: Compass },
+        { label: 'Comunidade', href: '/comunidade', icon: Users },
+      ]
 
   return (
     <nav

@@ -26,9 +26,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://acordaportugal.pt'),
-  title: 'Acorda Portugal — Desafio Nacional',
+  title: 'Acorda Portugal — Plataforma Nacional de Informação e Cidadania',
   description:
-    'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+    'Acorda Portugal: plataforma nacional e independente de informação, participação cívica e comunicação em tempo real. A informação começa nas pessoas.',
   alternates: {
     canonical: 'https://acordaportugal.pt/',
   },
@@ -56,24 +56,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_PT',
     url: 'https://acordaportugal.pt/',
-    siteName: 'Acorda Portugal — Desafio Nacional',
-    title: 'Acorda Portugal — Desafio Nacional',
+    siteName: 'Acorda Portugal',
+    title: 'Acorda Portugal — Plataforma Nacional de Informação e Cidadania',
     description:
-      'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+      'Acorda Portugal: plataforma nacional e independente de informação, participação cívica e comunicação em tempo real. A informação começa nas pessoas.',
     images: [
       {
         url: 'https://acordaportugal.pt/logo-oficial.png',
         width: 512,
         height: 512,
-        alt: 'Acorda Portugal — Desafio Nacional',
+        alt: 'Acorda Portugal',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Acorda Portugal — Desafio Nacional',
+    title: 'Acorda Portugal — Plataforma Nacional de Informação e Cidadania',
     description:
-      'Acorda Portugal — Desafio Nacional. Joga, compete, participa e descobre uma nova experiência nacional portuguesa.',
+      'Acorda Portugal: plataforma nacional e independente de informação, participação cívica e comunicação em tempo real. A informação começa nas pessoas.',
     images: ['https://acordaportugal.pt/logo-oficial.png'],
   },
 }
